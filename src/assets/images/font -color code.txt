@@ -1,0 +1,9 @@
+font- Montserrat family  - Regular,medium, bold
+
+green color - # 13322b
+
+brown - #a89968
+
+gray color- 4d4d4d
+
+

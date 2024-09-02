@@ -1,0 +1,21 @@
+//Footer//
+.site-footer { background: #a89968 ; background-size: cover; display: inline-block; width: 100%; padding-top: 120px;
+  h4 { color: #fff; font-size: 22px; font-weight: 500;
+    &:after { content: ''; display: block; width: 40px; height: 2px; background: #fff; margin-top: 10px; margin-bottom: 20px; }
+  }
+  ul { display: inline-block; width: 100%; padding: 0px; margin: 0px; list-style: none;
+    li { display: inline-block; width: 100%;
+      a { color: #fff; display: inline-block; padding: 5px 0; transition: 0.5s all;
+        &:hover { padding-left: 15px; }
+        .anticon { margin-right: 5px }
+      }
+    }
+  }
+  .img-fluid { height: 100px; width: 100px; }
+  .logo { margin-bottom: 20px; }
+  .desc { color: #fff; margin-bottom: 10px; }
+  .footer-top { margin-bottom: 60px; }
+  .copy-rights { display: inline-block; width: 100%; text-align: center; padding: 2px 0; color: #fff; 
+      p { margin-bottom: 0px; }
+  }
+}

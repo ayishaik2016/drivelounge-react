@@ -1,0 +1,155 @@
+.checkout-section {
+  display: inline-block;
+  width: 100%;
+  padding: 50px 0;
+}
+
+.checkout-section h2 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.checkout-section .checkout-box {
+  display: inline-block;
+  width: 100%;
+  padding-left: 70px;
+}
+
+.checkout-section .checkout-box .box-header h3 {
+  font-size: 19px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.checkout-section .checkout-box .box-header p {
+  font-size: 17px;
+  display: inline-block;
+  width: 100%;
+}
+
+.checkout-section .checkout-box .boxed {
+  display: inline-block;
+  width: 100%;
+  border: 1px solid #E7E7E7;
+  padding: 20px;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.checkout-section .checkout-box .boxed:after {
+  content: '';
+  width: 1px;
+  height: 100%;
+  position: absolute;
+  border-left: 2px dashed #7B3772;
+  left: -46px;
+  top: 71px;
+  z-index: 1;
+}
+
+.checkout-section .checkout-box .boxed .icons-box {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  background: #fff;
+  color: #7B3772;
+  font-size: 30px;
+  left: -70px;
+  top: 20px;
+  z-index: 2;
+  border: 1px solid #7B3772;
+}
+
+.checkout-section .checkout-box .boxed p.lite {
+  margin-bottom: 0px;
+  color: #999;
+}
+
+.checkout-section .checkout-box .lst:after {
+  display: none;
+}
+
+.checkout-section .user-checkout-info {
+  display: inline-block;
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+  width: 100%;
+}
+
+.checkout-section .user-checkout-info li {
+  display: inline-block;
+  margin-right: 10px;
+  border-right: 1px solid #666;
+  padding-right: 10px;
+}
+
+.checkout-section .user-checkout-info li:last-child {
+  border: none;
+}
+
+.checkout-section .pay-aradios {
+  display: inline-block;
+  width: 100%;
+}
+
+.checkout-section .pay-aradios .ant-radio-wrapper {
+  font-size: 16px;
+  margin-right: 30px;
+}
+
+.checkout-section .pay-aradios .ant-radio-wrapper .ant-radio-inner {
+  width: 22px;
+  height: 22px;
+}
+
+.checkout-section .pay-aradios .ant-radio-wrapper .ant-radio-inner:after {
+  width: 12px;
+  height: 12px;
+  top: 4px;
+  left: 4px;
+  background: #7B3772;
+}
+
+.checkout-section .pay-aradios .ant-radio-wrapper .ant-radio-checked .ant-radio-inner {
+  border-color: #7B3772;
+}
+
+.checkout-only {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.checkout-only p {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.checkout-only .lite {
+  color: #999;
+  margin-bottom: 25px;
+}
+
+.checkout-only .br-row {
+  display: inline-block;
+  width: 100%;
+  height: 1px;
+  background: #ececec;
+  margin-bottom: 25px;
+}
+
+.checkout-only .ant-input-group-wrapper {
+  margin-bottom: 20px;
+}
+
+.checkout-only textarea.ant-input {
+  padding: 10px;
+  border-color: #e4e3e3;
+  border-radius: 5px;
+}
+/*# sourceMappingURL=checkout.css.map */

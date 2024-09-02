@@ -1,0 +1,120 @@
+$text-primary-color: #231f20; $text-secondary-color: #7B3772;
+.detail-header { padding: 20px 0;
+	.ant-carousel .slick-slide img { width: 100%; height: auto; border-radius: 10px; }
+	.dh-box { display: inline-block; width: 100%; padding: 20px; border: 1px solid #F1F1F1; border-radius: 5px; box-shadow: 0px 0px 4px 0px #00000012; position: relative;
+		h2 { color: $text-primary-color; font-size: 30px; font-weight: 600; padding-right: 60px; }
+		.btn-fav { width: 50px; height: 50px; border: none; font-size: 20px; position: absolute; top: 20px; right: 20px; padding: 0; line-height: 55px; background: none; color: #FCBB4C; box-shadow: none !important; }
+		.rating { font-size: 16px;
+			.anticon-star { margin: 0 5px; color: $text-secondary-color; }
+		}
+		.desc { margin-bottom: 20px; line-height: 26px; }
+		.border { display: inline-block; width: 100%; border-top: 1px solid #F0F0F0; margin-bottom: 15px; }
+		.time, .confirm, .gender { font-size: 18px; position: relative;
+			.anticon { color: $text-secondary-color; margin-right: 5px; }
+		}
+		.booknow { display: inline-block; width: 100%; padding: 0 35px;
+			.ant-btn-primary { width: 100%; height: 50px; font-size: 18px; background: #513369; background: -webkit-linear-gradient(to right, #513369, #C759AF, #7B3772); background: linear-gradient(to right, #513369, #C759AF, #7B3772); border: none; border-radius: 5px;
+				&:hover, &:focus { background: #513369; background: -webkit-linear-gradient(to right, #7B3772, #C759AF, #513369); background: linear-gradient(to right, #7B3772, #C759AF, #513369); }
+			}
+		}
+	}
+}
+.detail-information { display: inline-block; width: 100%;
+	h2 { font-size: 28px; color: $text-primary-color; font-weight: 600; }
+	.about { display: inline-block; width: 100%; margin-bottom: 10px;
+		p { font-size: 16px; color: #666; line-height: 1.6; }
+	}
+}
+.location-box { display: inline-block; width: 100%; padding: 20px; border: 1px solid #F1F1F1; border-radius: 5px; box-shadow: 0px 0px 4px 0px #00000012; position: relative; padding-right: 80px; margin-bottom: 30px;
+	p { display: inline-block; width: 100%; margin-bottom: 0px; }
+	h3 { font-size: 18px; font-weight: 600; margin-bottom: 10px; }
+	&:after { content: ''; background: url(../img/location-pin.png) no-repeat 9px 8px; display: inline-block; width: 38px; height: 38px; border: 1px solid #ddd; border-radius: 50%; position: absolute; top: 50%; right: 20px; margin-top: -19px; }
+}
+.select-service { display: inline-block; width: 100%;
+	.ant-tabs-nav { margin-bottom: 40px; margin-top: 10px;
+		&:before { border: none; }
+		.ant-tabs-ink-bar { display: none; }
+		.ant-tabs-tab { margin: 0px; padding: 8px 20px; font-size: 16px; border: 1px solid #ECECEC; border-radius: 5px; margin-right: -1px; font-weight: 500;
+			.ant-tabs-tab-btn { color: #333;
+				&:hover, &:focus { color: $text-primary-color }
+			}
+		}
+		.ant-tabs-tab-active { background: #513369; background: -webkit-linear-gradient(to right, #513369, #C759AF, #7B3772); background: linear-gradient(to right, #513369, #C759AF, #7B3772);
+			.ant-tabs-tab-btn { color: #fff !important; }
+		}
+	}
+}
+.service_loop { display: inline-block; width: 100%; padding: 0px; margin: 0px;
+	li { display: inline-block; width: 100%; margin-bottom: 25px; padding-bottom: 25px; border-bottom: 1px solid #ECECEC;
+		.ant-checkbox-wrapper { display: inline-block; width: 100%; position: relative; padding-left: 50px; margin-bottom: 20px;
+			.ant-checkbox { position: absolute; left: 5px; top: 0px;
+				.ant-checkbox-inner { width: 30px; height: 30px; border-radius: 50%;
+					&:after { width: 7.714286px; height: 14.142857px; left: 8px; top: 13px }
+				}
+			}
+			.ant-checkbox-checked:after { border-radius: 50%; }
+			span { padding: 0px; }
+		}
+		.title { display: inline-block; font-size: 16px; }
+		.price { font-size: 17px; font-weight: bold; color: #7b3772; display: inline-block; margin-left: 10px; }
+		.hour { display: block; font-size: 13px; }
+	}
+	p { margin-bottom: 0px; display: inline-block; width: 100%; font-size: 16px; color: #666; line-height: 1.4 }
+}
+.staf-checkbox { display: inline-block; width: 100%; margin-top: 15px; padding-bottom: 0px; border-bottom: 1px solid #ececec; margin-bottom: 20px;
+	.ant-checkbox-wrapper { display: inline-block; text-align: center; margin-right: 60px; margin-bottom: 30px; position: relative; margin-left: 0px;
+		.ant-checkbox { display: none }
+		span { display: inline-block; padding: 0px; }
+		.img { width: 80px; height: 80px; border-radius: 50%; display: inline-block; overflow: hidden; border: none; margin-bottom: 10px;
+			img { width: 100%; height: auto; }
+		}
+		.title { display: block; font-size: 16px; }
+		.ant-checkbox-checked + span .img { box-shadow: 0px 0px 0px 5px #b751a1; border-color: transparent; }
+	}
+}
+.flex-reviews { display: flex; justify-content: space-between; margin-bottom: 30px; align-items: center;
+	h2 { margin: 0px; }
+	.btn-add-review { height: 45px; width: 120px; border-radius: 5px; font-size: 18px; }
+}
+.reviews-loop { display: inline-block; width: 100%; list-style: none; padding: 0px; margin: 0px;
+	li { display: inline-block; width: 100%; }
+	.box { display: inline-block; width: 100%; border: 1px solid #ececec; padding: 15px; position: relative; margin-bottom: 30px;
+		h4 { font-size: 18px; margin-bottom: 20px; display: inline-block; width: 100%; padding-right: 200px; margin-bottom: 10px; font-weight: 600; }
+		.date { display: inline-block; font-size: 15px; position: absolute; right: 15px; top: 15px; }
+		.star-value { display: inline-block; width: 100%; margin-bottom: 10px; }
+		p { display: inline-block; width: 100%; margin-bottom: 0; color: #666; line-height: 1.5; }
+		.anticon-star { color: #292929; margin-right: 10px; }
+	}
+}
+.side-carts { display: inline-block; width: 100%; padding: 20px; border: 1px solid #F1F1F1; border-radius: 5px; box-shadow: 0px 0px 4px 0px #00000012;
+	.heads { display: flex; width: 100%; position: relative; min-height: 80px; padding-left: 100px; border-bottom: 1px solid #ECECEC; padding-bottom: 30px; margin-bottom: 30px;
+		.img { width: 80px; height: 80px; overflow: hidden; position: absolute; left: 0px; top: 0px; border-radius: 5px;
+			img { max-height: 80px; width: 130px; object-fit: cover; }
+		}
+		.title { font-weight: 600; margin-bottom: 10px; }
+		address { margin-bottom: 0px; }
+	}
+	.orders { display: inline-block; width: 100%;
+		ul { display: inline-block; width: 100%; list-style: none; margin: 0px; padding: 0px; border-bottom: 1px solid #ECECEC;
+			li { display: flex; width: 100%; margin-bottom: 30px; justify-content: space-between; align-items: center;
+				h4 { font-size: 16px; font-weight: 600; }
+				p { margin-bottom: 0px; font-size: 14px; color: #666; }
+				.price { font-weight: 600; color: #7b3772; }
+			}
+		}
+	}
+	.cart-bill { display: inline-block; width: 100%; margin-top: 20px;
+		p { display: flex; justify-content: space-between; font-size: 16px; margin-bottom: 20px;
+			.price { color: #7b3772; }
+		}
+		.bolds { font-weight: bold; }
+		p.sub, p.total { color: #7b3772; }
+		p.total { padding: 20px 0; border-top: 1px solid #ECECEC; border-bottom: 1px solid #ECECEC; }
+	}
+	.booknow { display: inline-block; width: 100%; padding: 0 20px;
+		.ant-btn-primary { width: 100%; height: 50px; font-size: 18px; background: #513369; background: -webkit-linear-gradient(to right, #513369, #C759AF, #7B3772); background: linear-gradient(to right, #513369, #C759AF, #7B3772); border: none; border-radius: 5px;
+			&:hover, &:focus { background: #513369; background: -webkit-linear-gradient(to right, #7B3772, #C759AF, #513369); background: linear-gradient(to right, #7B3772, #C759AF, #513369); }
+		}
+	}
+}
+.venue-near h2 { font-size: 28px; color: #231f20; font-weight: 600; }

@@ -1,0 +1,21 @@
+.location-search-input{
+    font-family: 'Lato', sans-serif;
+    width: 240px;
+    height: 40px;
+    background: none;
+    border: 2px solid ;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;  
+  }
+  
+  .input-suggestion{
+    font-family: 'Lato', sans-serif;
+  width: 400px;
+  height: auto;
+  background-color: white;
+  border-bottom: 1px black dotted;
+  align-items: left;
+  font-size: 1rem;
+  font-weight: bold;
+  }
