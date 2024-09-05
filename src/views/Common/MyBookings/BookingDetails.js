@@ -135,6 +135,29 @@ const BookingDetails = (props) => {
         },
       });
     }
+    if (status == 1) {
+      return Modal.confirm({
+        icon: <ExclamationCircleOutlined />,
+        title: getLocaleMessages("Bookings"),
+        content: (
+          <span>
+            {getLocaleMessages("Are you sure you want to confirm this booking?")}
+          </span>
+        ),
+        okText: getLocaleMessages("Yes"),
+        cancelText: getLocaleMessages("No"),
+        onOk() {
+          dispatch({
+            type: settingsAction.CHANGE_BOOKING_STATUS,
+            payload: { id: id, status: status },
+          });
+          return;
+        },
+        onCancel() {
+          return;
+        },
+      });
+    }
     if (id > 0) {
       dispatch({
         type: settingsAction.CHANGE_BOOKING_STATUS,
@@ -374,6 +397,27 @@ const BookingDetails = (props) => {
     });
   };
 
+  const handleUserUpdateRequest = () => {
+    return Modal.confirm({
+      icon: <ExclamationCircleOutlined />,
+      title: getLocaleMessages("Bookings"),
+      content: (
+        <span>
+          {getLocaleMessages("Are you sure you want to update this booking")}?
+        </span>
+      ),
+      okText: getLocaleMessages("Yes"),
+      cancelText: getLocaleMessages("No"),
+      onOk() {
+        onFinishUserDetails();
+        return;
+      },
+      onCancel() {
+        return;
+      },
+    });
+  };
+
   const { pickuptime, dropofftime } = usedForm.getFieldValue();
 
   const onFinishDetails = async () => {
@@ -406,6 +450,40 @@ const BookingDetails = (props) => {
     console.log("DATA", data);
     dispatch({
       type: actions.UPDATE_BOOKING_INFORMATION,
+      payload: data,
+    });
+  };
+  
+  const onFinishUserDetails = async () => {
+    let _pickupdate = new Date();
+    let _dropoffdate = new Date();
+    const date = format(
+      new Date(usedForm.getFieldValue("pickupdate")),
+      "yyyy-MM-dd"
+    );
+    const time = format(new Date(pickuptime), "hh:mm a");
+    _pickupdate = new Date(date + " " + time);
+    const dropDate = format(
+      new Date(usedForm.getFieldValue("dropoffdate")),
+      "yyyy-MM-dd"
+    );
+    const dropTime = format(new Date(dropofftime), "hh:mm a");
+    _dropoffdate = new Date(dropDate + " " + dropTime);
+
+    let data = {
+      id: SelectedBookingInfo.id,
+      pickupdate: _pickupdate,
+      dropoffdate: _dropoffdate,
+      totalrentaldays: BookingDays,
+      driveramount: DriverCharge,
+      vatamount: VatAmount,
+      subtotal: SubTotal,
+      totalcost: TotalPrice,
+      agentid: SelectedBookingInfo.agentid,
+    };
+    console.log("DATA", data);
+    dispatch({
+      type: actions.UPDATE_USER_BOOKING_INFORMATION,
       payload: data,
     });
   };
@@ -578,6 +656,7 @@ const BookingDetails = (props) => {
         ref={componentRef}
         usedForm={usedForm}
         onFinishDetails={onFinishDetails}
+        onFinishUserDetails={onFinishUserDetails}
         IsEnabled={IsEnabled}
         SelectedBookingInfo={SelectedBookingInfo}
         onFinishChange={onFinishChange}
@@ -604,6 +683,7 @@ const BookingDetails = (props) => {
         handleCancel={handleCancel}
         handleEditClick={handleEditClick}
         handleUpdateRequest={handleUpdateRequest}
+        handleUserUpdateRequest={handleUserUpdateRequest}
         tabLocation={props.location.tabkey}
         reactToPrintContent={reactToPrintContent}
         DateEditable={DateEditable}

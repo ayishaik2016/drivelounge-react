@@ -14,7 +14,9 @@ import {
   Typography,
   message,
   Card,
+  DatePicker
 } from "antd";
+import dayjs from 'dayjs';
 import {
   FilterOutlined,
   EyeOutlined,
@@ -24,6 +26,7 @@ import {
 } from "@ant-design/icons";
 import { formProps } from "./../../../helpers/constant";
 import settingsAction from "./../../../redux/admin/customer/actions";
+import commonactions from "./../../../redux/common/actions";
 import "./../../../assets/css/adminStyle.css";
 import { ShowForPermission } from "redux/userPermissions";
 import LoadingOverlay from "react-loading-overlay";
@@ -141,7 +144,7 @@ const CustomerManagement = () => {
       ),
     },
   ];
-
+  const { countryList, cityList } = useSelector((state) => state.Common);
   const handleCustomerEdit = (values) => {
     var filter =
       customer_list && customer_list.filter((user) => user.id === values.id);
@@ -193,6 +196,9 @@ const CustomerManagement = () => {
         email: filter[0].email,
         password: filter[0].password,
         contactnumber: filter[0].contactnumber,
+        nationalityid: filter[0].nationalityid,
+        dateofbirth: "13-09-2023",
+        passportnumber: filter[0].passportnumber,
         status: filter[0].userstatus,
       });
       // cardForm.setFieldsValue({
@@ -315,6 +321,11 @@ const CustomerManagement = () => {
     dispatch({
       type: settingsAction.GET_CUSTOMER_LIST,
       payload: 0,
+    });
+
+    dispatch({
+      type: commonactions.GET_COUNTRY_LIST,
+      payload: false,
     });
   }, []);
   return (
@@ -446,6 +457,72 @@ const CustomerManagement = () => {
                   />
                 </Form.Item>
               )}
+
+               <Form.Item
+                label={getLocaleMessages("ID/Passport Number")}
+                    name="passportnumber"
+                    rules={[
+                      {
+                        required: true,
+                        whitespace: false,
+                        message: `${getLocaleMessages(
+                          "Please input"
+                        )} ${getLocaleMessages("ID/Passport Number")}`,
+                      },
+                      {
+                        max: 10,
+                        message: getLocaleMessages("ID/Passport Number must be at 10"),
+                      },
+                    ]}
+                  >
+                    <Input readOnly={!IsEdited} placeholder={getLocaleMessages("ID/Passport Number")} />
+                  </Form.Item>
+
+                  <Form.Item
+                    label={getLocaleMessages("DOB")}
+                    name="dob"
+                    rules={[
+                      {
+                        required: true,
+                        message: `${getLocaleMessages(
+                          "Please input"
+                        )} ${getLocaleMessages("DOB")}`,
+                      }
+                    ]}
+                  >
+                    <DatePicker 
+                      readOnly={!IsEdited} 
+                      format="DD-MM-YYYY" 
+                      disabledDate={(current) => current && current > dayjs().endOf('day')} // Disable future dates
+                      placeholder={getLocaleMessages("DOB")}
+                    />
+                  </Form.Item>
+                  
+                  <Form.Item
+                    label={getLocaleMessages("Nationality")}
+                    name={"nationalityid"}
+                    // rules={[{ required: true, message: `${getLocaleMessages(
+                    //   "Please input"
+                    // )} ${getLocaleMessages("Nationality")}`, }]}
+                  >
+                    <Select
+                      showSearch
+                      allowClear
+                      autoComplete={'off'}
+                      placeholder={getLocaleMessages("Select your nationality")}
+                      dropdownStyle={{ minWidth: '200px' }}
+                    >
+                      {countryList && countryList.map(value => {
+                        return (
+                          <Option key={value.id} value={value.id}>
+                            {value.countryname}
+                          </Option>
+                        );
+                      })}
+                    </Select>
+                  </Form.Item>
+                  
+
               <Form.Item
                 name="contactnumber"
                 label={getLocaleMessages("Contact Number")}

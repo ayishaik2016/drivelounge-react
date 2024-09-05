@@ -1121,7 +1121,7 @@ const Home = () => {
                               Curencyval(DriverCharge)}
                           </span>
                         </Paragraph>
-                        <span>{`[${getLocaleMessages("Note Driver")}]`}</span>
+                        <span><b>{`${getLocaleMessages("Note Text")}`}:</b>{`[${getLocaleMessages("Note Driver")}]`}</span>
                       </>
                     )}
 
@@ -1134,7 +1134,7 @@ const Home = () => {
                         </span>
                       </Paragraph>
                     )}
-                    <span>{`[${getLocaleMessages("Note Deposit")}]`}</span>
+                    <span><b>{`${getLocaleMessages("Note Text")}`}:</b>{`[${getLocaleMessages("Note Deposit")}]`}</span>
                   </div>
                 </Col>
               </Row>

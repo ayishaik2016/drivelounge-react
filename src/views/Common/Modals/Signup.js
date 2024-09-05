@@ -12,7 +12,9 @@ import {
   Row,
   Upload,
   message,
+  DatePicker
 } from "antd";
+import dayjs from 'dayjs';
 import { UploadOutlined } from "@ant-design/icons";
 import Agency from "./../../Admin/Application/ApplicationDetails";
 import { uploadRequest } from "./../../../helpers/axiosClient";
@@ -39,6 +41,22 @@ const SignupModal = (props) => {
   const [DLicense, setDrivingLicense] = useState({ name: "" });
   const [VatDocs, setVatDocs] = useState({ name: "" });
   const [CRDocs, setCRDocs] = useState({ name: "" });
+
+  const tenYearsFromNow = dayjs().add(10, 'year').endOf('day');
+
+  const disableDates = (current) => {
+    return current && current.isAfter(tenYearsFromNow);
+  };
+
+  const nationalities = [
+    { value: '', label: 'Select' },
+    { value: 'us', label: 'United States' },
+    { value: 'ca', label: 'Canada' },
+    { value: 'gb', label: 'United Kingdom' },
+    { value: 'au', label: 'Australia' },
+    { value: 'in', label: 'India' },
+    // Add more nationalities as needed
+  ];
 
   const handleOnFinish = (event) => {
     if (UserType == 2 && event.vatnumber == event.crnumber) {
@@ -201,6 +219,69 @@ const SignupModal = (props) => {
                 >
                   <Input placeholder={getLocaleMessages("Email")} />
                 </Form.Item>
+
+                
+                <Form.Item
+                    name="passportnumber"
+                    rules={[
+                      {
+                        required: true,
+                        whitespace: false,
+                        message: `${getLocaleMessages(
+                          "Please input"
+                        )} ${getLocaleMessages("ID/Passport Number")}`,
+                      },
+                      {
+                        max: 10,
+                        message: getLocaleMessages("ID/Passport Number must be at 10"),
+                      },
+                    ]}
+                  >
+                    <Input placeholder={getLocaleMessages("ID/Passport Number")} />
+                  </Form.Item>
+
+                  <Form.Item
+                    name="dob"
+                    rules={[
+                      {
+                        required: true,
+                        message: `${getLocaleMessages(
+                          "Please input"
+                        )} ${getLocaleMessages("DOB")}`,
+                      }
+                    ]}
+                  >
+                    <DatePicker 
+                      format="DD-MM-YYYY" 
+                      disabledDate={(current) => current && current > dayjs().endOf('day')} // Disable future dates
+                      placeholder={getLocaleMessages("DOB")}
+                    />
+                  </Form.Item>
+                  
+                  <Form.Item
+                    name={"nationalityid"}
+                    // rules={[{ required: true, message: `${getLocaleMessages(
+                    //   "Please input"
+                    // )} ${getLocaleMessages("Nationality")}`, }]}
+                  >
+                    <Select
+                      showSearch
+                      allowClear
+                      autoComplete={'off'}
+                      placeholder={getLocaleMessages("Select your nationality")}
+                      dropdownStyle={{ minWidth: '200px' }}
+                    >
+                      {countryList && countryList.map(value => {
+                        return (
+                          <Option key={value.id} value={value.id}>
+                            {value.countryname}
+                          </Option>
+                        );
+                      })}
+                    </Select>
+                  </Form.Item>
+                  
+
                 <Form.Item
                   name="password"
                   rules={[

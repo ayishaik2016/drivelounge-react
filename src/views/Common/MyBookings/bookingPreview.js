@@ -60,6 +60,7 @@ const BookingPreview = React.forwardRef((props, ref) => {
     IsEnabled,
     usedForm,
     onFinishDetails,
+    onFinishUserDetails,
     SelectedBookingInfo = {},
     onFinishChange,
     handleBookingStatus,
@@ -85,6 +86,7 @@ const BookingPreview = React.forwardRef((props, ref) => {
     handleCancel,
     handleEditClick,
     handleUpdateRequest,
+    handleUserUpdateRequest,
     tabLocation,
     reactToPrintContent,
     DateEditable,
@@ -813,7 +815,7 @@ const BookingPreview = React.forwardRef((props, ref) => {
                         </div>
                         {SelectedBookingInfo.bookingstatus == 1 &&
                           SelectedBookingInfo.changerequeststatus &&
-                          getLocalDataType() == "admin" && (
+                          (getLocalDataType() == "admin" || getLocalDataType() == "agency") && (
                             <div style={{ marginRight: "10px" }}>
                               <Button
                                 type="primary"
@@ -859,6 +861,30 @@ const BookingPreview = React.forwardRef((props, ref) => {
                                 }
                               >
                                 {getLocaleMessages("Cancel Booking")}
+                              </Button>
+                            </div>
+                          )}
+                      </div>
+                    </Form.Item>
+                  </Col>
+                )}
+            </Row>
+
+            <Row gutter={4} style={{ justifyContent: "center" }}>
+              {SelectedBookingInfo.bookingstatus == 1 &&
+                (getLocalDataType() == "user") && (
+                  <Col span={6}>
+                    <Form.Item>
+                      <div className="button-center">
+                        {SelectedBookingInfo.bookingstatus == 1 &&
+                          SelectedBookingInfo.changerequeststatus && (
+                            <div style={{ marginRight: "10px" }}>
+                              <Button
+                                type="primary"
+                                style={{ width: "fixed-content" }}
+                                onClick={handleUserUpdateRequest}
+                              >
+                                {getLocaleMessages("Update Request")}
                               </Button>
                             </div>
                           )}

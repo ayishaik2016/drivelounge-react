@@ -125,6 +125,34 @@ const SignupModal = (props) => {
     setVatDocs({ name: "" });
   };
 
+  const hours = [
+    { value: '', label: 'Select' },
+    { value: '00:00', label: '12AM' },
+    { value: '01:00', label: '1 AM' },
+    { value: '02:00', label: '2 AM' },
+    { value: '03:00', label: '3 AM' },
+    { value: '04:00', label: '4 AM' },
+    { value: '05:00', label: '5 AM' },
+    { value: '06:00', label: '6 AM' },
+    { value: '07:00', label: '7 AM' },
+    { value: '08:00', label: '8 AM' },
+    { value: '09:00', label: '9 AM' },
+    { value: '10:00', label: '10 AM' },
+    { value: '11:00', label: '11 AM' },
+    { value: '12:00', label: '12 PM' },
+    { value: '13:00', label: '13 PM' },
+    { value: '14:00', label: '14 PM' },
+    { value: '15:00', label: '15 PM' },
+    { value: '16:00', label: '16 PM' },
+    { value: '17:00', label: '17 PM' },
+    { value: '18:00', label: '18 PM' },
+    { value: '19:00', label: '19 PM' },
+    { value: '20:00', label: '20 PM' },
+    { value: '21:00', label: '21 PM' },
+    { value: '22:00', label: '22 PM' },
+    { value: '23:00', label: '23 PM' }
+  ];
+
   useEffect(() => {
     usedForm.setFieldsValue({
       servicelocation: Cors.address,
@@ -283,6 +311,54 @@ const SignupModal = (props) => {
                     autoComplete="new-password"
                   />
                 </Form.Item>
+
+                <Form.Item
+                    name={"openingHours"}
+                    // rules={[{ required: true, message: `${getLocaleMessages(
+                    //   "Please input"
+                    // )} ${getLocaleMessages("Nationality")}`, }]}
+                  >
+                    <Select
+                      showSearch
+                      allowClear
+                      autoComplete={'off'}
+                      placeholder={getLocaleMessages("Opening Hours")}
+                      dropdownStyle={{ minWidth: '200px' }}
+                    >
+
+                      {hours.map((hour) => (
+                        <Option key={hour.value} value={hour.value}>
+                          {hour.label}
+                        </Option>
+                      ))}
+                    
+                    </Select>
+                  </Form.Item>
+
+                <Form.Item
+                    name={"closingHours"}
+                    // rules={[{ required: true, message: `${getLocaleMessages(
+                    //   "Please input"
+                    // )} ${getLocaleMessages("Nationality")}`, }]}
+                  >
+                    <Select
+                      showSearch
+                      allowClear
+                      autoComplete={'off'}
+                      placeholder={getLocaleMessages("Closing Hours")}
+                      dropdownStyle={{ minWidth: '200px' }}
+                    >
+
+                      {hours.map((hour) => (
+                        <Option key={hour.value} value={hour.value}>
+                          {hour.label}
+                        </Option>
+                      ))}
+                    
+                    </Select>
+                  </Form.Item>
+
+
                 {/* <Form.Item
                   name={"contactnumber"}
                   validateTrigger={["onSubmit", "onChange"]}

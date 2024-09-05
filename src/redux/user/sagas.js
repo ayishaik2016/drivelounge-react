@@ -67,6 +67,25 @@ export function* updateBookingInformation(params) {
   }
 }
 
+export function* updateUserBookingInformation(params) {
+  try {
+    const response = yield call(() =>
+      putRequest("user/booking/userChanges", params.payload)
+    );
+    yield put({
+      type: actions.UPDATE_USER_BOOKING_INFORMATION_SUCCESS,
+      // payload: result.data,
+    });
+    if (response?.status < 400) {
+      message.success(getLocaleMessages("Booking information udpated."));
+      history.push("/user/bookings");
+    }
+  } catch (error) {
+    // message.error(error.response)
+    yield put({ type: actions.UPDATE_CAR_RESERVATION_FAILURE });
+  }
+}
+
 export function* makeAdminPayment(params) {
   try {
     const response = yield call(() =>
@@ -423,6 +442,7 @@ export default function* rootSaga() {
 
     takeEvery(actions.GET_BOOKING_INFOBYID, GetBookingDetails),
     takeEvery(actions.UPDATE_BOOKING_INFORMATION, updateBookingInformation),
+    takeEvery(actions.UPDATE_USER_BOOKING_INFORMATION, updateUserBookingInformation),
     takeEvery(actions.MAKE_ADMIN_PAYMENT, makeAdminPayment),
 
     takeEvery(actions.SET_BOOKING_START, setBookingTripStart),

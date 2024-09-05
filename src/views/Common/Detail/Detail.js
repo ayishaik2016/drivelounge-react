@@ -100,6 +100,16 @@ const Home = (props) => {
     address: "",
   });
 
+  const handleHourConverstion = (time24) => {
+    const [hours, minutes] = time24.split(':').map(Number);
+
+    const period = hours >= 12 ? 'PM' : 'AM';
+    const hours12 = ((hours + 11) % 12 + 1); // Convert to 12-hour format
+    const minutesFormatted = minutes.toString().padStart(2, '0');
+
+    return `${hours12}:${minutesFormatted} ${period}`;
+  }
+
   const handleCalculation = () => {
     if (SelectedCar !== undefined) {
       let subtotal =
@@ -966,7 +976,7 @@ const Home = (props) => {
                       </Col>
                       <div style={{ marginLeft: 10, marginTop: 20 }}>
                         {" "}
-                        <Paragraph>{getLocaleMessages("Note")}</Paragraph>
+                        <Paragraph><b>{`${getLocaleMessages("Note Text")}`}:</b>{getLocaleMessages("Note")}</Paragraph>
                       </div>
                     </Row>
                   </div>
@@ -1000,6 +1010,23 @@ const Home = (props) => {
                           {SelectedCar !== undefined && SelectedCar[0].agent
                             ? SelectedCar[0].agent
                             : "Drive Lounge"}
+                        </p>
+                      </div>
+                      <Title level={4}>
+                        {" "}
+                        {getLocaleMessages("Delivery Timing")}{" "}
+                      </Title>
+                      <div className="box-information-agencyinfo">
+                        <p>
+                          {SelectedCar !== undefined && SelectedCar[0].openinghours
+                            ? handleHourConverstion(SelectedCar[0].openinghours)
+                            : "10 AM"}
+                        </p>
+                         To
+                        <p>
+                          {SelectedCar !== undefined && SelectedCar[0].closinghours
+                            ? handleHourConverstion(SelectedCar[0].closinghours)
+                            : "5 PM"}
                         </p>
                       </div>
                     </div>
@@ -1133,7 +1160,7 @@ const Home = (props) => {
                                 Curencyval(DriverCharge)}
                             </span>
                           </Paragraph>
-                          <span>{`[${getLocaleMessages("Note Driver")}]`}</span>
+                          <span><b>{`${getLocaleMessages("Note Text")}`}:</b>{`[${getLocaleMessages("Note Driver")}]`}</span>
                         </>
                       )}
                       {SelectedCar !== undefined &&
@@ -1147,7 +1174,7 @@ const Home = (props) => {
                             </span>
                           </Paragraph>
                         )}
-                      <span>{`[${getLocaleMessages("Note Deposit")}]`}</span>
+                      <span><b>{`${getLocaleMessages("Note Text")}`}:</b>{`[${getLocaleMessages("Note Deposit")}]`}</span>
                     </div>
                   </StickyBox>
 
