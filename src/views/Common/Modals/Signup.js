@@ -29,6 +29,7 @@ import PhoneInput, {
 import { getLocaleMessages } from "redux/helper";
 import { eachMonthOfInterval } from "date-fns";
 import { PatternFormat } from "react-number-format";
+import commonactions from "./../../../redux/common/actions";
 
 const { Option } = Select;
 
@@ -124,6 +125,11 @@ const SignupModal = (props) => {
   };
 
   useEffect(() => {
+    dispatch({
+      type: commonactions.GET_COUNTRY_LIST,
+      payload: false,
+    });
+
     clearFields();
   }, []);
 

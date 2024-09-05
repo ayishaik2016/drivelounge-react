@@ -23,6 +23,7 @@ import PhoneInput, {
 import "./../../../assets/css/userStyle.css";
 import { getLocaleMessages } from "redux/helper";
 import Map from "./../../Admin/Agency/Map";
+import commonactions from "./../../../redux/common/actions";
 import AutoCompleteAddress from "./../../Admin/Agency/AutoCompleteAddress";
 import LogoImageUpload from "../../../components/shared/LogoImageUpload";
 import { PatternFormat } from "react-number-format";
@@ -161,6 +162,11 @@ const SignupModal = (props) => {
   }, [Cors]);
 
   useEffect(() => {
+    dispatch({
+      type: commonactions.GET_COUNTRY_LIST,
+      payload: false,
+    });
+
     clearFields();
   }, []);
 
