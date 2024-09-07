@@ -18,7 +18,7 @@ import {
   Upload,
   Typography,
   message,
-  Modal,
+  Modal
 } from "antd";
 import { formProps } from "../../../helpers/constant";
 import settingsAction from "../../../redux/admin/agency/actions";
@@ -40,6 +40,7 @@ import { NumericFormat, PatternFormat } from "react-number-format";
 import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input";
 const { TabPane } = Tabs;
 const { Title } = Typography;
+const { Option } = Select;
 
 const ApplicationDetails = (props) => {
   const dispatch = useDispatch();
@@ -71,6 +72,34 @@ const ApplicationDetails = (props) => {
   const [Places, setPlaces] = useState("");
   const [AgencyVatDocs, setAgencyVatDocs] = useState({ name: "" });
   const [loading, setloading] = useState(false);
+
+  const hours = [
+    { value: '', label: 'Select' },
+    { value: '00:00', label: '12 AM' },
+    { value: '01:00', label: '1 AM' },
+    { value: '02:00', label: '2 AM' },
+    { value: '03:00', label: '3 AM' },
+    { value: '04:00', label: '4 AM' },
+    { value: '05:00', label: '5 AM' },
+    { value: '06:00', label: '6 AM' },
+    { value: '07:00', label: '7 AM' },
+    { value: '08:00', label: '8 AM' },
+    { value: '09:00', label: '9 AM' },
+    { value: '10:00', label: '10 AM' },
+    { value: '11:00', label: '11 AM' },
+    { value: '12:00', label: '12 PM' },
+    { value: '13:00', label: '1 PM' },
+    { value: '14:00', label: '2 PM' },
+    { value: '15:00', label: '3 PM' },
+    { value: '16:00', label: '4 PM' },
+    { value: '17:00', label: '5 PM' },
+    { value: '18:00', label: '6 PM' },
+    { value: '19:00', label: '7 PM' },
+    { value: '20:00', label: '8 PM' },
+    { value: '21:00', label: '9 PM' },
+    { value: '22:00', label: '10 PM' },
+    { value: '23:00', label: '11 PM' }
+  ];
 
   const handleAgencyImage = (options) => {
     const { file, onSuccess, onError } = options;
@@ -213,6 +242,8 @@ const ApplicationDetails = (props) => {
       paymentoption: 2, ///PayOption,
       photopath: AgencyImage.name, //values.photopath,
       status: Status,
+      openinghours: values.openinghours,
+      closinghours: values.closinghours,
     };
     dispatch({
       type: settingsAction.AGENCY_INFORMATION_IUD,
@@ -308,6 +339,8 @@ const ApplicationDetails = (props) => {
             ? agencydata_byid.vatstatus
             : 1,
         contactnumber: agencydata_byid.contactnumber,
+        openinghours: agencydata_byid.openinghours,
+        closinghours: agencydata_byid.closinghours,
       });
       setCors({
         lat: agencydata_byid.latitude,
@@ -443,6 +476,7 @@ const ApplicationDetails = (props) => {
         //   agencydata_byid.id !== undefined ? getLocaleMessages('Update Agency') : getLocaleMessages('Create Agency')
         // }
         >
+          
           <Form
             className="login-form"
             form={usedForm}
@@ -801,6 +835,7 @@ const ApplicationDetails = (props) => {
                   />
                 </Form.Item> */}
                 <Form.Item
+                  label={getLocaleMessages("Contact Number")}
                   name="contactnumber"
                   rules={[
                     {
@@ -850,6 +885,68 @@ const ApplicationDetails = (props) => {
                   ]}
                 >
                   <Input />
+                </Form.Item>
+              </Col>
+            </Row>
+            <Row gutter={30}>
+              <Col span={12}>
+                <Form.Item
+                  label={getLocaleMessages("Opening Hour")}
+                  name="openingHours"
+                  rules={[
+                    {
+                      required: true,
+                      message: getLocaleMessages("Opening hour is required"),
+                    }
+                  ]}
+                >
+                 <Select
+                    showSearch
+                    allowClear
+                    name='openinghours'
+                    autoComplete={'off'}
+                    placeholder={getLocaleMessages("Opening Hours")}
+                    dropdownStyle={{ minWidth: '200px' }}
+                    value='16:00'
+                  >
+
+                    {hours.map((hour) => (
+                      <Option key={hour.value} value={hour.label}>
+                        {hour.label}
+                      </Option>
+                    ))}
+                  
+                  </Select>
+                </Form.Item>
+              </Col>
+              <Col span={12}>
+                <Form.Item
+                  label={getLocaleMessages("Closing Hour")}
+                  name="closingHours"
+                  rules={[
+                    {
+                      required: true,
+                      message: getLocaleMessages("Closing hour is required"),
+                    }
+                  ]}
+                >
+                 <Select
+                    showSearch
+                    allowClear
+                    name="{closinghours}"
+                    autoComplete={'off'}
+                    placeholder={getLocaleMessages("Closing Hours")}
+                    dropdownStyle={{ minWidth: '200px' }}
+                    value="18:00"
+                  >
+
+                    {hours.map((hour) => (
+                      <Option key={hour.value} value={hour.value}>
+                        {hour.label}
+                      </Option>
+                    ))}
+                  
+                  </Select>
                 </Form.Item>
               </Col>
             </Row>
@@ -924,34 +1021,22 @@ const ApplicationDetails = (props) => {
                     <Input type="number" />
                   </Form.Item>
                 </Col>
+                
                 <Col span={12}>
                   <Form.Item
-                    label={getLocaleMessages("VAT Document")}
-                    name={"vatdocument"}
+                    label={getLocaleMessages("CR Number")}
+                    name={"crnumber"}
                     rules={[
                       {
                         required: true,
                         whitespace: true,
                         message: `${getLocaleMessages(
                           "Please input"
-                        )} ${getLocaleMessages("VAT Document")}`,
+                        )} ${getLocaleMessages("CR Number")}`,
                       },
                     ]}
                   >
-                    <div className="form-uploads">
-                      <Input value={AgencyVatDocs.name} disabled />
-                      <Upload
-                        fileList={
-                          AgencyVatDocs.name !== "" ? [AgencyVatDocs] : []
-                        }
-                        listType="picture"
-                        onRemove={() => handleRemove(2)}
-                        customRequest={(e) => handleLicenseImage(e, 2)}
-                        icon={<UploadOutlined />}
-                      >
-                        <Button icon={<UploadOutlined />} />
-                      </Upload>
-                    </div>
+                    <Input type="number" />
                   </Form.Item>
                 </Col>
               </Row>
@@ -980,19 +1065,32 @@ const ApplicationDetails = (props) => {
             <Row gutter={30}>
               <Col span={12}>
                 <Form.Item
-                  label={getLocaleMessages("CR Number")}
-                  name={"crnumber"}
+                  label={getLocaleMessages("VAT Document")}
+                  name={"vatdocument"}
                   rules={[
                     {
                       required: true,
                       whitespace: true,
                       message: `${getLocaleMessages(
                         "Please input"
-                      )} ${getLocaleMessages("CR Number")}`,
+                      )} ${getLocaleMessages("VAT Document")}`,
                     },
                   ]}
                 >
-                  <Input type="number" />
+                  <div className="form-uploads">
+                    <Input value={AgencyVatDocs.name} disabled />
+                    <Upload
+                      fileList={
+                        AgencyVatDocs.name !== "" ? [AgencyVatDocs] : []
+                      }
+                      listType="picture"
+                      onRemove={() => handleRemove(2)}
+                      customRequest={(e) => handleLicenseImage(e, 2)}
+                      icon={<UploadOutlined />}
+                    >
+                      <Button icon={<UploadOutlined />} />
+                    </Upload>
+                  </div>
                 </Form.Item>
               </Col>
               <Col span={12}>

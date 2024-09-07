@@ -247,7 +247,7 @@ const BookingPreview = React.forwardRef((props, ref) => {
                     <Input.TextArea rows={"3"} disabled />
                   </Form.Item>
                 </Col>{" "}
-                {SelectedBookingInfo.bookingstatus == 1 &&
+                {SelectedBookingInfo.bookingstatus > 4 &&
                   //SelectedBookingInfo.bookingstatus == 2 && //client asked us to hide this button
                   SelectedBookingInfo.changerequeststatus && (
                     <>
@@ -813,7 +813,7 @@ const BookingPreview = React.forwardRef((props, ref) => {
                             {getLocaleMessages("Cancel Booking")}
                           </Button>
                         </div>
-                        {SelectedBookingInfo.bookingstatus == 1 &&
+                        {/* {SelectedBookingInfo.bookingstatus > 4 &&
                           SelectedBookingInfo.changerequeststatus &&
                           (getLocalDataType() == "admin" || getLocalDataType() == "agency") && (
                             <div style={{ marginRight: "10px" }}>
@@ -825,7 +825,7 @@ const BookingPreview = React.forwardRef((props, ref) => {
                                 {getLocaleMessages("Update Request")}
                               </Button>
                             </div>
-                          )}
+                          )} */}
                         {/* {(getLocalDataType() == "user" ||
                         (getLocalDataType() == "admin" &&
                           !SelectedBookingInfo.changerequeststatus)) &&
@@ -870,13 +870,13 @@ const BookingPreview = React.forwardRef((props, ref) => {
                 )}
             </Row>
 
-            <Row gutter={4} style={{ justifyContent: "center" }}>
+            {/* <Row gutter={4} style={{ justifyContent: "center" }}>
               {SelectedBookingInfo.bookingstatus == 1 &&
                 (getLocalDataType() == "user") && (
                   <Col span={6}>
                     <Form.Item>
                       <div className="button-center">
-                        {SelectedBookingInfo.bookingstatus == 1 &&
+                        {SelectedBookingInfo.bookingstatus > 4 &&
                           SelectedBookingInfo.changerequeststatus && (
                             <div style={{ marginRight: "10px" }}>
                               <Button
@@ -892,7 +892,7 @@ const BookingPreview = React.forwardRef((props, ref) => {
                     </Form.Item>
                   </Col>
                 )}
-            </Row>
+            </Row> */}
 
             {/* <div className="mybook-detail">
               {getLocalDataType() == "admin" &&
