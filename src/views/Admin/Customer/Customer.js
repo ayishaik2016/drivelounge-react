@@ -202,7 +202,7 @@ const CustomerManagement = () => {
       setSelectedID(id);
       setStatus(filter[0].userstatus);
       setIsEdited(false);
-      const dateofbirth = moment(filter[0].dateofbirth);
+      const dateofbirth = filter[0].dateofbirth;
       usedForm.setFieldsValue({
         firstname: filter[0].firstname,
         lastname: filter[0].lastname,

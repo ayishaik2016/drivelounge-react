@@ -1153,7 +1153,7 @@ const Home = (props) => {
                       {(filterCarElements.WithDriver || (SelectedCar !== undefined && SelectedCar[0].driver == "With Chauffeur")) && (
                         <>
                           <Paragraph className="split">
-                            {`${getLocaleMessages("Chauffeur Charge")}`}
+                            <b>{`${getLocaleMessages("Chauffeur Charge")}`}</b>
                             <span>
                               {" "}
                               {SelectedCar !== undefined &&
