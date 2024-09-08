@@ -58,6 +58,8 @@ const ApplicationDetails = (props) => {
   const [showVAT, toggleVATShow] = useState(true);
   const [PayOption, setPayOption] = useState(3);
   const [visible, setvisible] = useState(false);
+  const [searchOpeningHours, setSearchOpeningHours] = useState('');  
+  const [searchClosingHours, setSearchClosingHours] = useState('');  
   const [AgencyId, setAgencyId] = useState(
     props.location.state !== undefined ? props.location.state : 0
   );
@@ -100,6 +102,23 @@ const ApplicationDetails = (props) => {
     { value: '22:00', label: '10 PM' },
     { value: '23:00', label: '11 PM' }
   ];
+
+  const handleSearchOpeningHours = (value) => {
+    setSearchOpeningHours(value);
+  };
+
+  const filteredOpeningHours = hours.filter(hour =>
+    hour.label.toLowerCase().includes(searchOpeningHours.toLowerCase())
+  );
+
+
+  const handleSearchClosingHours = (value) => {
+    setSearchClosingHours(value);
+  };
+
+  const filteredClosingHours = hours.filter(hour =>
+    hour.label.toLowerCase().includes(searchClosingHours.toLowerCase())
+  );
 
   const handleAgencyImage = (options) => {
     const { file, onSuccess, onError } = options;
@@ -892,7 +911,7 @@ const ApplicationDetails = (props) => {
               <Col span={12}>
                 <Form.Item
                   label={getLocaleMessages("Opening Hour")}
-                  name="openingHours"
+                  name="openinghours"
                   rules={[
                     {
                       required: true,
@@ -903,15 +922,15 @@ const ApplicationDetails = (props) => {
                  <Select
                     showSearch
                     allowClear
-                    name='openinghours'
                     autoComplete={'off'}
                     placeholder={getLocaleMessages("Opening Hours")}
                     dropdownStyle={{ minWidth: '200px' }}
-                    value='16:00'
+                    onSearch={handleSearchOpeningHours}
+                    filterOption={false} 
                   >
 
-                    {hours.map((hour) => (
-                      <Option key={hour.value} value={hour.label}>
+                    {filteredOpeningHours.map((hour) => (
+                      <Option key={hour.value} value={hour.value}>
                         {hour.label}
                       </Option>
                     ))}
@@ -922,7 +941,7 @@ const ApplicationDetails = (props) => {
               <Col span={12}>
                 <Form.Item
                   label={getLocaleMessages("Closing Hour")}
-                  name="closingHours"
+                   name="closinghours"
                   rules={[
                     {
                       required: true,
@@ -933,14 +952,14 @@ const ApplicationDetails = (props) => {
                  <Select
                     showSearch
                     allowClear
-                    name="{closinghours}"
                     autoComplete={'off'}
                     placeholder={getLocaleMessages("Closing Hours")}
                     dropdownStyle={{ minWidth: '200px' }}
-                    value="18:00"
+                    onSearch={handleSearchClosingHours}
+                    filterOption={false} 
                   >
 
-                    {hours.map((hour) => (
+                    {filteredClosingHours.map((hour) => (
                       <Option key={hour.value} value={hour.value}>
                         {hour.label}
                       </Option>

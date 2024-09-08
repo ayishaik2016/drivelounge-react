@@ -55,6 +55,7 @@ const CustomerManagement = () => {
   const [visible, setvisible] = useState(false);
   const [Status, setStatus] = useState(1);
   const [IsEdited, setIsEdited] = useState(false);
+  const [searchNationality, setSearchNationality] = useState('');  
   const columns = [
     {
       title: "#",
@@ -145,6 +146,15 @@ const CustomerManagement = () => {
     },
   ];
   const { countryList, cityList } = useSelector((state) => state.Common);
+
+  const handleSearchNationality = (value) => {
+    setSearchNationality(value);
+  };
+
+  const filteredCountryList = countryList.filter(country =>
+    country.countryname.toLowerCase().includes(searchNationality.toLowerCase())
+  );
+
   const handleCustomerEdit = (values) => {
     var filter =
       customer_list && customer_list.filter((user) => user.id === values.id);
@@ -157,6 +167,9 @@ const CustomerManagement = () => {
       password: filter[0].password,
       contactnumber: filter[0].contactnumber,
       status: filter[0].userstatus,
+      nationalityid: filter[0].nationalityid,
+      // dateofbirth: new Date(dateofbirth.clone),
+      passportno: filter[0].passportno,
     });
     setvisible(!visible);
     setSelectedID(values.id);
@@ -189,6 +202,7 @@ const CustomerManagement = () => {
       setSelectedID(id);
       setStatus(filter[0].userstatus);
       setIsEdited(false);
+      const dateofbirth = moment(filter[0].dateofbirth);
       usedForm.setFieldsValue({
         firstname: filter[0].firstname,
         lastname: filter[0].lastname,
@@ -197,8 +211,8 @@ const CustomerManagement = () => {
         password: filter[0].password,
         contactnumber: filter[0].contactnumber,
         nationalityid: filter[0].nationalityid,
-        dateofbirth: "13-09-2023",
-        passportnumber: filter[0].passportnumber,
+        // dateofbirth: new Date(dateofbirth.clone),
+        passportno: filter[0].passportno,
         status: filter[0].userstatus,
       });
       // cardForm.setFieldsValue({
@@ -288,6 +302,9 @@ const CustomerManagement = () => {
       username: values.username,
       usertypeid: 3,
       status: Status,
+      nationalityid: values.nationalityid,
+      // dateofbirth: new Date(dateofbirth.clone),
+      passportno: values.passportno,
     };
     if (data.email) {
       setvisible(!visible);
@@ -460,7 +477,7 @@ const CustomerManagement = () => {
 
                <Form.Item
                 label={getLocaleMessages("ID/Passport Number")}
-                    name="passportnumber"
+                    name="passportno"
                     rules={[
                       {
                         required: true,
@@ -480,7 +497,7 @@ const CustomerManagement = () => {
 
                   <Form.Item
                     label={getLocaleMessages("DOB")}
-                    name="dob"
+                    name={"dateofbirth"}
                     rules={[
                       {
                         required: true,
@@ -501,9 +518,9 @@ const CustomerManagement = () => {
                   <Form.Item
                     label={getLocaleMessages("Nationality")}
                     name={"nationalityid"}
-                    // rules={[{ required: true, message: `${getLocaleMessages(
-                    //   "Please input"
-                    // )} ${getLocaleMessages("Nationality")}`, }]}
+                    rules={[{ required: true, message: `${getLocaleMessages(
+                      "Please input"
+                    )} ${getLocaleMessages("Nationality")}`, }]}
                   >
                     <Select
                       showSearch
@@ -511,14 +528,14 @@ const CustomerManagement = () => {
                       autoComplete={'off'}
                       placeholder={getLocaleMessages("Select your nationality")}
                       dropdownStyle={{ minWidth: '200px' }}
+                      onSearch={handleSearchNationality}
+                      filterOption={false} 
                     >
-                      {countryList && countryList.map(value => {
-                        return (
-                          <Option key={value.id} value={value.id}>
-                            {value.countryname}
-                          </Option>
-                        );
-                      })}
+                      {filteredCountryList.map((country) => (
+                      <Option key={country.id} value={country.id}>
+                        {country.countryname}
+                      </Option>
+                    ))}
                     </Select>
                   </Form.Item>
                   

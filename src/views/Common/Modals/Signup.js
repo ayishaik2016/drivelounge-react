@@ -42,6 +42,7 @@ const SignupModal = (props) => {
   const [DLicense, setDrivingLicense] = useState({ name: "" });
   const [VatDocs, setVatDocs] = useState({ name: "" });
   const [CRDocs, setCRDocs] = useState({ name: "" });
+  const [searchNationality, setSearchNationality] = useState('');  
 
   const tenYearsFromNow = dayjs().add(10, 'year').endOf('day');
 
@@ -59,6 +60,14 @@ const SignupModal = (props) => {
     // Add more nationalities as needed
   ];
 
+  const handleSearchNationality = (value) => {
+    setSearchNationality(value);
+  };
+
+  const filteredCountryList = countryList.filter(country =>
+    country.countryname.toLowerCase().includes(searchNationality.toLowerCase())
+  );
+  
   const handleOnFinish = (event) => {
     if (UserType == 2 && event.vatnumber == event.crnumber) {
       message.error("VAT Number and CR Number should not be equal");
@@ -247,7 +256,7 @@ const SignupModal = (props) => {
                   </Form.Item>
 
                   <Form.Item
-                    name="dob"
+                    name="dateofbirth"
                     rules={[
                       {
                         required: true,
@@ -266,9 +275,9 @@ const SignupModal = (props) => {
                   
                   <Form.Item
                     name={"nationalityid"}
-                    // rules={[{ required: true, message: `${getLocaleMessages(
-                    //   "Please input"
-                    // )} ${getLocaleMessages("Nationality")}`, }]}
+                    rules={[{ required: true, message: `${getLocaleMessages(
+                      "Please input"
+                    )} ${getLocaleMessages("Nationality")}`, }]}
                   >
                     <Select
                       showSearch
@@ -276,14 +285,16 @@ const SignupModal = (props) => {
                       autoComplete={'off'}
                       placeholder={getLocaleMessages("Select your nationality")}
                       dropdownStyle={{ minWidth: '200px' }}
+                      onSearch={handleSearchNationality}
+                      filterOption={false} 
                     >
-                      {countryList && countryList.map(value => {
-                        return (
-                          <Option key={value.id} value={value.id}>
-                            {value.countryname}
-                          </Option>
-                        );
-                      })}
+
+                    {filteredCountryList.map((country) => (
+                      <Option key={country.id} value={country.id}>
+                        {country.countryname}
+                      </Option>
+                    ))}
+                    
                     </Select>
                   </Form.Item>
                   

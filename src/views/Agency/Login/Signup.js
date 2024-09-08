@@ -43,6 +43,8 @@ const SignupModal = (props) => {
   const [Places, setPlaces] = useState("");
   const [CoverImagePath, setCoverImagePath] = useState({ name: "" });
   const [AgencyImage, setAgencyImage] = useState({ name: "" });
+  const [searchOpeningHours, setSearchOpeningHours] = useState('');  
+  const [searchClosingHours, setSearchClosingHours] = useState('');  
   const [Cors, setCors] = useState({
     lat: 24.6877,
     lng: 46.7219,
@@ -153,6 +155,24 @@ const SignupModal = (props) => {
     { value: '22:00', label: '10 PM' },
     { value: '23:00', label: '11 PM' }
   ];
+
+  
+  const handleSearchOpeningHours = (value) => {
+    setSearchOpeningHours(value);
+  };
+
+  const filteredOpeningHours = hours.filter(hour =>
+    hour.label.toLowerCase().includes(searchOpeningHours.toLowerCase())
+  );
+
+
+  const handleSearchClosingHours = (value) => {
+    setSearchClosingHours(value);
+  };
+
+  const filteredClosingHours = hours.filter(hour =>
+    hour.label.toLowerCase().includes(searchClosingHours.toLowerCase())
+  );
 
   useEffect(() => {
     usedForm.setFieldsValue({
@@ -319,10 +339,10 @@ const SignupModal = (props) => {
                 </Form.Item>
 
                 <Form.Item
-                    name={"openingHours"}
-                    // rules={[{ required: true, message: `${getLocaleMessages(
-                    //   "Please input"
-                    // )} ${getLocaleMessages("Nationality")}`, }]}
+                    name={"openinghours"}
+                    rules={[{ required: true, message: `${getLocaleMessages(
+                      "Please input"
+                    )} ${getLocaleMessages("Opening Hours")}`, }]}
                   >
                     <Select
                       showSearch
@@ -330,9 +350,11 @@ const SignupModal = (props) => {
                       autoComplete={'off'}
                       placeholder={getLocaleMessages("Opening Hours")}
                       dropdownStyle={{ minWidth: '200px' }}
+                      onSearch={handleSearchOpeningHours}
+                      filterOption={false} 
                     >
 
-                      {hours.map((hour) => (
+                      {filteredOpeningHours.map((hour) => (
                         <Option key={hour.value} value={hour.value}>
                           {hour.label}
                         </Option>
@@ -342,10 +364,10 @@ const SignupModal = (props) => {
                   </Form.Item>
 
                 <Form.Item
-                    name={"closingHours"}
-                    // rules={[{ required: true, message: `${getLocaleMessages(
-                    //   "Please input"
-                    // )} ${getLocaleMessages("Nationality")}`, }]}
+                    name={"closinghours"}
+                    rules={[{ required: true, message: `${getLocaleMessages(
+                      "Please input"
+                    )} ${getLocaleMessages("Closing Hours")}`, }]}
                   >
                     <Select
                       showSearch
@@ -353,9 +375,11 @@ const SignupModal = (props) => {
                       autoComplete={'off'}
                       placeholder={getLocaleMessages("Closing Hours")}
                       dropdownStyle={{ minWidth: '200px' }}
+                      onSearch={handleSearchClosingHours}
+                      filterOption={false} 
                     >
 
-                      {hours.map((hour) => (
+                      {filteredClosingHours.map((hour) => (
                         <Option key={hour.value} value={hour.value}>
                           {hour.label}
                         </Option>

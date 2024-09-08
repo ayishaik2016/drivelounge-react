@@ -18,6 +18,7 @@ import {
   Space,
   Modal,
   Spin,
+  Select,
 } from "antd";
 import {
   EditOutlined,
@@ -45,17 +46,20 @@ import Header from "./../Header/Header";
 import Footer from "./../Footer/Footer";
 import { uploadRequest } from "../../../helpers/axiosClient";
 import settingsAction from "../../../redux/admin/booking/actions";
+import commonactions from "./../../../redux/common/actions";
 import ProfileHead from "../MyProfile/ProfileHeader";
 import { Link } from "react-router-dom";
 import "../../../assets/css/userStyle.css";
 import Map from "./../../Admin/Agency/MapDisplay";
 
+const { Option } = Select;
 const { Title } = Typography;
 const { Panel } = Collapse;
 const { Content } = Layout;
 const { TextArea } = Input;
 
 const BookingPreview = React.forwardRef((props, ref) => {
+  const dispatch = useDispatch();
   const {
     IsEnabled,
     usedForm,
@@ -94,6 +98,7 @@ const BookingPreview = React.forwardRef((props, ref) => {
   } = props;
 
   const { preferredCurrency } = useSelector(state => state.Currency)
+  const { countryList, cityList } = useSelector((state) => state.Common);
 
   const RenderMap = ({ lat, lng, address }) => {
     return (
@@ -145,6 +150,13 @@ const BookingPreview = React.forwardRef((props, ref) => {
   useEffect(() => {
     <RenderUploadFiles />;
   }, [PickupImageList]);
+
+  useEffect(() => {
+    dispatch({
+      type: commonactions.GET_COUNTRY_LIST,
+      payload: false,
+    });
+  }, []);
   console.log("UsedForm", usedForm.getFieldsValue(), SelectedBookingInfo);
   return (
     <div
@@ -610,6 +622,26 @@ const BookingPreview = React.forwardRef((props, ref) => {
                       <Input disabled />
                     </Form.Item>
                   </Col>
+                  <Col span={12}>
+                    <Form.Item label={getLocaleMessages("ID/Passport Number")} name="passportno">
+                      <Input disabled />
+                    </Form.Item>
+                  </Col>
+                  <Form.Item
+                    label={getLocaleMessages("Nationality")}
+                    name={"nationalityid"}
+                  >
+                    <Select
+                    disabled
+                      dropdownStyle={{ minWidth: '200px' }}
+                    >
+                      {countryList.map((country) => (
+                      <Option key={country.id} value={country.id}>
+                        {country.countryname}
+                      </Option>
+                    ))}
+                    </Select>
+                  </Form.Item>
                   {/* <Col span={12}>
                   <Form.Item
                     name="address"
