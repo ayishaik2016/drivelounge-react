@@ -16,6 +16,7 @@ import {
   Card,
   DatePicker
 } from "antd";
+import moment from 'moment';
 import dayjs from 'dayjs';
 import {
   FilterOutlined,
@@ -56,6 +57,7 @@ const CustomerManagement = () => {
   const [Status, setStatus] = useState(1);
   const [IsEdited, setIsEdited] = useState(false);
   const [searchNationality, setSearchNationality] = useState('');  
+  const [selectedDate, setSelectedDate] = useState('');
   const columns = [
     {
       title: "#",
@@ -159,6 +161,10 @@ const CustomerManagement = () => {
     var filter =
       customer_list && customer_list.filter((user) => user.id === values.id);
     setStatus(filter[0].userstatus);
+    const dateofbirth = new Date(filter[0].dateofbirth);
+    const birthDay = dateofbirth.getDate();
+    const birthMonth = dateofbirth.getMonth() + 1; // Months are zero-indexed
+    const birthYear = dateofbirth.getFullYear();
     usedForm.setFieldsValue({
       firstname: filter[0].firstname,
       lastname: filter[0].lastname,
@@ -171,6 +177,7 @@ const CustomerManagement = () => {
       // dateofbirth: new Date(dateofbirth.clone),
       passportno: filter[0].passportno,
     });
+    setSelectedDate(moment(birthYear + '-' + birthMonth + '-' + birthDay, 'YYYY-MM-DD'));
     setvisible(!visible);
     setSelectedID(values.id);
     setIsEdited(true);
@@ -202,7 +209,10 @@ const CustomerManagement = () => {
       setSelectedID(id);
       setStatus(filter[0].userstatus);
       setIsEdited(false);
-      const dateofbirth = filter[0].dateofbirth;
+      const dateofbirth = new Date(filter[0].dateofbirth);
+      const birthDay = dateofbirth.getDate();
+      const birthMonth = dateofbirth.getMonth() + 1; // Months are zero-indexed
+      const birthYear = dateofbirth.getFullYear();
       usedForm.setFieldsValue({
         firstname: filter[0].firstname,
         lastname: filter[0].lastname,
@@ -211,7 +221,7 @@ const CustomerManagement = () => {
         password: filter[0].password,
         contactnumber: filter[0].contactnumber,
         nationalityid: filter[0].nationalityid,
-        // dateofbirth: new Date(dateofbirth.clone),
+        // dateofbirth: new Date(dateofbirth),
         passportno: filter[0].passportno,
         status: filter[0].userstatus,
       });
@@ -221,6 +231,8 @@ const CustomerManagement = () => {
       //   cvv: filter[0].cvv,
       //   cardholdername: filter[0].cardholdername,
       // })
+      
+      setSelectedDate(moment(birthYear + '-' + birthMonth + '-' + birthDay, 'YYYY-MM-DD'));
       setvisible(!visible);
     }
   };
@@ -303,7 +315,7 @@ const CustomerManagement = () => {
       usertypeid: 3,
       status: Status,
       nationalityid: values.nationalityid,
-      // dateofbirth: new Date(dateofbirth.clone),
+      dateofbirth: selectedDate,
       passportno: values.passportno,
     };
     if (data.email) {
@@ -497,7 +509,7 @@ const CustomerManagement = () => {
 
                   <Form.Item
                     label={getLocaleMessages("DOB")}
-                    name={"dateofbirth"}
+                    // name="dateofbirthEdit"
                     rules={[
                       {
                         required: true,
@@ -510,6 +522,8 @@ const CustomerManagement = () => {
                     <DatePicker 
                       readOnly={!IsEdited} 
                       format="DD-MM-YYYY" 
+                      value={selectedDate}
+                      onChange={(date) => setSelectedDate(date)}
                       disabledDate={(current) => current && current > dayjs().endOf('day')} // Disable future dates
                       placeholder={getLocaleMessages("DOB")}
                     />
@@ -525,6 +539,7 @@ const CustomerManagement = () => {
                     <Select
                       showSearch
                       allowClear
+                      disabled={!IsEdited}
                       autoComplete={'off'}
                       placeholder={getLocaleMessages("Select your nationality")}
                       dropdownStyle={{ minWidth: '200px' }}

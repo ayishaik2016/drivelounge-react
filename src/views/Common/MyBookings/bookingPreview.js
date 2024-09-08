@@ -157,7 +157,18 @@ const BookingPreview = React.forwardRef((props, ref) => {
       payload: false,
     });
   }, []);
+  
   console.log("UsedForm", usedForm.getFieldsValue(), SelectedBookingInfo);
+  let age = 0;
+  if(SelectedBookingInfo.dateofbirth !== undefined) {
+    const today = new Date();
+    const birthDate = new Date(SelectedBookingInfo.dateofbirth);  // create a date object directly from `dob1` argument
+    age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+  }
   return (
     <div
       ref={ref}
@@ -627,21 +638,33 @@ const BookingPreview = React.forwardRef((props, ref) => {
                       <Input disabled />
                     </Form.Item>
                   </Col>
-                  <Form.Item
-                    label={getLocaleMessages("Nationality")}
-                    name={"nationalityid"}
-                  >
-                    <Select
-                    disabled
-                      dropdownStyle={{ minWidth: '200px' }}
+                </Row>
+                <Row gutter={20}>
+                  <Col span={12}>
+                    <Form.Item
+                      label={getLocaleMessages("Nationality")}
+                      name={"nationalityid"}
                     >
-                      {countryList.map((country) => (
-                      <Option key={country.id} value={country.id}>
-                        {country.countryname}
-                      </Option>
-                    ))}
-                    </Select>
-                  </Form.Item>
+                      <Select
+                      disabled
+                        dropdownStyle={{ minWidth: '200px' }}
+                      >
+                        {countryList.map((country) => (
+                        <Option key={country.id} value={country.id}>
+                          {country.countryname}
+                        </Option>
+                      ))}
+                      </Select>
+                    </Form.Item>
+                  </Col>
+                  <Col span={12}>
+                    <Form.Item
+                      // name={"age"}
+                      label={getLocaleMessages("Age")}
+                    >
+                     <Input disabled className="number_ltr" value={age} />
+                    </Form.Item>
+                  </Col>
                   {/* <Col span={12}>
                   <Form.Item
                     name="address"
