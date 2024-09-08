@@ -237,7 +237,7 @@ const SignupModal = (props) => {
 
                 
                 <Form.Item
-                    name="passportnumber"
+                    name="passportno"
                     rules={[
                       {
                         required: true,

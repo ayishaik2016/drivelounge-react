@@ -736,7 +736,10 @@ const BookingPreview = React.forwardRef((props, ref) => {
                 </Row>
               </Card>
             )}
-            {SelectedBookingInfo.bookingstatus == 0 && (
+
+            {SelectedBookingInfo.bookingstatus == 0 &&
+              (getLocalDataType() == "admin" ||
+                getLocalDataType() == "agency") && (
               <Card
                 style={{ marginTop: 16 }}
                 type="inner"
