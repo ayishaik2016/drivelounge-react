@@ -33,6 +33,7 @@ import SigninModal from "./../../Common/Modals/Signin";
 import ForgotModal from "./../../Common/Modals/Forgot";
 import OTP from "./../../Common/Modals/OneTimePassword";
 import ImageGallery from "react-image-gallery";
+import 'react-image-gallery/styles/css/image-gallery.css';
 import {
   compareDesc,
   addDays,
@@ -62,6 +63,8 @@ const Home = (props) => {
   const [isForgotVisible, setIsForgotVisible] = useState(false);
   const [isOtpVisible, SetIsOtpVisible] = useState(false);
   const [OTPdata, setOTPdata] = useState("");
+  const [loadedImages, setLoadedImages] = useState([]);
+  const [loading, setLoading] = useState(true);
   const { subLang, loader, isLoggedIn, isOtp, isemail } = useSelector(
     (state) => state.Auth
   );
@@ -287,14 +290,57 @@ const Home = (props) => {
     if (carInterriorImagesList.length > 0) {
       let images = [];
       carInterriorImagesList.map((inter) => {
+        const timestamp = new Date().getTime();
         images.push({
-          original: `https://api.drivelounge.com/${inter.carinterriorimagename}`,
-          thumbnail: `https://api.drivelounge.com/${inter.carinterriorimagename}`,
+          original: `https://api.drivelounge.com/${inter.carinterriorimagename}?v=${timestamp}`,
+          thumbnail: `https://api.drivelounge.com/${inter.carinterriorimagename}?v=${timestamp}`,
         });
       });
       setCourselImages(images);
     }
   }, [carInterriorImagesList]);
+  
+  const loadImage = (src) => {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.src = src;
+      img.onload = () => resolve(src);
+      img.onerror = () => resolve(null);
+    });
+  };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      // Load all images in the background
+      const loadImages = async () => {
+        setLoading(true);
+        try {
+          const promises = carInterriorImagesList.map((image) => {
+            const timestamp = new Date().getTime();
+            return `https://api.drivelounge.com/${image.carinterriorimagename}`;
+          });
+          const loaded = await Promise.all(promises);
+          setLoadedImages(loaded.filter(src => src !== null));
+        } catch (error) {
+          console.error('Error loading images:', error);
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      loadImages();
+    }, 300);
+  }, [carInterriorImagesList]);
+
+  const galleryImages = carInterriorImagesList.map((image) => ({
+    original: loadedImages.includes(`https://api.drivelounge.com/${image.carinterriorimagename}`) ? `https://api.drivelounge.com/${image.carinterriorimagename}` : '',
+    thumbnail: `https://api.drivelounge.com/${image.carinterriorimagename}`,
+    // description: image.carinterriorimagename,
+  }));
+
+  const handleImageLoad = (event) => {
+    console.log('Image loaded:', event.target.src);
+  };
 
   const thumbnailStyles = () => {
     return {
@@ -754,14 +800,18 @@ const Home = (props) => {
             <div className="container">
               <Row gutter={30}>
                 <Col span={17}>
-                  {CourselImages ? (
-                    <ImageGallery
-                      autoPlay={true}
-                      showPlayButton={false}
-                      items={CourselImages}
-                      thumbnailClass={thumbnailStyles}
-                    />
-                  ) : null}
+                  <div className="box-image-coursel">
+                    {(galleryImages.length > 0 && !loading) ? (
+                      <ImageGallery
+                        autoPlay={true}
+                        showPlayButton={false}
+                        items={galleryImages}
+                        thumbnailClass={thumbnailStyles}
+                        showBullets={true} 
+                        onImageLoad={handleImageLoad}
+                      />
+                    ) : null}
+                  </div>
 
                   {/* <div className="cover_image">
                     <img
