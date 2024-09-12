@@ -910,7 +910,7 @@ const ApplicationDetails = (props) => {
             <Row gutter={30}>
               <Col span={12}>
                 <Form.Item
-                  label={getLocaleMessages("Opening Hour")}
+                  label={getLocaleMessages("Opening Hours")}
                   name="openinghours"
                   rules={[
                     {
@@ -940,7 +940,7 @@ const ApplicationDetails = (props) => {
               </Col>
               <Col span={12}>
                 <Form.Item
-                  label={getLocaleMessages("Closing Hour")}
+                  label={getLocaleMessages("Closing Hours")}
                    name="closinghours"
                   rules={[
                     {
