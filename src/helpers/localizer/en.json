@@ -837,5 +837,13 @@
   "WhatsApp": "WhatsApp",
   "Commercial Registration No": "Commercial Registration No",
   "Note Text": "Note",
-  "Are you sure you want to confirm this booking": "Are you sure you want to confirm this booking"
+  "Are you sure you want to confirm this booking": "Are you sure you want to confirm this booking",
+  "Delivery Timing": "Delivery Timing",
+  "ID/Passport Number": "ID/Passport Number",
+  "DOB": "DOB",
+  "Select your nationality": "Select your nationality",
+  "Opening Hours": "Opening Hours",
+  "Closing Hours": "Closing Hours",
+  "Nationality": "Nationality",
+  "Age": "Age"
 }

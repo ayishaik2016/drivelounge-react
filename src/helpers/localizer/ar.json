@@ -835,5 +835,13 @@
   "WhatsApp": "الواتس اب",
   "Commercial Registration No": "سجل تجاري رقم",
   "Note Text": "ملاحظة",
-  "Are you sure you want to confirm this booking": "هل انت متأكد من تأكيد هذا الحجز ؟"
+  "Are you sure you want to confirm this booking": "هل انت متأكد من تأكيد هذا الحجز ؟",
+  "Delivery Timing": "وقت التوصيل",
+  "ID/Passport Number": "رقم الهوية / الجواز",
+  "DOB": "تاريخ الميلاد",
+  "Select your nationality": "الجنسية",
+  "Opening Hours": "ساعات العمل",
+  "Closing Hours": "خارج اوقات العمل",
+  "Nationality": "الجنسية",
+  "Age": "عمر"
 }

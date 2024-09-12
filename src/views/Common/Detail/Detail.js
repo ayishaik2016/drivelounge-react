@@ -329,7 +329,7 @@ const Home = (props) => {
       };
 
       loadImages();
-    }, 300);
+    }, 500);
   }, [carInterriorImagesList]);
 
   const galleryImages = carInterriorImagesList.map((image) => ({
