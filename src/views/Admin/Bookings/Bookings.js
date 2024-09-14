@@ -152,21 +152,16 @@ const BookingManagement = () => {
         else if (status.status <= 0)
           return (
             <span>{`${
-              status.roleid == 0
+              status.usertype == 3
                 ? `${getLocaleMessages("Cancelled")} by the user ${
                     status.cancellationreason.length > 0
                       ? `(reason: ${status.cancellationreason})`
                       : ""
                   }`
                 : ` ${
-                    status.cancellationreason !== null &&
-                    status.cancellationreason.length > 0
-                      ? status.roleid == 1
-                        ? `${getLocaleMessages("Cancelled by Agency")}: ${
-                            status.cancellationreason
-                          }`
-                        : getLocaleMessages("Cancelled by admin")
-                      : getLocaleMessages("Cancelled by admin")
+                    status.usertype == 2
+                        ? `${getLocaleMessages("Cancelled by Agency")}: ${status.cancellationreason}`
+                        : `${getLocaleMessages("Cancelled by Admin")}: ${status.cancellationreason}`
                   }`
             }`}</span>
           );

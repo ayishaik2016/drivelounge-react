@@ -102,19 +102,33 @@ const BookingDetails = (props) => {
 
   const handleBookingStatus = (status, bookingid, userid) => {
     const id = SelectedBookingInfo.id || props.location.state;
+    const pickupDate = new Date(SelectedBookingInfo.pickupdate);
+    const currentDate = new Date();
+    
+    const timeDifference = pickupDate - currentDate;
+    const daysDifference = timeDifference / (1000 * 60 * 60 * 24);
+
+    let cancelMessage = 'Are you sure to cancel this booking';
+    if(getLocalDataType("login_type") === "user") {
+      if(daysDifference <= 1) {
+        cancelMessage = 'Are you sure to cancel this booking, additional chanrges will collected on cancellation?';
+      } else {
+        cancelMessage = 'Are you sure to cancel this booking, no additional chanrges will collected on cancellation?';
+      }
+    }
     if (status == 0) {
       return Modal.confirm({
         icon: <ExclamationCircleOutlined />,
         title: getLocaleMessages("Bookings"),
         content: (
           <span>
-            {getLocaleMessages("Are you sure to cancel this booking")}?
+            {getLocaleMessages(cancelMessage)}?
           </span>
         ),
         okText: getLocaleMessages("Yes"),
         cancelText: getLocaleMessages("No"),
         onOk() {
-          if (getLocalDataType("login_type") === "agency") {
+          if (getLocalDataType("login_type") === "admin" || getLocalDataType("login_type") === "agency") {
             setShowCancelDialog(!ShowCancelDialog);
             setSelectedBooking({
               id: id || bookingid,
@@ -171,7 +185,7 @@ const BookingDetails = (props) => {
       icon: <ExclamationCircleOutlined />,
       title: getLocaleMessages("Bookings"),
       content: (
-        <span>{getLocaleMessages("Are you sure to cancel this booking")}?</span>
+        <span>{getLocaleMessages("Are you sure to cancel this booking111")}?</span>
       ),
       okText: getLocaleMessages("Yes"),
       cancelText: getLocaleMessages("No"),

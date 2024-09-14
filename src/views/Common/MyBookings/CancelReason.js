@@ -16,7 +16,7 @@ const ForgotModal = (props) => {
     setSelectedBooking,
   } = props;
   const onFinish = (values) => {
-    if (getLocalDataType("login_type") === "agency") {
+    if (getLocalDataType("login_type") === "admin" || getLocalDataType("login_type") === "agency") {
       dispatch({
         type: settingsAction.CHANGE_BOOKING_STATUS,
         payload: { ...SelectedBooking, reason: values.reason },

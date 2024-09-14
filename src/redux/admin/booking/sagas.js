@@ -49,9 +49,15 @@ export function* change_booking_status(params) {
       yield put({
         type: actions.CHANGE_BOOKING_STATUS_SUCCESS,
       });
-      history.push(
-        getLocalDataType() === "agency" ? "/agency/bookings" : "/admin/bookings"
-      );
+
+      let bookingUrl = '/agency/bookings';
+      if(getLocalDataType() == 'admin') {
+        bookingUrl = '/admin/bookings'
+      } else if(getLocalDataType() == 'user') {
+        bookingUrl = 'booking';
+      }
+      
+      history.push(bookingUrl);
     }
 
     // if(usertype == 2)
