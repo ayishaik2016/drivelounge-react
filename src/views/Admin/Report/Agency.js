@@ -26,7 +26,7 @@ import { Formatcurrency, formProps, DEFAULT_CURRENCY } from "../../../helpers/co
 import actions from "./../../../redux/admin/report/actions";
 import "./../../../assets/css/adminStyle.css";
 import format from "date-fns/format";
-import { getLocalData, getLocaleMessages } from "redux/helper";
+import { getLocalData, getLocaleMessages, getLocalDataType } from "redux/helper";
 import moment from "moment";
 import Payment from "./../../Common/MyBookings/Payment";
 const { Option } = Select;
@@ -166,7 +166,7 @@ const ReportManagement = () => {
         )}`}</span>
       ),
     },
-    {
+    /*{
       title: getLocaleMessages("Admin Commission"),
       dataIndex: "admincomission",
       key: "admincomission",
@@ -183,7 +183,7 @@ const ReportManagement = () => {
       render: (adminvat) => (
         <span>{`${Formatcurrency(adminvat)} ${getLocaleMessages(DEFAULT_CURRENCY)}`}</span>
       ),
-    },
+    },*/
     // {
     //   title: getLocaleMessages("Admin Commission"),
     //   dataIndex: "deposit",
@@ -253,6 +253,29 @@ const ReportManagement = () => {
     //         }} type="remove"/> : <></>
     // },
   ];
+
+  if (getLocalDataType("login_type") === "admin") {
+    columns.push(
+      {
+        title: getLocaleMessages("Admin Commission"),
+        dataIndex: "admincomission",
+        key: "admincomission",
+        render: (admincomission) => (
+          <span>{`${Formatcurrency(admincomission)} ${getLocaleMessages(
+            DEFAULT_CURRENCY
+          )}`}</span>
+        ),
+      },
+      {
+        title: getLocaleMessages("Admin VAT"),
+        dataIndex: "adminvat",
+        key: "adminvat",
+        render: (adminvat) => (
+          <span>{`${Formatcurrency(adminvat)} ${getLocaleMessages(DEFAULT_CURRENCY)}`}</span>
+        ),
+      }
+    );
+  }
 
   useEffect(() => {
     comm = 0;

@@ -54,7 +54,7 @@ import CancelReason from "./CancelReason";
 import EditRequest from "./EditRequest";
 import ComponentToPrint from "./bookingPreview";
 import { Formatcurrency } from "helpers/constant";
-const { Title } = Typography;
+const { Title, Paragraph } = Typography;
 const { Panel } = Collapse;
 const { Content } = Layout;
 
@@ -108,12 +108,16 @@ const BookingDetails = (props) => {
     const timeDifference = pickupDate - currentDate;
     const daysDifference = timeDifference / (1000 * 60 * 60 * 24);
 
-    let cancelMessage = 'Are you sure to cancel this booking';
+    let cancelMessageNote = '';
+    let cancelMessageNoteMessage = '';
+    let cancelMessage = getLocaleMessages('Are you sure to cancel this booking');
     if(getLocalDataType("login_type") === "user") {
       if(daysDifference <= 1) {
-        cancelMessage = 'Are you sure to cancel this booking, additional chanrges will collected on cancellation?';
+        cancelMessageNote = getLocaleMessages("Note Text") + ': ';
+        cancelMessageNoteMessage = getLocaleMessages('Cancellation fees will be applied on this cancellation, Please review the terms of conditions');
       } else {
-        cancelMessage = 'Are you sure to cancel this booking, no additional chanrges will collected on cancellation?';
+        cancelMessageNote = getLocaleMessages("Note Text") + ': ';
+        cancelMessageNoteMessage = getLocaleMessages('No additional charges  will be applied on this cancellation');
       }
     }
     if (status == 0) {
@@ -121,9 +125,13 @@ const BookingDetails = (props) => {
         icon: <ExclamationCircleOutlined />,
         title: getLocaleMessages("Bookings"),
         content: (
-          <span>
-            {getLocaleMessages(cancelMessage)}?
-          </span>
+          <Paragraph>
+            {cancelMessage}?
+            <br></br>
+            <br></br>
+            <b>{cancelMessageNote}</b>
+            {cancelMessageNoteMessage}
+          </Paragraph>
         ),
         okText: getLocaleMessages("Yes"),
         cancelText: getLocaleMessages("No"),
@@ -185,7 +193,7 @@ const BookingDetails = (props) => {
       icon: <ExclamationCircleOutlined />,
       title: getLocaleMessages("Bookings"),
       content: (
-        <span>{getLocaleMessages("Are you sure to cancel this booking111")}?</span>
+        <span>{getLocaleMessages("Are you sure to cancel this booking")}?</span>
       ),
       okText: getLocaleMessages("Yes"),
       cancelText: getLocaleMessages("No"),

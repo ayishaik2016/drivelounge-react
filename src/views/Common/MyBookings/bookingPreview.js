@@ -928,6 +928,32 @@ const BookingPreview = React.forwardRef((props, ref) => {
                 )}
             </Row>
 
+            {SelectedBookingInfo.bookingstatus == 2 &&
+              (getLocalDataType() == "user") && (
+                <Row gutter={4} style={{ justifyContent: "center" }}>
+                  <Col span={9}>
+                    <Form.Item>
+                      <div className="button-center">
+                        <Button
+                          type="primary"
+                          className="save-btn"
+                          onClick={() =>
+                            handleBookingStatus(
+                              0,
+                              SelectedBookingInfo.id,
+                              SelectedBookingInfo.userid
+                            )
+                          }
+                          style={{ background: "#bd3d3d" }}
+                        >
+                          {getLocaleMessages("Cancel Booking")}
+                        </Button>
+                      </div>
+                    </Form.Item>
+                  </Col>
+                </Row>
+              )}
+
             {/* <Row gutter={4} style={{ justifyContent: "center" }}>
               {SelectedBookingInfo.bookingstatus == 1 &&
                 (getLocalDataType() == "user") && (

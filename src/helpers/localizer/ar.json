@@ -836,12 +836,15 @@
   "Commercial Registration No": "سجل تجاري رقم",
   "Note Text": "ملاحظة",
   "Are you sure you want to confirm this booking": "هل انت متأكد من تأكيد هذا الحجز ؟",
-  "Delivery Timing": "وقت التوصيل",
+  "Delivery Timing": "Open Hours",
   "ID/Passport Number": "رقم الهوية / الجواز",
   "DOB": "تاريخ الميلاد",
   "Select your nationality": "الجنسية",
   "Opening Hours": "ساعات العمل",
   "Closing Hours": "خارج اوقات العمل",
   "Nationality": "الجنسية",
-  "Age": "عمر"
+  "Age": "عمر",
+  "Cancellation fees will be applied on this cancellation, Please review the terms of conditions": "ملاحظة / سوف يتم تطبيق رسوم الغاء الحجز، الرجاء مراجعة سياسة الغاء الحجوزات",
+  "No additional charges  will be applied on this cancellation": "ملاحظة / لا يوجد رسوم اضافية لإلغاء هذا الحجز. الرجاء مراجعة سياسة الغاء الحجوزات.",
+  "No cancellation fee if cancelled at least 24 hours before the scheduled time": "No cancellation fee if cancelled at least 24 hours before the scheduled time"
 }

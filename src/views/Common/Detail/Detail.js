@@ -1024,6 +1024,28 @@ const Home = (props) => {
                           </div>
                         </div>
                       </Col>
+
+                      <Col span={24}>
+                        <div className="fullSpecification">
+                          <div className="box">
+                            <div>
+                              <img
+                                src={
+                                  require("../../../assets/images/mode-car.png")
+                                    .default
+                                }
+                                alt="Car"
+                              />
+                            </div>
+                            <span>
+                              {SelectedCar !== undefined
+                                ? getLocaleMessages('No cancellation fee if cancelled at least 24 hours before the scheduled time')
+                                : ""}
+                            </span>
+                          </div>
+                        </div>
+                      </Col>
+
                       <div style={{ marginLeft: 10, marginTop: 20 }}>
                         {" "}
                         <Paragraph><b>{`${getLocaleMessages("Note Text")}`}:</b>{getLocaleMessages("Note")}</Paragraph>
