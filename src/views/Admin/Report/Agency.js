@@ -451,16 +451,16 @@ const ReportManagement = () => {
                 />
               </Form.Item>
             </Col>
-            <Col span={5}></Col>
+            {/* <Col span={5}></Col>
             <Col span={5}>
               <Card className="customer-count">
                 <Statistic
                   title={getLocaleMessages("Admin Commission")}
                   value={`${comm.toFixed(2)} SAR`}
                 />
-                {/* <UserOutlined /> */}
+                <UserOutlined />
               </Card>
-            </Col>
+            </Col> */}
             {/* <Col span={5}>
                     <Card className="customer-count">
                       <Statistic title={("Payment Balance")} value={`${balance > 0 ? balance : comm} SAR`}/>

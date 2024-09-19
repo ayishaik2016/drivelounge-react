@@ -78,7 +78,9 @@ export default function authReducer(state = initState, action) {
       } else {
         localStorage.setItem("language", action.payload);
       }
-      window.location.reload();
+      // window.location.reload();
+      history.push('/');
+
       channelLanguage();
       return {
         ...state,

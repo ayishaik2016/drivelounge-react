@@ -188,9 +188,7 @@ const BookingPreview = React.forwardRef((props, ref) => {
             onFieldsChange={onFinishChange}
           >
             <div className="flex_content_booking">
-              <div></div>
-              <div className="flex_content_booking_flex">
-                <ReactToPrint
+              <ReactToPrint
                   trigger={() => (
                     <Button icon={<PrinterOutlined />}>
                       {getLocaleMessages("Print")}{" "}
@@ -198,6 +196,7 @@ const BookingPreview = React.forwardRef((props, ref) => {
                   )}
                   content={reactToPrintContent}
                 />
+              <div className="flex_content_booking_flex">
                 {getLocalDataType() == "admin" && (
                   <Button>
                     <Link
