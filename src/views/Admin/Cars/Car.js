@@ -1194,7 +1194,7 @@ const CarComponent = (props) => {
                     <Option value={0}>
                       {getLocaleMessages("Without Driver")}
                     </Option>
-                    <Option value={2}>{getLocaleMessages("Both")}</Option>
+                    {/* <Option value={2}>{getLocaleMessages("Both")}</Option> */}
                   </Select>
                 </Form.Item>
               </Col>
