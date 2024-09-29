@@ -927,7 +927,7 @@ const BookingPreview = React.forwardRef((props, ref) => {
                 )}
             </Row>
 
-            {SelectedBookingInfo.bookingstatus == 2 &&
+            {(SelectedBookingInfo.bookingstatus == 2 || SelectedBookingInfo.bookingstatus == 1) &&
               (getLocalDataType() == "user") && (
                 <Row gutter={4} style={{ justifyContent: "center" }}>
                   <Col span={9}>

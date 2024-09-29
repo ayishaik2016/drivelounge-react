@@ -1037,7 +1037,7 @@ const Home = (props) => {
                                 alt="Car"
                               />
                             </div>
-                            <span>
+                            <span style={{ color: "#188942" }}>
                               {SelectedCar !== undefined
                                 ? getLocaleMessages('No cancellation fee if cancelled at least 24 hours before the scheduled time')
                                 : ""}
