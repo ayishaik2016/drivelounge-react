@@ -187,6 +187,26 @@ const BookingManagement = () => {
       // </Select>
     },
     {
+      title: getLocaleMessages("Payment Transaction Id"),
+      dataIndex: "paymenttransactionid",
+      key: "paymenttransactionid",
+    },
+    {
+      title: getLocaleMessages("Payment Status"),
+      dataIndex: "paymentstatus",
+      key: "paymentstatus",
+      render: (id, paymentstatus) => {
+        if (paymentstatus.paymentstatus == 0)
+          return <span>{getLocaleMessages("Pending")}</span>;
+        else if (paymentstatus.paymentstatus == 1)
+          return <span>{getLocaleMessages("Success")}</span>;
+        else if (paymentstatus.paymentstatus == 2)
+          return <span>{getLocaleMessages("Failed")}</span>;
+        else if (paymentstatus.paymentstatus == 3)
+          return <span>{getLocaleMessages("Refund")}</span>;
+      },
+    },
+    {
       title: getLocaleMessages("Action"),
       dataIndex: "id",
       key: "id",
@@ -270,6 +290,15 @@ const BookingManagement = () => {
             new Date(bookings[i].dropoffdate),
             "dd/MM/yyyy hh:mm a"
           );
+
+          let paymentStatus = 'Pending';
+          if(bookings[i].paymentstatus == 1) {
+            paymentStatus = 'Success'
+          } else if (bookings[i].paymentstatus == 2) {
+            paymentStatus = 'Failed'
+          } else if (bookings[i].paymentstatus == 3) {
+            paymentStatus = 'Refund'
+          }
           arr.push({
             "Booking No": bookings[i].bookingcode,
             "Pickup Date": pickup,
@@ -278,6 +307,9 @@ const BookingManagement = () => {
             "Rental Days": bookings[i].totalrentaldays,
             "Total Amount": bookings[i].totalcost,
             Deposit: bookings[i].deposit,
+            Request: bookings[i].changerequest,
+            "Payment Transaction": bookings[i].paymenttransactionid,
+            "Payment Status": paymentStatus,
             Request: bookings[i].changerequest,
             Status: Status,
           });

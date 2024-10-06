@@ -99,6 +99,12 @@ export default function carReservationReducer(state = initState, action) {
         isLoading: true,
       };
     }
+    case actions.GET_PAYMENT_CONFIRMATION: {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
     case actions.GET_BOOKING_CONFIRMATION_SUCCESS: {
       return {
         ...state,

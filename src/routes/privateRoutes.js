@@ -40,6 +40,12 @@ const privateRoutes = {
       ),
     },
     {
+      path: "paymentconfirmation",
+      component: asyncComponent(() =>
+        import("./../views/Common/Confirmation/Payment")
+      ),
+    },
+    {
       path: "booking",
       component: asyncComponent(() =>
         import("./../views/Common/MyBookings/Bookings")

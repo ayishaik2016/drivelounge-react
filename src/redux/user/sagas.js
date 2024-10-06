@@ -13,14 +13,16 @@ export function* createCarReservation(params) {
     const result = response.data.data;
     if (response?.status < 400) {
       params.callBackAction(response);
-      yield put({
+      window.location.href = result;
+
+      /*yield put({
         type: actions.CREATE_CAR_RESERVATION_SUCCESS,
         payload: result.data,
       });
       history.push({
         pathname: "/confirmation",
         state: { id: result.data.bookingid },
-      });
+      });*/
     } else {
       yield put({ type: actions.CREATE_CAR_RESERVATION_FAILURE });
     }
@@ -158,10 +160,34 @@ export function* getBookingConfirmation(params) {
     yield put({
       type: actions.GET_BOOKING_CONFIRMATION_SUCCESS,
       payload: response.data.data[0],
-    });
+      });
   } catch (error) {
     // message.error(error.response)
     yield put({ type: actions.GET_BOOKING_CONFIRMATION_FAILURE });
+  }
+}
+
+export function* getPaymentConfirmation(params) {
+  try {
+    const response = yield call(() =>
+      postRequest("user/booking/paymentconfirmation", params.payload)
+    );
+    const result = response.data.data;
+    if (response?.status < 400) {
+      // params.callBackAction(response);
+      yield put({
+        type: actions.CREATE_CAR_RESERVATION_SUCCESS,
+        payload: result.data[0],
+      });
+      history.push({
+        pathname: "/confirmation",
+        state: { id: result.data[0].id },
+      });
+    } else {
+      yield put({ type: actions.CREATE_CAR_RESERVATION_FAILURE });
+    }
+  } catch (error) {
+    yield put({ type: actions.CREATE_CAR_RESERVATION_FAILURE });
   }
 }
 
@@ -429,6 +455,7 @@ export default function* rootSaga() {
     takeEvery(actions.GET_PAYMENT_OPTION, getPaymentOption),
     takeEvery(actions.GET_USER_INFO, getUserInfo),
     takeEvery(actions.GET_BOOKING_CONFIRMATION, getBookingConfirmation),
+    takeEvery(actions.GET_PAYMENT_CONFIRMATION, getPaymentConfirmation),
     takeEvery(actions.GET_MYBOOKING_INFORMATION, getMyBookingInformation),
 
     takeEvery(actions.GET_USER_PROFILE, getUserProfile),

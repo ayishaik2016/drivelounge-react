@@ -789,7 +789,7 @@ const BookingPreview = React.forwardRef((props, ref) => {
               </Card>
             )}
 
-            {SelectedBookingInfo.bookingstatus == 2 &&
+            {SelectedBookingInfo.paymentstatus == 1 && SelectedBookingInfo.bookingstatus == 2 &&
               (getLocalDataType() == "admin" ||
                 getLocalDataType() == "agency") && (
                 <Row gutter={4}>
@@ -831,7 +831,7 @@ const BookingPreview = React.forwardRef((props, ref) => {
             {console.log("SelectedBookingInfo", SelectedBookingInfo)}
 
             <Row gutter={4} style={{ justifyContent: "center" }}>
-              {SelectedBookingInfo.bookingstatus == 1 &&
+              {SelectedBookingInfo.paymentstatus == 1 && SelectedBookingInfo.bookingstatus == 1 &&
                 (getLocalDataType() == "admin" ||
                   getLocalDataType() == "agency") && (
                   <Col span={6}>
@@ -927,7 +927,7 @@ const BookingPreview = React.forwardRef((props, ref) => {
                 )}
             </Row>
 
-            {(SelectedBookingInfo.bookingstatus == 2 || SelectedBookingInfo.bookingstatus == 1) &&
+            {SelectedBookingInfo.paymentstatus == 1 && (SelectedBookingInfo.bookingstatus == 2 || SelectedBookingInfo.bookingstatus == 1) &&
               (getLocalDataType() == "user") && (
                 <Row gutter={4} style={{ justifyContent: "center" }}>
                   <Col span={9}>
@@ -993,7 +993,7 @@ const BookingPreview = React.forwardRef((props, ref) => {
                   </div>
                 )}
             </div> */}
-            {SelectedBookingInfo.bookingstatus == 3 && (
+            {SelectedBookingInfo.paymentstatus == 1 && SelectedBookingInfo.bookingstatus == 3 && (
               <div
                 style={{
                   display: "flex",

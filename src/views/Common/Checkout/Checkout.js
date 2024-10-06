@@ -529,7 +529,7 @@ const Home = () => {
         totalcost: Decimalval(TotalPrice),
         otheramount: 0,
         paymentmode: 1, //PaymentOption,
-        paymentstatus: 1,
+        paymentstatus: 0,//Pending
         paymenttransactionid: 1,
         pickupaddress: localValue.PickupCors?.address,
         dropoffaddress: filterCarElements.DropCors?.address,
