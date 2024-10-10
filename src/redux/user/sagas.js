@@ -175,14 +175,25 @@ export function* getPaymentConfirmation(params) {
     const result = response.data.data;
     if (response?.status < 400) {
       // params.callBackAction(response);
-      yield put({
-        type: actions.CREATE_CAR_RESERVATION_SUCCESS,
-        payload: result.data[0],
-      });
-      history.push({
-        pathname: "/confirmation",
-        state: { id: result.data[0].id },
-      });
+      if(result == 'success') {
+        yield put({
+          type: actions.CREATE_CAR_RESERVATION_SUCCESS,
+          payload: result.data[0],
+        });
+        history.push({
+          pathname: "/confirmation",
+          state: { id: result.data[0].id },
+        });
+      } else {
+        message.warn(getLocaleMessages("Your payment has been failed"));
+        
+        yield put({ type: actions.CREATE_CAR_RESERVATION_FAILURE });
+
+        history.push({
+          pathname: "/booking",
+          state: {},
+        });
+      }
     } else {
       yield put({ type: actions.CREATE_CAR_RESERVATION_FAILURE });
     }
