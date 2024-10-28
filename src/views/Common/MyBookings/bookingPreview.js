@@ -169,6 +169,15 @@ const BookingPreview = React.forwardRef((props, ref) => {
       age--;
     }
   }
+
+  let targetUrl = '';
+  const paymenttransaction = SelectedBookingInfo.paymenttransactionjson ? JSON.parse(SelectedBookingInfo.paymenttransactionjson) : {};
+  if(paymenttransaction) {
+    let payId = paymenttransaction.payid;
+    targetUrl = paymenttransaction.targetUrl + '?paymentid=' + payId;
+  }
+ 
+
   return (
     <div
       ref={ref}
@@ -789,7 +798,7 @@ const BookingPreview = React.forwardRef((props, ref) => {
               </Card>
             )}
 
-            {SelectedBookingInfo.paymentstatus == 1 && SelectedBookingInfo.bookingstatus == 2 &&
+            {SelectedBookingInfo.bookingstatus == 2 &&
               (getLocalDataType() == "admin" ||
                 getLocalDataType() == "agency") && (
                 <Row gutter={4}>
@@ -831,7 +840,7 @@ const BookingPreview = React.forwardRef((props, ref) => {
             {console.log("SelectedBookingInfo", SelectedBookingInfo)}
 
             <Row gutter={4} style={{ justifyContent: "center" }}>
-              {SelectedBookingInfo.paymentstatus == 1 && SelectedBookingInfo.bookingstatus == 1 &&
+              {SelectedBookingInfo.bookingstatus == 1 &&
                 (getLocalDataType() == "admin" ||
                   getLocalDataType() == "agency") && (
                   <Col span={6}>
@@ -927,7 +936,7 @@ const BookingPreview = React.forwardRef((props, ref) => {
                 )}
             </Row>
 
-            {SelectedBookingInfo.paymentstatus == 1 && (SelectedBookingInfo.bookingstatus == 2 || SelectedBookingInfo.bookingstatus == 1) &&
+            {(SelectedBookingInfo.paymentstatus == 1 && (SelectedBookingInfo.bookingstatus == 2 || SelectedBookingInfo.bookingstatus == 1)) &&
               (getLocalDataType() == "user") && (
                 <Row gutter={4} style={{ justifyContent: "center" }}>
                   <Col span={9}>
@@ -953,6 +962,18 @@ const BookingPreview = React.forwardRef((props, ref) => {
                 </Row>
               )}
 
+            {((targetUrl != '' && SelectedBookingInfo.bookingstatus == 1)) &&
+              (getLocalDataType() == "user") && (
+                <Row gutter={4} style={{ justifyContent: "center" }}>
+                  <Col span={9}>
+                    <Form.Item>
+                      <div className="button-center">
+                        <a className="save-btn" style={{ background: "#bd3d3d",width: "100%", height: "45px","font-size": "17px",color: "#fff", padding: "10px 124px" }} href={targetUrl}>{getLocaleMessages("Pay Now")}</a>
+                      </div>
+                    </Form.Item>
+                  </Col>
+                </Row>
+              )}
             {/* <Row gutter={4} style={{ justifyContent: "center" }}>
               {SelectedBookingInfo.bookingstatus == 1 &&
                 (getLocalDataType() == "user") && (
@@ -993,7 +1014,7 @@ const BookingPreview = React.forwardRef((props, ref) => {
                   </div>
                 )}
             </div> */}
-            {SelectedBookingInfo.paymentstatus == 1 && SelectedBookingInfo.bookingstatus == 3 && (
+            {SelectedBookingInfo.bookingstatus == 3 && (
               <div
                 style={{
                   display: "flex",

@@ -13,16 +13,16 @@ export function* createCarReservation(params) {
     const result = response.data.data;
     if (response?.status < 400) {
       params.callBackAction(response);
-      window.location.href = result;
+      //window.location.href = result;
 
-      /*yield put({
+      yield put({
         type: actions.CREATE_CAR_RESERVATION_SUCCESS,
         payload: result.data,
       });
       history.push({
         pathname: "/confirmation",
         state: { id: result.data.bookingid },
-      });*/
+      });
     } else {
       yield put({ type: actions.CREATE_CAR_RESERVATION_FAILURE });
     }
