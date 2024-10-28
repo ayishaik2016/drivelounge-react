@@ -98,7 +98,7 @@ const PublicRoutes = ({ history }) => {
                   "/reviews",
                   "/favorites",
                   "/bookingdetails",
-                  "/paymentconfirmation",
+                  "/paymenttransaction"
                 ].includes(history.location.pathname)
                 ? "/"
                 : isurl

@@ -42,6 +42,12 @@ const publicRoutes = [
     ),
   },
   {
+    path: "/paymenttransaction",
+    component: asyncComponent(() =>
+      import("./../views/Common/Confirmation/Transaction")
+    ),
+  },
+  {
     path: "/cms",
     component: asyncComponent(() => import("./../views/Common/Cms/Cms")),
   },

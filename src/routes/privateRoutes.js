@@ -40,12 +40,6 @@ const privateRoutes = {
       ),
     },
     {
-      path: "paymentconfirmation",
-      component: asyncComponent(() =>
-        import("./../views/Common/Confirmation/Payment")
-      ),
-    },
-    {
       path: "booking",
       component: asyncComponent(() =>
         import("./../views/Common/MyBookings/Bookings")
@@ -79,6 +73,12 @@ const privateRoutes = {
       path: "contactus",
       component: asyncComponent(() =>
         import("./../views/Common/Enquiry/Enquiry")
+      ),
+    },
+    {
+      path: "paymenttransaction",
+      component: asyncComponent(() =>
+        import("./../views/Common/Confirmation/Transaction")
       ),
     },
     {

@@ -108,6 +108,13 @@ const MyBookingInformation = () => {
     else if (status == 3) return getLocaleMessages("Completed");
     else return getLocaleMessages("Pending");
   };
+  const getPaymentStatus = (status) => {
+    if (status == 1) return getLocaleMessages("Completed");
+    else if (status == 0) return getLocaleMessages("Pending");
+    else if (status == 2) return getLocaleMessages("Failed");
+    else if (status == 3) return getLocaleMessages("Refund");
+    else return getLocaleMessages("Pending");
+  };
   useEffect(() => {
     dispatch({
       type: actions.GET_MYBOOKING_INFORMATION,
@@ -310,6 +317,11 @@ const MyBookingInformation = () => {
                               <Paragraph className="id">
                                 {getLocaleMessages("Booking Status")}:{" "}
                                 {getBookingStatus(mybook.status)}
+                              </Paragraph>
+
+                              <Paragraph className="id">
+                                {getLocaleMessages("payment Status")}:{" "}
+                                {getPaymentStatus(mybook.paymentstatus)}
                               </Paragraph>
 
                               {/* {checkCancel(mybook) && mybook.status !== 0 && (
