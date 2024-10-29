@@ -112,7 +112,8 @@ const MyBookingInformation = () => {
     if (status == 1) return getLocaleMessages("Completed");
     else if (status == 0) return getLocaleMessages("Pending");
     else if (status == 2) return getLocaleMessages("Failed");
-    else if (status == 3) return getLocaleMessages("Refund");
+    else if (status == 3) return getLocaleMessages("Cancelled");
+    else if (status == 4) return getLocaleMessages("Refund");
     else return getLocaleMessages("Pending");
   };
   useEffect(() => {

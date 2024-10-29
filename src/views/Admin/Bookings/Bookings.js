@@ -297,6 +297,8 @@ const BookingManagement = () => {
           } else if (bookings[i].paymentstatus == 2) {
             paymentStatus = 'Failed'
           } else if (bookings[i].paymentstatus == 3) {
+            paymentStatus = 'Cancelled'
+          } else if (bookings[i].paymentstatus == 4) {
             paymentStatus = 'Refund'
           }
           arr.push({
