@@ -38,7 +38,11 @@ const Home = (props) => {
   const {preferredCurrency, currencyConversion}=useSelector(
     (state) => state.Currency
   )
-
+  const {paymentStatus} = useSelector((state) => props.location.state);
+  let confirmationMessage = getLocaleMessages("Your booking was successful  and waiting for agency confimation")
+  if (paymentStatus !== undefined && paymentStatus > 0) {
+    confirmationMessage = getLocaleMessages("Your payment is successful and ready to go")
+  }
   useEffect(() => {
     const state = props.location.state;
     dispatch({
@@ -52,6 +56,7 @@ const Home = (props) => {
         data,
       });
     }
+  
   }, []);
 
   // useEffect(() => {
@@ -78,9 +83,7 @@ const Home = (props) => {
               <div className="box">
                 <Title level={3} style={{ textAlign: "center" }}>
                   {" "}
-                  {getLocaleMessages(
-                    "Your booking was successful  and waiting for agency confimation"
-                  )}{" "}
+                  {confirmationMessage}{" "}
                 </Title>
                 <Paragraph className="fs-large" style={{ textAlign: "center" }}>
                   <strong>

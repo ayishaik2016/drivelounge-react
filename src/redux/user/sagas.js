@@ -21,7 +21,7 @@ export function* createCarReservation(params) {
       });
       history.push({
         pathname: "/confirmation",
-        state: { id: result.data.bookingid },
+        state: { id: result.data.bookingid, paymentStatus: 0 },
       });
     } else {
       yield put({ type: actions.CREATE_CAR_RESERVATION_FAILURE });
@@ -42,7 +42,7 @@ export function* updateCarReservation(params) {
     });
     history.push({
       pathname: "/confirmation",
-      state: { id: response.data.data },
+      state: { id: response.data.data, paymentStatus: 0 },
     });
   } catch (error) {
     // message.error(error.response)
@@ -174,10 +174,10 @@ export function* getPaymentConfirmation(params) {
     );
     const result = response.data.data;
     if (response?.status < 400) {
-      if(result == 'success') {
+      if (result.data?.length > 0) {
         history.push({
           pathname: "/confirmation",
-          state: { id: result.data[0].id },
+          state: { id: result.data[0].id, paymentStatus: 1 }
         });
       } else {
         message.warn(getLocaleMessages("Your payment has been failed"));

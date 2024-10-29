@@ -42,7 +42,7 @@ const publicRoutes = [
     ),
   },
   {
-    path: "/paymenttransaction",
+    path: "paymenttransaction",
     component: asyncComponent(() =>
       import("./../views/Common/Confirmation/Transaction")
     ),
