@@ -839,7 +839,7 @@
   "Commercial Registration No": "Commercial Registration No",
   "Note Text": "Note",
   "Are you sure you want to confirm this booking": "Are you sure you want to confirm this booking",
-  "Delivery Timing": "Open Hours",
+  "Delivery Timing": "Opening Hours",
   "ID/Passport Number": "ID/Passport Number",
   "DOB": "DOB",
   "Select your nationality": "Select your nationality",
@@ -849,5 +849,5 @@
   "Age": "Age",
   "Cancellation fees will be applied on this cancellation, Please review the terms of conditions": "Cancellation fees will be applied on this cancellation, Please review the terms of conditions",
   "No additional charges  will be applied on this cancellation": "No additional charges  will be applied on this cancellation",
-  "No cancellation fee if cancelled at least 24 hours before the scheduled time": "No cancellation fee"
+  "No cancellation fee if cancelled at least 24 hours before the scheduled time": "Free cancelation before 24 Hours"
 }

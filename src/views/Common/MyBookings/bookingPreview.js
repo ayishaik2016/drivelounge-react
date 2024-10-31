@@ -68,6 +68,7 @@ const BookingPreview = React.forwardRef((props, ref) => {
     SelectedBookingInfo = {},
     onFinishChange,
     handleBookingStatus,
+    handleBookingPayment,
     BookingDays,
     showTripStatus,
     TripStarted,
@@ -464,6 +465,29 @@ const BookingPreview = React.forwardRef((props, ref) => {
                   </Form.Item>
                 </Col>
               </Row>
+              
+              {(getLocalDataType() == "admin" ||
+                getLocalDataType() == "agency") && (
+                <Row gutter={20}>
+                  <Col span={12}>
+                    <Form.Item
+                      name="paymentstatusname"
+                      label={getLocaleMessages("Payment Status")}
+                    >
+                      <Input disabled/>
+                    </Form.Item>
+                  </Col>
+                  <Col span={12}>
+                    <Form.Item
+                      name="paymenttransactionid"
+                      label={getLocaleMessages("Payment Transaction Id")}
+                    >
+                      <Input disabled/>
+                    </Form.Item>
+                  </Col>
+                </Row>
+                )}
+
               <Row gutter={20}>
                 {SelectedBookingInfo.withdriver !== 0 && (
                   <Col span={12}>
@@ -962,7 +986,7 @@ const BookingPreview = React.forwardRef((props, ref) => {
                 </Row>
               )}
 
-            {((targetUrl != '' && SelectedBookingInfo.bookingstatus == 1)) &&
+            {((SelectedBookingInfo.paymentstatus == 0 && targetUrl != '' && SelectedBookingInfo.bookingstatus == 1)) &&
               (getLocalDataType() == "user") && (
                 <Row gutter={4} style={{ justifyContent: "center" }}>
                   <Col span={9}>
@@ -974,6 +998,26 @@ const BookingPreview = React.forwardRef((props, ref) => {
                   </Col>
                 </Row>
               )}
+
+             {((SelectedBookingInfo.paymentstatus == 2 && SelectedBookingInfo.bookingstatus == 1)) &&
+              (getLocalDataType() == "user") && (
+                <Row gutter={4} style={{ justifyContent: "center" }}>
+                <Col span={9}>
+                  <Form.Item>
+                    <div className="button-center">
+                      <Button
+                        type="primary"
+                        className="save-btn"
+                        onClick={() => handleBookingPayment(SelectedBookingInfo.bookingcode)}
+                      >
+                        {getLocaleMessages("Pay Now")}
+                      </Button>
+                    </div>
+                  </Form.Item>
+                </Col>
+              </Row>
+              )}
+              
             {/* <Row gutter={4} style={{ justifyContent: "center" }}>
               {SelectedBookingInfo.bookingstatus == 1 &&
                 (getLocalDataType() == "user") && (

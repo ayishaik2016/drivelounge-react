@@ -175,12 +175,35 @@ export function* getPaymentConfirmation(params) {
     const result = response.data.data;
     if (response?.status < 400) {
       if (result.data?.length > 0) {
-        history.push({
-          pathname: "/confirmation",
-          state: { id: result.data[0].id, paymentStatus: 1 }
-        });
+        if(result.data[0].paymentstatus == 1) {
+          history.push({
+            pathname: "/confirmation",
+            state: { id: result.data[0].id, paymentStatus: 1 }
+          });
+        } else if(result.data[0].paymentstatus == 2) {
+          message.warn(getLocaleMessages("Your payment has been failed! Please try again"));
+
+          history.push({
+            pathname: "bookingdetails",
+            state: result.data[0].id,
+          });
+        } else if(result.data[0].paymentstatus == 3) {
+          message.warn(getLocaleMessages("Your booking has been cancelled already"));
+
+          history.push({
+            pathname: "bookingdetails",
+            state: result.data[0].id,
+          });
+        } else {
+          message.warn(getLocaleMessages("Invalid payment transaction. Please contact your agent"));
+
+          history.push({
+            pathname: "/booking",
+            state: {},
+          });
+        }
       } else {
-        message.warn(getLocaleMessages("Your payment has been failed"));
+        message.warn(getLocaleMessages("Invalid payment transaction. Please contact your agent"));
         
         history.push({
           pathname: "/booking",

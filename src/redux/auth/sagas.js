@@ -199,7 +199,9 @@ export function* logout() {
       localStorage.setItem("showmap", 0);
     }
   } catch (error) {
-    yield put({ type: actions.LOGOUT_USER_FAILURE });
+    message.success(getLocaleMessages("Logout successfully"));
+    window.location.href = "/";
+    // yield put({ type: actions.LOGOUT_USER_FAILURE });
   }
 }
 

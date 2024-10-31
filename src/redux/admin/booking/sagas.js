@@ -72,9 +72,42 @@ export function* change_booking_status(params) {
   }
 }
 
+export function* change_booking_payment(params) {
+  try {
+    yield put({
+      type: actions.CHANGE_BOOKING_PAYMENT_SUCCESS,
+    });
+
+    const response = yield call(() =>
+      postRequest("user/booking/booking_payment", params.payload)
+    );
+    
+    const result = response.data.data;
+    if (response?.status < 400) {
+      if (result.data?.length > 0) {
+        const paymenttransactionjson = JSON.parse(result.data[0].paymenttransactionjson);
+        if(paymenttransactionjson) {
+          let payId = paymenttransactionjson.payid;
+          const targetUrl = paymenttransactionjson.targetUrl + '?paymentid=' + payId;
+
+          window.location.href = targetUrl;
+        } else {
+          message.error('somethong went wrong! Please try again');
+        }
+      } else {
+        message.error('somethong went wrong! Please try again');
+      }
+    }
+  } catch (error) {
+    yield put({ type: actions.CHANGE_BOOKING_PAYMENT_FAILURE });
+    message.error(error.message);
+  }
+}
+
 export default function* rootSaga() {
   yield all([
     takeEvery(actions.GET_CARBOOKING_INFO, get_booking_information),
     takeEvery(actions.CHANGE_BOOKING_STATUS, change_booking_status),
+    takeEvery(actions.CHANGE_BOOKING_PAYMENT, change_booking_payment),
   ]);
 }

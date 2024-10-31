@@ -321,7 +321,7 @@ const MyBookingInformation = () => {
                               </Paragraph>
 
                               <Paragraph className="id">
-                                {getLocaleMessages("payment Status")}:{" "}
+                                {getLocaleMessages("Payment Status")}:{" "}
                                 {getPaymentStatus(mybook.paymentstatus)}
                               </Paragraph>
 

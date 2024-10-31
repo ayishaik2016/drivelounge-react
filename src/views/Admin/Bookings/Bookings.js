@@ -133,13 +133,13 @@ const BookingManagement = () => {
       key: "deposit",
       render: (deposit) => <span>{Formatcurrency(deposit)}</span>,
     },
-    {
+    /*{
       title: getLocaleMessages("Request"),
       dataIndex: "changerequest",
       key: "changerequest",
-    },
+    },*/
     {
-      title: getLocaleMessages("Status"),
+      title: getLocaleMessages("Booking Status"),
       dataIndex: "status",
       key: "status",
       render: (id, status) => {
@@ -186,11 +186,11 @@ const BookingManagement = () => {
       //   <Option key={0} value={0}>Canceled</Option>
       // </Select>
     },
-    {
+    /*{
       title: getLocaleMessages("Payment Transaction Id"),
       dataIndex: "paymenttransactionid",
       key: "paymenttransactionid",
-    },
+    },*/
     {
       title: getLocaleMessages("Payment Status"),
       dataIndex: "paymentstatus",

@@ -100,6 +100,16 @@ const BookingDetails = (props) => {
     else return false;
   };
 
+  const handleBookingPayment = (bookingid) => {
+    const id = SelectedBookingInfo.bookingcode || props.location.state;
+   
+    dispatch({
+      type: settingsAction.CHANGE_BOOKING_PAYMENT,
+      payload: { id: id },
+    });
+    return;
+  };
+
   const handleBookingStatus = (status, bookingid, userid) => {
     const id = SelectedBookingInfo.id || props.location.state;
     const pickupDate = new Date(SelectedBookingInfo.pickupdate);
@@ -683,6 +693,7 @@ const BookingDetails = (props) => {
         SelectedBookingInfo={SelectedBookingInfo}
         onFinishChange={onFinishChange}
         handleBookingStatus={handleBookingStatus}
+        handleBookingPayment={handleBookingPayment}
         BookingDays={BookingDays}
         showTripStatus={showTripStatus}
         TripStarted={TripStarted}

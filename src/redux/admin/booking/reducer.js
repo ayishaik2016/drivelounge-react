@@ -52,6 +52,24 @@ export default function carInformationReducer(state = initState, action) {
         isLoading: false,
       };
     }
+    case actions.CHANGE_BOOKING_PAYMENT: {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+    case actions.CHANGE_BOOKING_PAYMENT_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
+      };
+    }
+    case actions.CHANGE_BOOKING_PAYMENT_FAILURE: {
+      return {
+        ...state,
+        isLoading: false,
+      };
+    }
 
     default:
       return state;
