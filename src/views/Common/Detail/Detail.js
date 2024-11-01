@@ -1084,10 +1084,9 @@ const Home = (props) => {
                             : "Drive Lounge"}
                         </p>
                       </div>
-                      <Title level={4}>
-                        {" "}
-                        {getLocaleMessages("Delivery Timing")}{" "}
-                      </Title>
+                      <div className="box-information-agencyinfo">
+                        <h3>{getLocaleMessages("Delivery Timing")}{" "}</h3>
+                      </div>
                       <div className="box-information-agencyinfo">
                         <p>
                           {SelectedCar !== undefined && SelectedCar[0].openinghours

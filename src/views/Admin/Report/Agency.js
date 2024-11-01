@@ -110,7 +110,11 @@ const ReportManagement = () => {
         <span>{`${Formatcurrency(deposit)} ${getLocaleMessages(DEFAULT_CURRENCY)}`}</span>
       ),
     },
-
+    {
+      title: getLocaleMessages("Payment Transaction"),
+      dataIndex: "paymenttransactionid",
+      key: "paymenttransactionid"
+    },
     {
       title: getLocaleMessages("Rental Total Price"),
       dataIndex: "subtotal",
@@ -365,7 +369,8 @@ const ReportManagement = () => {
           "Car No": reports[i].carno,
           "Customer Name": reports[i].customername,
           "Total Rental Days": reports[i].totalrentaldays,
-          Depoist: reports[i].deposit,
+          Deposit: reports[i].deposit,
+          "Payment Transaction": reports[i].paymenttransactionid,
           VAT: reports[i].vatamount,
           "Admin Commission":
             reports[i].commtype == 2

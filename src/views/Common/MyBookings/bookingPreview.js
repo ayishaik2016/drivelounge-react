@@ -990,9 +990,15 @@ const BookingPreview = React.forwardRef((props, ref) => {
               (getLocalDataType() == "user") && (
                 <Row gutter={4} style={{ justifyContent: "center" }}>
                   <Col span={9}>
-                    <Form.Item>
+                    <Form.Item style={{ background: "#fff", border: "1px solid #fff"}}>
                       <div className="button-center">
-                        <a className="save-btn" style={{ background: "#bd3d3d",width: "100%", height: "45px","font-size": "17px",color: "#fff", padding: "10px 124px" }} href={targetUrl}>{getLocaleMessages("Pay Now")}</a>
+                      <Button
+                        type="primary"
+                        className="save-btn"
+                        onClick={() => window.location.href = targetUrl}
+                      >
+                        {getLocaleMessages("Pay Now")}
+                      </Button>
                       </div>
                     </Form.Item>
                   </Col>
@@ -1002,8 +1008,8 @@ const BookingPreview = React.forwardRef((props, ref) => {
              {((SelectedBookingInfo.paymentstatus == 2 && SelectedBookingInfo.bookingstatus == 1)) &&
               (getLocalDataType() == "user") && (
                 <Row gutter={4} style={{ justifyContent: "center" }}>
-                <Col span={9}>
-                  <Form.Item>
+                  <Col span={9}>
+                  <Form.Item style={{ background: "#fff", border: "1px solid #fff"}}>
                     <div className="button-center">
                       <Button
                         type="primary"

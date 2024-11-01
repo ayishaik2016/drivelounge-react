@@ -83,7 +83,7 @@ const NotFound = () => {
       } else {
         window.open("/", "_self");
       }
-    }, 5000);
+    }, 500);
   }, []);
 
   return (

@@ -18,6 +18,7 @@ import {
 import "../../../assets/css/userStyle.css";
 import { history, store } from "redux/store";
 import actions from "./../../../redux/user/actions";
+import settingsAction from "../../../redux/admin/booking/actions";
 import Header from "./../Header/Header";
 import Footer from "./../Footer/Footer";
 import {
@@ -115,6 +116,26 @@ const MyBookingInformation = () => {
     else if (status == 3) return getLocaleMessages("Cancelled");
     else if (status == 4) return getLocaleMessages("Refund");
     else return getLocaleMessages("Pending");
+  };
+  const getPaymentLink = (paymenttransaction) => {
+    let payId = paymenttransaction.payid;
+    let paymentUrl = paymenttransaction.targetUrl + '?paymentid=' + payId;
+
+    if(paymentUrl) {
+      return paymentUrl;
+    } else {
+      return '/';
+    }
+  };
+
+  const handleBookingPayment = (bookingid) => {
+    const id = bookingid;
+   
+    dispatch({
+      type: settingsAction.CHANGE_BOOKING_PAYMENT,
+      payload: { id: id },
+    });
+    return;
   };
   useEffect(() => {
     dispatch({
@@ -275,6 +296,7 @@ const MyBookingInformation = () => {
                       <div className={{ textAlign: "center" }}>
                         {FilteredUpcomingBooking &&
                           FilteredUpcomingBooking.map((mybook) => (
+                           
                             <div className="my-carbox" key={mybook.id}>
                               <div className="img">
                                 <div>
@@ -344,6 +366,27 @@ const MyBookingInformation = () => {
                                 >
                                   {getLocaleMessages("View")}
                                 </Button>
+
+                                {(mybook.paymentstatus == 0) && (
+                                  <Button
+                                    onClick={() =>
+                                      window.location.href = getPaymentLink(JSON.parse(mybook.paymenttransactionjson))
+                                    }
+                                    type="primary"
+                                  >
+                                    {getLocaleMessages("Pay Now")}
+                                  </Button>
+                                )}
+
+                                 {(mybook.paymentstatus == 2) && (
+                                  <Button
+                                    onClick={() => handleBookingPayment(mybook.bookingcode)}
+                                    type="primary"
+                                  >
+                                    {getLocaleMessages("Pay Now")}
+                                  </Button>
+                                )}
+                                
                               </div>
                             </div>
                           ))}
@@ -416,6 +459,7 @@ const MyBookingInformation = () => {
                                 >
                                   {getLocaleMessages("View")}
                                 </Button>
+                                
                               </div>
                             </div>
                           ))}

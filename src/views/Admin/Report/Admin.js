@@ -112,6 +112,11 @@ const ReportManagement = () => {
       ),
     },
     {
+      title: getLocaleMessages("Payment Transaction"),
+      dataIndex: "paymenttransactionid",
+      key: "paymenttransactionid"
+    },
+    {
       title: getLocaleMessages("Agency Rent Price"),
       dataIndex: "carpriceperday",
       key: "carpriceperday",
@@ -310,6 +315,7 @@ const ReportManagement = () => {
           "Agent Name": reports[i].agentname,
           "Total Rental Days": reports[i].totalrentaldays,
           Depoist: reports[i].deposit,
+          "Payment Transaction": reports[i].paymenttransactionid,
           "Agency Rent Price":
             reports[i].carpriceperday * reports[i].totalrentaldays,
           "Agency VAT":
