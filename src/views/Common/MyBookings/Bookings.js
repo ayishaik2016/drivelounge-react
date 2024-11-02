@@ -296,7 +296,6 @@ const MyBookingInformation = () => {
                       <div className={{ textAlign: "center" }}>
                         {FilteredUpcomingBooking &&
                           FilteredUpcomingBooking.map((mybook) => (
-                           
                             <div className="my-carbox" key={mybook.id}>
                               <div className="img">
                                 <div>
@@ -367,7 +366,7 @@ const MyBookingInformation = () => {
                                   {getLocaleMessages("View")}
                                 </Button>
 
-                                {(mybook.paymentstatus == 0) && (
+                                {(mybook.bookingstatus == 1 && mybook.paymentstatus == 0 && mybook.paymenttransactionjson != '') && (
                                   <Button
                                     onClick={() =>
                                       window.location.href = getPaymentLink(JSON.parse(mybook.paymenttransactionjson))
@@ -380,7 +379,7 @@ const MyBookingInformation = () => {
 
                                  {(mybook.paymentstatus == 2) && (
                                   <Button
-                                    onClick={() => handleBookingPayment(mybook.bookingcode)}
+                                    onClick={() => handleBookingPayment(mybook.bookingno)}
                                     type="primary"
                                   >
                                     {getLocaleMessages("Pay Now")}
