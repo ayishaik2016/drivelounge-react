@@ -153,15 +153,15 @@ const BookingManagement = () => {
           return (
             <span>{`${
               status.usertype == 3
-                ? `${getLocaleMessages("Cancelled")} by the user ${
+                ? `${getLocaleMessages("Cancelled by the user")} ${
                     status.cancellationreason.length > 0
                       ? `(reason: ${status.cancellationreason})`
                       : ""
                   }`
                 : ` ${
                     status.usertype == 2
-                        ? `${getLocaleMessages("Cancelled by Agency")}: ${status.cancellationreason}`
-                        : `${getLocaleMessages("Cancelled by Admin")}: ${status.cancellationreason}`
+                        ? `${getLocaleMessages("Cancelled by Agency")}`
+                        : `${getLocaleMessages("Cancelled by Admin")}`
                   }`
             }`}</span>
           );
