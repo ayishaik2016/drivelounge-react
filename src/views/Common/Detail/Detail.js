@@ -1025,7 +1025,7 @@ const Home = (props) => {
                         </div>
                       </Col>
 
-                      <Col span={24}>
+                      <Col span={12}>
                         <div className="fullSpecification">
                           <div className="box">
                             <div>
@@ -1037,7 +1037,7 @@ const Home = (props) => {
                                 alt="Car"
                               />
                             </div>
-                            <span style={{ color: "#188942", "margin-left": "20px" }}>
+                            <span style={{ color: "#188942" }}>
                               {SelectedCar !== undefined
                                 ? getLocaleMessages('No cancellation fee if cancelled at least 24 hours before the scheduled time')
                                 : ""}
