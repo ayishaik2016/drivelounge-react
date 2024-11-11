@@ -75,42 +75,23 @@ const ContactComponet = (props) => {
                 onFinish={onFinishDetails}
                 {...formProps}
               >
-                <Row gutter={40}>
+                <Row gutter={30} className="contact-container">
                   <Col span={12} className="inner-content">
                     <Form.Item
-                      label={getLocaleMessages("First Name")}
-                      name="firstname"
+                      label={getLocaleMessages("Name")}
+                      name="name"
                       rules={[
                         {
                           required: true,
                           message: `${getLocaleMessages(
                             "Please input"
-                          )} ${getLocaleMessages("First Name")}`,
+                          )} ${getLocaleMessages("Name")}`,
                         },
                       ]}
                     >
                       <Input placeholder="" />
                     </Form.Item>
-                  </Col>
-                  <Col span={12} className="inner-content">
-                    <Form.Item
-                      label={getLocaleMessages("Last Name")}
-                      name="lastname"
-                      rules={[
-                        {
-                          required: true,
-                          message: `${getLocaleMessages(
-                            "Please input"
-                          )} ${getLocaleMessages("Last Name")}`,
-                        },
-                      ]}
-                    >
-                      <Input placeholder="" />
-                    </Form.Item>
-                  </Col>
-                </Row>
-                <Row gutter={40}>
-                  <Col span={12} className="inner-content">
+
                     <Form.Item
                       label={getLocaleMessages("Email")}
                       name="email"
@@ -131,8 +112,7 @@ const ContactComponet = (props) => {
                     >
                       <Input placeholder="" />
                     </Form.Item>
-                  </Col>
-                  <Col span={12} className="inner-content">
+                    
                     <Form.Item
                       label={getLocaleMessages("Contact Number")}
                       name="contactnumber"
@@ -165,10 +145,7 @@ const ContactComponet = (props) => {
                         defaultCountry={"SA"}
                       />
                     </Form.Item>
-                  </Col>
-                </Row>
-                <Row gutter={40}>
-                  <Col span={12} className="inner-content">
+
                     <Form.Item
                       label={getLocaleMessages("Subject")}
                       name="subject"
@@ -183,8 +160,7 @@ const ContactComponet = (props) => {
                     >
                       <Input placeholder="" />
                     </Form.Item>
-                  </Col>
-                  <Col span={12} className="inner-content">
+                    
                     <Form.Item
                       label={getLocaleMessages("Message")}
                       name="content"
@@ -197,8 +173,9 @@ const ContactComponet = (props) => {
                         },
                       ]}
                     >
-                      <Input.TextArea placeholder="" />
+                      <Input.TextArea rows={4} className="contact-textarea" placeholder="" />
                     </Form.Item>
+
                   </Col>
                 </Row>
                 <div className="button-center-text">

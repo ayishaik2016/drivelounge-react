@@ -49,26 +49,29 @@ export function* change_booking_status(params) {
       yield put({
         type: actions.CHANGE_BOOKING_STATUS_SUCCESS,
       });
-
-      let bookingUrl = '/agency/bookings';
-      if(getLocalDataType() == 'admin') {
-        bookingUrl = '/admin/bookings'
-      } else if(getLocalDataType() == 'user') {
-        bookingUrl = 'booking';
-      }
-      
-      history.push(bookingUrl);
+    } else {
+      message.error(getLocaleMessages("Booking status changed failed"));
     }
 
-    // if(usertype == 2)
-    //     history.push('/agnecy/bookings')
-    // else if(usertype == 1)
-    //     history.push('/admin/bookings')
-    // else
-    //     history.push("/booking")
+    let bookingUrl = '/agency/bookings';
+    if(getLocalDataType() == 'admin') {
+      bookingUrl = '/admin/bookings'
+    } else if(getLocalDataType() == 'user') {
+      bookingUrl = 'booking';
+    }
+
+    history.push(bookingUrl);
   } catch (error) {
     yield put({ type: actions.CHANGE_BOOKING_STATUS_FAILURE });
-    message.error(error.message);
+    message.error(getLocaleMessages("Booking status changed failed"));
+    let bookingUrl = '/agency/bookings';
+    if(getLocalDataType() == 'admin') {
+      bookingUrl = '/admin/bookings'
+    } else if(getLocalDataType() == 'user') {
+      bookingUrl = 'booking';
+    }
+    history.push(bookingUrl);
+    // message.error(error.message);
   }
 }
 

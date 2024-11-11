@@ -940,3 +940,5 @@ border-radius: 35px; box-shadow: none; height: inherit; background: #656565; bor
 .ant-dropdown-trigger { display: flex; align-items: center; }
 .ant-input-group-addon { background: #bcab83; }
 .modal-body-ui .pac-target-input { min-width: inherit; }
+.contact-textarea {height: 130px !important; resize: none;}
+.contact-container { display: flex; justify-content: center; align-items: center;}
