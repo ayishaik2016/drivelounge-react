@@ -609,11 +609,17 @@ const BookingManagement = () => {
           )}
           <Table
             rowKey="id"
-            rowClassName={(record, index) =>
-              record.changerequeststatus && record.status == 1
-                ? "table-row-dark"
-                : "table-row-light"
-            }
+            rowClassName={(record, index) => {
+              switch (record.status) {
+                case 1:
+                  return "table-row-dark"; 
+                case 2:
+                  return "table-row-pending"; 
+                default:
+                  return "table-row-light"; 
+              }
+              // ((record.status == 1) ? "table-row-dark" : (record.status == 0) ? "table-row-dark" : 'table-row-light')
+            }}
             columns={columns}
             dataSource={FilteredBooking}
           />

@@ -1231,7 +1231,7 @@ const Home = (props) => {
                                 Curencyval(DriverCharge)}
                             </span>
                           </Paragraph>
-                          <span><b>{`${getLocaleMessages("Note Text")}`}:</b>{`[${getLocaleMessages("Note Driver")}]`}</span>
+                          <span><b>{`${getLocaleMessages("Note Text")}`}:</b> {`${getLocaleMessages("Note Driver")}`}</span>
                         </>
                       )}
                       {SelectedCar !== undefined &&
@@ -1245,7 +1245,7 @@ const Home = (props) => {
                             </span>
                           </Paragraph>
                         )}
-                      <span><b>{`${getLocaleMessages("Note Text")}`}:</b>{`[${getLocaleMessages("Note Deposit")}]`}</span>
+                      <span><b>{`${getLocaleMessages("Note Text")}`}:</b> {`${getLocaleMessages("Note Deposit")}`}</span>
                     </div>
                   </StickyBox>
 

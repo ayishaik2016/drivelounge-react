@@ -840,7 +840,7 @@ const Home = (props) => {
 })
     },[]
   )
-  console.log(currencyList,isCurrencyLoading,"currencyList")
+  
   return (
     <>
       <Layout className={"on-boarding"}>
