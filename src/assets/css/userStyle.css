@@ -271,7 +271,7 @@ span.or { display: inline-block; width: 100%; margin-bottom: 15px; text-align: c
 .filter-header h4.ant-typography { font-size: 20px; font-weight: 700; margin: 0; }
 .filter-header .box h5.ant-typography { font-size: inherit; font-weight: 700; color: #656565; }
 .filter-header-flex .ant-btn { border: none; padding: 0; color: #bcab83; text-decoration: underline; text-transform: uppercase; }
-.ant-form-item-explain.ant-form-item-explain-error { font-weight: 400; text-align: right; }
+.ant-form-item-explain.ant-form-item-explain-error { font-weight: 400; }
 
 /*modal details*/
 .modal-detail-popup { max-width: 580px; }
