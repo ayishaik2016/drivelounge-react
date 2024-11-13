@@ -69,6 +69,15 @@ const ContactComponet = (props) => {
             style={{ marginTop: "30px" }}
           >
             <div className="container">
+              <Row gutter={40}>
+                <Col span={24} className="inner-content">
+                  <div className="button-center-text">
+                    { getLocaleMessages("If you have any questions or any complaint about any service provided, you can contact the driving lounge team regarding it on the following contact")}: <br />
+                    { getLocaleMessages("Email Address")}: <a href="mailto:support@drivelounge.com">support@drivelounge.com</a><br />
+                    { getLocaleMessages("WhatsApp")}: 00966507070805
+                  </div>
+                </Col>
+              </Row>
               <Form
                 form={usedForm}
                 layout="vertical"
@@ -183,15 +192,6 @@ const ContactComponet = (props) => {
                     {getLocaleMessages("Send")}
                   </Button>
                 </div>
-                <Row gutter={40}>
-                  <Col span={24} className="inner-content">
-                     <div className="button-center-text">
-                       { getLocaleMessages("If you have any questions or any complaint about any service provided, you can contact the driving lounge team regarding it on the following contact")}: <br />
-{ getLocaleMessages("Email Address")}: <a href="mailto:support@drivelounge.com">support@drivelounge.com</a><br />
-{ getLocaleMessages("WhatsApp")}: 00966507070805
-                     </div>
-                  </Col>
-                </Row>
                 
               </Form>
             </div>
