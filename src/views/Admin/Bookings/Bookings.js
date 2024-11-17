@@ -203,6 +203,8 @@ const BookingManagement = () => {
         else if (paymentstatus.paymentstatus == 2)
           return <span>{getLocaleMessages("Failed")}</span>;
         else if (paymentstatus.paymentstatus == 3)
+          return <span>{getLocaleMessages("Cancelled")}</span>;
+        else if (paymentstatus.paymentstatus == 4)
           return <span>{getLocaleMessages("Refund")}</span>;
       },
     },
