@@ -26,9 +26,9 @@ const ChangeAdminModal = (props) => {
             : actions.UPDATE_AGENT_PASSWORD,
         payload: { ...data },
       });
-      dispatch({
-        type: authactions.LOGOUT_USER,
-      });
+      // dispatch({
+      //   type: authactions.LOGOUT_USER,
+      // });
       setChangePassword(!visible);
     } else {
       message.error(getLocaleMessages("Password mismatch"));

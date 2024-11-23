@@ -20,9 +20,11 @@ export default function asyncComponent(importComponent) {
       const { default: component } = await importComponent();
       NProgress.done();
       if (this._isMounted) {
-        this.setState({
-          component: component,
-        });
+        if(component){
+          this.setState({
+            component: component,
+          });
+        }
       }
     }
 

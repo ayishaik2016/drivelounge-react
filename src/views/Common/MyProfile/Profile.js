@@ -96,9 +96,9 @@ const Profile = () => {
         type: actions.UPDATE_USER_PASSWORD,
         payload: { ...data },
       });
-      dispatch({
+      /*dispatch({
         type: authactions.LOGOUT_USER,
-      });
+      });*/
       formPass.resetFields();
       setvisible(!visible);
     } else {

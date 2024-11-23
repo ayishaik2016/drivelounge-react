@@ -50,26 +50,26 @@ const NotFound = () => {
       return privateRoutes?.user
         ?.map((ite) => ite?.path)
         ?.includes(location.pathname.slice(1))
-        ? "403"
+        ? "/"
         : "404";
     } else {
       if (logInType === "user") {
         return privateRoutes?.user
           ?.map((ite) => ite?.path)
           ?.includes(location.pathname.slice(1))
-          ? "403"
+          ? "/"
           : "404";
       } else if (logInType === "admin") {
         return privateRoutes?.admin
           ?.map((ite) => ite?.path)
           ?.includes(location.pathname.slice(1))
-          ? "403"
+          ? "/"
           : "404";
       } else if (logInType === "agency") {
         return privateRoutes?.agency
           ?.map((ite) => ite?.path)
           ?.includes(location.pathname.slice(1))
-          ? "403"
+          ? "/"
           : "404";
       }
     }
@@ -83,7 +83,7 @@ const NotFound = () => {
       } else {
         window.open("/", "_self");
       }
-    }, 500);
+    }, 20);
   }, []);
 
   return (
