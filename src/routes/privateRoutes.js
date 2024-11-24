@@ -533,6 +533,12 @@ const privateRoutes = {
 
   common: [
     {
+      path: "paymenttransaction",
+      component: asyncComponent(() =>
+        import("./../views/Common/Confirmation/Transaction")
+      ),
+    },
+    {
       path: "listing",
       component: asyncComponent(() =>
         import("./../views/Common/Listing/Listing")
