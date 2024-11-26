@@ -18,11 +18,11 @@ class ErrorBoundary extends React.PureComponent {
       // You can render any custom fallback UI
       return (
         <Result
-          status="500"
-          title={getLocaleMessages("Something went wrong")}
+          status="200"
+          /*title={getLocaleMessages("Something went wrong")}
           subTitle={getLocaleMessages(
             "Sorry, We will fix this as soon as possible"
-          )}
+          )}*/
         />
       );
     }

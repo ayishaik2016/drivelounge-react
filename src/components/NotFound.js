@@ -46,7 +46,8 @@ const NotFound = () => {
   };
 
   const getErrorStatus = () => {
-    if (logInType === null) {
+    return '/';
+    /*if (logInType === null) {
       return privateRoutes?.user
         ?.map((ite) => ite?.path)
         ?.includes(location.pathname.slice(1))
@@ -72,18 +73,16 @@ const NotFound = () => {
           ? "/"
           : "404";
       }
-    }
+    }*/
   };
   useEffect(() => {
-    setTimeout(() => {
-      if (getLocalDataType() === "admin") {
-        window.open("/admin/dashboard", "_self");
-      } else if (getLocalDataType() === "agency") {
-        window.open("/agency/dashboard", "_self");
-      } else {
-        window.open("/", "_self");
-      }
-    }, 20);
+    if (getLocalDataType() === "admin") {
+      window.open("/admin/dashboard", "_self");
+    } else if (getLocalDataType() === "agency") {
+      window.open("/agency/dashboard", "_self");
+    } else {
+      window.open("/", "_self");
+    }
   }, []);
 
   return (
