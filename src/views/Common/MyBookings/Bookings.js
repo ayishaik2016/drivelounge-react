@@ -438,7 +438,10 @@ const MyBookingInformation = () => {
                               <Paragraph className="price">
                                 {getLocaleMessages(preferredCurrency)} {mybook.totalcost * parseFloat(currencyConversion).toFixed(2)}
                               </Paragraph>
-
+                              <Paragraph className="id">
+                                {getLocaleMessages("Payment Status")}:{" "}
+                                {getPaymentStatus(mybook.paymentstatus)}
+                              </Paragraph>
                               {/* {checkCancel(mybook) && mybook.status !== 0 && (
                               <Button
                                 onClick={() =>
@@ -510,6 +513,7 @@ const MyBookingInformation = () => {
                               <Paragraph className="price">
                                 {getLocaleMessages(preferredCurrency)} {mybook.totalcost * parseFloat(currencyConversion).toFixed(2)}
                               </Paragraph>
+
                               {/* {checkCancel(mybook) && mybook.status !== 0 && (
                               <Button
                                 onClick={() =>
