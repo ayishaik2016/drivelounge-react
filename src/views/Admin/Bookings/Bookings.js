@@ -203,9 +203,9 @@ const BookingManagement = () => {
         else if (paymentstatus.paymentstatus == 2)
           return <span>{getLocaleMessages("Failed")}</span>;
         else if (paymentstatus.paymentstatus == 3)
-          return <span>{getLocaleMessages("Cancelled")}</span>;
+          return <span>{getLocaleMessages("Refunded")}</span>;
         else if (paymentstatus.paymentstatus == 4)
-          return <span>{getLocaleMessages("Refund")}</span>;
+          return <span>{getLocaleMessages("Refund Pending")}</span>;
       },
     },
     {
@@ -299,9 +299,9 @@ const BookingManagement = () => {
           } else if (bookings[i].paymentstatus == 2) {
             paymentStatus = 'Failed'
           } else if (bookings[i].paymentstatus == 3) {
-            paymentStatus = 'Cancelled'
+            paymentStatus = 'Refunded'
           } else if (bookings[i].paymentstatus == 4) {
-            paymentStatus = 'Refund'
+            paymentStatus = 'Refund Pending'
           }
           arr.push({
             "Booking No": bookings[i].bookingcode,

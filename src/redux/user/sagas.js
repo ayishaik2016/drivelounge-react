@@ -194,6 +194,13 @@ export function* getPaymentConfirmation(params) {
             pathname: "bookingdetails",
             state: result.data[0].id,
           });
+        } else if(result.data[0].paymentstatus == 4) {
+          message.warn(getLocaleMessages("Your booking has been cancelled already"));
+
+          history.push({
+            pathname: "bookingdetails",
+            state: result.data[0].id,
+          });
         } else {
           message.warn(getLocaleMessages("Invalid payment transaction. Please contact your agent"));
 
