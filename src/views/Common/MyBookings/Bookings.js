@@ -366,7 +366,7 @@ const MyBookingInformation = () => {
                                   {getLocaleMessages("View")}
                                 </Button>
 
-                                {(mybook.bookingstatus == 1 && mybook.paymentstatus == 0 && mybook.paymenttransactionjson != '') && (
+                                {/* {(mybook.bookingstatus == 1 && mybook.paymentstatus == 0 && mybook.paymenttransactionjson != '') && (
                                   <Button
                                     onClick={() =>
                                       window.location.href = getPaymentLink(JSON.parse(mybook.paymenttransactionjson))
@@ -375,9 +375,9 @@ const MyBookingInformation = () => {
                                   >
                                     {getLocaleMessages("Pay Now")}
                                   </Button>
-                                )}
+                                )} */}
 
-                                 {(mybook.paymentstatus == 2) && (
+                                 {(mybook.paymentstatus == 0 || mybook.paymentstatus == 2) && (
                                   <Button
                                     onClick={() => handleBookingPayment(mybook.bookingno)}
                                     type="primary"
