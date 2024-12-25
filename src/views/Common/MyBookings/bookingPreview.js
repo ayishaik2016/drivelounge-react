@@ -861,7 +861,6 @@ const BookingPreview = React.forwardRef((props, ref) => {
                   </Col>
                 </Row>
               )}
-            {console.log("SelectedBookingInfo", SelectedBookingInfo)}
 
             <Row gutter={4} style={{ justifyContent: "center" }}>
               {SelectedBookingInfo.bookingstatus == 1 &&
@@ -870,6 +869,7 @@ const BookingPreview = React.forwardRef((props, ref) => {
                   <Col span={6}>
                     <Form.Item>
                       <div className="button-center">
+                        {SelectedBookingInfo.paymentstatus == 1 && (
                         <div style={{ marginRight: "10px" }}>
                           <Button
                             type="primary"
@@ -885,6 +885,7 @@ const BookingPreview = React.forwardRef((props, ref) => {
                             {getLocaleMessages("Completed")}
                           </Button>
                         </div>
+                        )}
                         <div style={{ marginRight: "10px" }}>
                           <Button
                             type="primary"
@@ -1064,7 +1065,7 @@ const BookingPreview = React.forwardRef((props, ref) => {
                   </div>
                 )}
             </div> */}
-            {SelectedBookingInfo.bookingstatus == 3 && (
+            {(SelectedBookingInfo.paymentstatus == 1 && SelectedBookingInfo.bookingstatus == 3) && (
               <div
                 style={{
                   display: "flex",

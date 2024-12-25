@@ -201,6 +201,18 @@ const MyBookingInformation = () => {
       : 2
   );
 
+  const getTimerCount = (paymentTransactionDate) => {
+    const currentDate = new Date();
+    const paymentValidityDate = new Date(new Date(paymentTransactionDate).getTime() + 60 * 60 * 24 * 1000);
+    const paymentDifferenceDate = new Date(paymentValidityDate - currentDate);
+
+    const hours = Math.floor(paymentDifferenceDate / (1000 * 60 * 60)); // hours
+    const minutes = Math.floor((paymentDifferenceDate % (1000 * 60 * 60)) / (1000 * 60)); // minutes
+    const seconds = Math.floor((paymentDifferenceDate % (1000 * 60)) / 1000); // seconds
+
+    return hours + ':' + minutes.toString().padStart(2, '0') + ':' + seconds.toString().padStart(2, '0');
+  }
+
   return (
     <>
       <LoadingOverlay
@@ -386,6 +398,10 @@ const MyBookingInformation = () => {
                                   </Button>
                                 )}
                                 
+                              </div>
+
+                              <div className="my-booking-timer">
+                                <p>Time left to complete the payment: <span>{getTimerCount(mybook.paymenttransactiondate)}</span></p>
                               </div>
                             </div>
                           ))}
