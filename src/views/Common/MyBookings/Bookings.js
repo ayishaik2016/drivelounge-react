@@ -56,6 +56,32 @@ const MyBookingInformation = () => {
   const { profile } = useSelector((state) => state.CarReservation);
   const [visible, setvisible] = useState(false);
   const [SelectForRate, setSelectForRate] = useState({});
+  const [currentDate, setCurrentDate] = useState(new Date());
+
+  const getTimerCount = (paymentTransactionDate) => {
+    const paymentValidityDate = new Date(new Date(paymentTransactionDate).getTime() + 60 * 60 * 24 * 1000);
+    const paymentDifferenceDate = new Date(paymentValidityDate - currentDate);
+
+    if (paymentDifferenceDate <= 0) {
+      return "Payment Expired"; 
+    }
+
+    const hours = Math.floor(paymentDifferenceDate / (1000 * 60 * 60)); // hours
+    const minutes = Math.floor((paymentDifferenceDate % (1000 * 60 * 60)) / (1000 * 60)); // minutes
+    const seconds = Math.floor((paymentDifferenceDate % (1000 * 60)) / 1000); // seconds
+
+    return hours + ':' + minutes.toString().padStart(2, '0') + ':' + seconds.toString().padStart(2, '0');
+  }
+
+  useEffect(() => {
+    // Set an interval to update the current time every second
+    const interval = setInterval(() => {
+      setCurrentDate(new Date());
+    }, 1000);
+
+    // Cleanup interval on component unmount
+    return () => clearInterval(interval);
+  }, []);
 
   const checkCancel = ({ bookingdate, status }) => {
     let addedDate = addDays(parseISO(bookingdate), 2);
@@ -72,6 +98,7 @@ const MyBookingInformation = () => {
     var filters = [];
     if (val == 2) {
       mybookinginfo.filter((book) => {
+        book.bookingCountDown = getTimerCount(book.paymenttransactiondate);
         if (book.bookingstatus == 1 || book.bookingstatus == 2) {
           filters.push(book);
         }
@@ -101,7 +128,7 @@ const MyBookingInformation = () => {
     handleComplete(3);
     handleComplete(2);
     handleComplete(0);
-  }, [mybookinginfo]);
+  }, [mybookinginfo, currentDate]);
 
   const getBookingStatus = (status) => {
     if (status == 1) return getLocaleMessages("Confirmed");
@@ -200,18 +227,6 @@ const MyBookingInformation = () => {
       ? history.location.query.tabkey
       : 2
   );
-
-  const getTimerCount = (paymentTransactionDate) => {
-    const currentDate = new Date();
-    const paymentValidityDate = new Date(new Date(paymentTransactionDate).getTime() + 60 * 60 * 24 * 1000);
-    const paymentDifferenceDate = new Date(paymentValidityDate - currentDate);
-
-    const hours = Math.floor(paymentDifferenceDate / (1000 * 60 * 60)); // hours
-    const minutes = Math.floor((paymentDifferenceDate % (1000 * 60 * 60)) / (1000 * 60)); // minutes
-    const seconds = Math.floor((paymentDifferenceDate % (1000 * 60)) / 1000); // seconds
-
-    return hours + ':' + minutes.toString().padStart(2, '0') + ':' + seconds.toString().padStart(2, '0');
-  }
 
   return (
     <>
@@ -401,7 +416,7 @@ const MyBookingInformation = () => {
                               </div>
 
                               <div className="my-booking-timer">
-                                <p>Time left to complete the payment: <span>{getTimerCount(mybook.paymenttransactiondate)}</span></p>
+                                <p>Time left to complete the payment: <span>{mybook.bookingCountDown}</span></p>
                               </div>
                             </div>
                           ))}
