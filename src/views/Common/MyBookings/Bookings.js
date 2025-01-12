@@ -404,7 +404,7 @@ const MyBookingInformation = () => {
                                   </Button>
                                 )} */}
 
-                                 {(mybook.paymentstatus == 0 || mybook.paymentstatus == 2) && (
+                                 {mybook.bookingstatus == 1 && (mybook.paymentstatus == 0 || mybook.paymentstatus == 2) && (
                                   <Button
                                     onClick={() => handleBookingPayment(mybook.bookingno)}
                                     type="primary"
@@ -414,10 +414,11 @@ const MyBookingInformation = () => {
                                 )}
                                 
                               </div>
-
-                              <div className="my-booking-timer">
-                                <p>Time left to complete the payment: <span>{mybook.bookingCountDown}</span></p>
-                              </div>
+                              {mybook.bookingstatus == 1 && (
+                                <div className="my-booking-timer">
+                                  <p>Time left to complete the payment: <span>{mybook.bookingCountDown}</span></p>
+                                </div>
+                              )}
                             </div>
                           ))}
                       </div>
