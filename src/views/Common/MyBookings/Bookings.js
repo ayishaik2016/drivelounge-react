@@ -63,7 +63,7 @@ const MyBookingInformation = () => {
     const paymentDifferenceDate = new Date(paymentValidityDate - currentDate);
 
     if (paymentDifferenceDate <= 0) {
-      return "Payment Expired"; 
+      return getLocaleMessages("Payment Expired"); 
     }
 
     const hours = Math.floor(paymentDifferenceDate / (1000 * 60 * 60)); // hours
@@ -414,9 +414,9 @@ const MyBookingInformation = () => {
                                 )}
                                 
                               </div>
-                              {mybook.bookingstatus == 1 && (
+                              {mybook.bookingstatus == 1 && (mybook.paymentstatus == 0 || mybook.paymentstatus == 2) && (
                                 <div className="my-booking-timer">
-                                  <p>Time left to complete the payment: <span>{mybook.bookingCountDown}</span></p>
+                                  <p>{getLocaleMessages("Time left to complete the payment")}: <span>{mybook.bookingCountDown}</span></p>
                                 </div>
                               )}
                             </div>

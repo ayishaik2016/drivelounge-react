@@ -961,7 +961,7 @@ const BookingPreview = React.forwardRef((props, ref) => {
                 )}
             </Row>
 
-            {(SelectedBookingInfo.paymentstatus == 1 && (SelectedBookingInfo.bookingstatus == 2 || SelectedBookingInfo.bookingstatus == 1)) &&
+            {/*(SelectedBookingInfo.paymentstatus == 1 && (SelectedBookingInfo.bookingstatus == 2 || SelectedBookingInfo.bookingstatus == 1)) &&
               (getLocalDataType() == "user") && (
                 <Row gutter={4} style={{ justifyContent: "center" }}>
                   <Col span={9}>
@@ -985,7 +985,7 @@ const BookingPreview = React.forwardRef((props, ref) => {
                     </Form.Item>
                   </Col>
                 </Row>
-              )}
+              )*/}
 
             {/* {((SelectedBookingInfo.paymentstatus == 0 && targetUrl != '' && SelectedBookingInfo.bookingstatus == 1)) &&
               (getLocalDataType() == "user") && (
