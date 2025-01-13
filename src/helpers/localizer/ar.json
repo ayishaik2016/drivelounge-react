@@ -711,12 +711,13 @@
   "Type Here": "اكتب هنا",
   "Pickup:": "الاستلام:",
   "Booking Status": "حالة الحجز",
+  "Payment Status": "حالة الدفع",
   "Ok": "حسنًا",
   "Are you sure you want to update this booking": "هل أنت متأكد أنك تريد تحديث هذا الحجز؟",
   "Do you want to make a change in your booking?": "هل ترغب في إجراء تغيير في حجزك ؟",
   "Nothing found": "لم يتم العثور على شيء",
   "Your booking was successful  and waiting for agency confimation": "تم تقديم حجزك بنجاح وفي انتظار تأكيد مكتب التأجير",
-  "Your payment is successful and ready to go": "Your payment is successful and ready to go",
+  "Your payment is successful and ready to go": "دفعتك ناجحة وجاهزة للانطلاق",
   "VAT%": "ضريبة القيمة المضافة %",
   "MY BOOKINGS": "حجوزاتي",
   "Welcome": "مرحباً",
@@ -848,5 +849,8 @@
   "Age": "عمر",
   "Cancellation fees will be applied on this cancellation, Please review the terms of conditions": "ملاحظة / سوف يتم تطبيق رسوم الغاء الحجز، الرجاء مراجعة سياسة الغاء الحجوزات",
   "No additional charges  will be applied on this cancellation": "ملاحظة / لا يوجد رسوم اضافية لإلغاء هذا الحجز. الرجاء مراجعة سياسة الغاء الحجوزات.",
-  "No cancellation fee if cancelled at least 24 hours before the scheduled time": "الغاء مجاني قبل ٢٤ ساعة"
+  "No cancellation fee if cancelled at least 24 hours before the scheduled time": "الغاء مجاني قبل ٢٤ ساعة",
+  "Pay Now": "ادفع الأن",
+  "Time left to complete the payment": "الوقت المتبقي لإتمام عملية الدفع",
+  "Payment Expired": "انتهت مهلة الدفع"
 }

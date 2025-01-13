@@ -383,7 +383,14 @@ const MyBookingInformation = () => {
                               </Button>
                             )} */}
 
-                              <div className="my-carbox-flex">
+                              
+                              {mybook.bookingstatus == 1 && (mybook.paymentstatus == 0 || mybook.paymentstatus == 2) && (
+                                <div className="my-booking-timer" direction="ltr">
+                                  <p>{getLocaleMessages("Time left to complete the payment")}: <b>{mybook.bookingCountDown}</b></p>
+                                </div>
+                              )}
+
+                              <div className="my-carbox-flex-box" direction="ltr">
                                 <Button
                                   onClick={() =>
                                     handleSelectedBooking(mybook.id)
@@ -414,11 +421,7 @@ const MyBookingInformation = () => {
                                 )}
                                 
                               </div>
-                              {mybook.bookingstatus == 1 && (mybook.paymentstatus == 0 || mybook.paymentstatus == 2) && (
-                                <div className="my-booking-timer">
-                                  <p>{getLocaleMessages("Time left to complete the payment")}: <span>{mybook.bookingCountDown}</span></p>
-                                </div>
-                              )}
+
                             </div>
                           ))}
                       </div>
@@ -484,7 +487,7 @@ const MyBookingInformation = () => {
                               </Button>
                             )} */}
 
-                              <div className="my-carbox-flex">
+                              <div className="my-carbox-flex-box">
                                 <Button
                                   onClick={() =>
                                     handleSelectedBooking(mybook.id)
@@ -555,7 +558,7 @@ const MyBookingInformation = () => {
                                 Cancel
                               </Button>
                             )} */}
-                              <div className="my-carbox-flex">
+                              <div className="my-carbox-flex-box">
                                 <Button
                                   onClick={() =>
                                     handleSelectedBooking(mybook.id)
