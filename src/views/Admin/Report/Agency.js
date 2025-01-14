@@ -111,11 +111,6 @@ const ReportManagement = () => {
       ),
     },
     {
-      title: getLocaleMessages("Payment Transaction"),
-      dataIndex: "paymenttransactionid",
-      key: "paymenttransactionid"
-    },
-    {
       title: getLocaleMessages("Rental Total Price"),
       dataIndex: "subtotal",
       key: "subtotal",
@@ -123,16 +118,16 @@ const ReportManagement = () => {
         <span>{`${Formatcurrency(subtotal)} ${getLocaleMessages(DEFAULT_CURRENCY)}`}</span>
       ),
     },
-    {
-      title: getLocaleMessages("Total VAT"),
-      dataIndex: "vatamount",
-      key: "vatamount",
-      render: (vatamount) => (
-        <span>{`${Formatcurrency(vatamount)} ${getLocaleMessages(
-          DEFAULT_CURRENCY
-        )}`}</span>
-      ),
-    },
+    // {
+    //   title: getLocaleMessages("Total VAT"),
+    //   dataIndex: "vatamount",
+    //   key: "vatamount",
+    //   render: (vatamount) => (
+    //     <span>{`${Formatcurrency(vatamount)} ${getLocaleMessages(
+    //       DEFAULT_CURRENCY
+    //     )}`}</span>
+    //   ),
+    // },
     {
       title: getLocaleMessages("Agency VAT"),
       dataIndex: "deposit",
@@ -169,6 +164,11 @@ const ReportManagement = () => {
           DEFAULT_CURRENCY
         )}`}</span>
       ),
+    },
+    {
+      title: getLocaleMessages("Payment Transaction"),
+      dataIndex: "paymenttransactionid",
+      key: "paymenttransactionid"
     },
     /*{
       title: getLocaleMessages("Admin Commission"),
@@ -388,7 +388,7 @@ const ReportManagement = () => {
                 reports[i].commvalue *
                 (reports[i].vatpercent / 100),
           "Rental Total Price": reports[i].subtotal,
-          "Total VAT": reports[i].vatamount,
+          // "Total VAT": reports[i].vatamount,
           "Total Amount": reports[i].totalcost,
         });
       }
