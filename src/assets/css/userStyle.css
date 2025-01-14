@@ -583,7 +583,7 @@ border-radius: 35px; box-shadow: none; height: inherit; background: #656565; bor
 .my-carbox-flex-box .ant-btn { height: 40px; min-width: 100px; margin-left: 20px; border-radius: 5px; font-size: 16px; padding: 0 20px; right: 50px; margin-top: 6px; }
 .my-carbox-flex-box .ant-btn.rate_us { min-width: inherit; color: #ff9800; border-color: #ff9800; }
 .my-carbox-flex-box .completed_btn { background: none; color: #4d9b50; border: 1px solid #4d9b50; pointer-events: none; }
-.my-booking-timer {display: block; margin: 14px 0px;}
+.my-booking-timer {display: block; margin: 14px 0px; color: #f44336}
 .my-carbox h3.ant-typography .completed_btn { font-weight: normal; font-size: 12px; display: inline-block; text-transform: uppercase; background: #4caf50; color: #fff; margin-left: 10px; padding: 3px 10px; border-radius: 35px; position: relative; top: -4px; }
 .my-carbox h3.ant-typography .completed_btn.upcoming { background: #2196f3; }
 .my-carbox h3.ant-typography .completed_btn.cancel { background: #f44336; }
