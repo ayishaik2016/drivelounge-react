@@ -284,14 +284,9 @@ const BookingManagement = () => {
             break;
         }
         if (bookings[i]?.bookingcode !== undefined) {
-          const pickup = format(
-            new Date(bookings[i].pickupdate),
-            "dd/MM/yyyy hh:mm a"
-          );
-          const dropoff = format(
-            new Date(bookings[i].dropoffdate),
-            "dd/MM/yyyy hh:mm a"
-          );
+          const pickup = format(new Date(bookings[i].pickupdate), "dd/MM/yyyy hh:mm a");
+          const dropoff = format(new Date(bookings[i].dropoffdate), "dd/MM/yyyy hh:mm a");
+          const bookingdate = format(new Date(bookings[i].bookingdate), "dd/MM/yyyy hh:mm a");
 
           let paymentStatus = 'Pending';
           if(bookings[i].paymentstatus == 1) {
@@ -303,7 +298,8 @@ const BookingManagement = () => {
           } else if (bookings[i].paymentstatus == 4) {
             paymentStatus = 'Refund Pending'
           }
-          arr.push({
+
+          /*arr.push({
             "Booking No": bookings[i].bookingcode,
             "Pickup Date": pickup,
             "Dropoff Date": dropoff,
@@ -316,6 +312,21 @@ const BookingManagement = () => {
             "Payment Status": paymentStatus,
             Request: bookings[i].changerequest,
             Status: Status,
+          });*/
+
+          arr.push({
+            "Booking No": bookings[i].bookingcode,
+            "Booking Date": bookingdate,
+            "Pickup Date": pickup,
+            "Dropoff Date": dropoff,
+            "Price Per Day": bookings[i].priceperday,
+            "Rental Days": bookings[i].totalrentaldays,
+            "Total Amount": bookings[i].totalcost,
+            "Deposit": bookings[i].deposit,
+            //"Request": bookings[i].changerequest,
+            "Status": Status,
+            "Payment Status": paymentStatus,
+            "Payment Transaction": (bookings[i].paymenttransactionid != 1) ? bookings[i].paymenttransactionid : '',
           });
         }
       }

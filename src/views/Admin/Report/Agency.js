@@ -166,6 +166,26 @@ const ReportManagement = () => {
       ),
     },
     {
+      title: getLocaleMessages("Admin Commission"),
+      dataIndex: "admincomission",
+      key: "admincomission  ",
+      render: (totalcost) => (
+        <span>{`${Formatcurrency(totalcost)} ${getLocaleMessages(
+          DEFAULT_CURRENCY
+        )}`}</span>
+      ),
+    },
+    {
+      title: getLocaleMessages("Admin VAT"),
+      dataIndex: "adminvat",
+      key: "adminvat",
+      render: (totalcost) => (
+        <span>{`${Formatcurrency(totalcost)} ${getLocaleMessages(
+          DEFAULT_CURRENCY
+        )}`}</span>
+      ),
+    },
+    {
       title: getLocaleMessages("Payment Transaction"),
       dataIndex: "paymenttransactionid",
       key: "paymenttransactionid"
@@ -365,12 +385,14 @@ const ReportManagement = () => {
           "Total Rental Days": reports[i].totalrentaldays,
           "Deposit": reports[i].deposit,
           "Rental Total Price": reports[i].subtotal,
-          "VAT": reports[i].vatamount,
+          "Total VAT": reports[i].vatamount,
           "Coupon Code": reports[i].couponcode,
           "Coupon Value": reports[i].couponvalue,
           "Total Amount": reports[i].totalcost,
-          "Admin Commission": reports[i].commtype == 2 ? (reports[i].carpriceperday * reports[i].totalrentaldays * (reports[i].commvalue / 100)) : (reports[i].totalrentaldays * reports[i].commvalue),
-          "Admin VAT": reports[i].commtype == 2 ? (reports[i].carpriceperday * reports[i].totalrentaldays * (reports[i].commvalue / 100) * (reports[i].vatpercent / 100)) : (reports[i].totalrentaldays * reports[i].commvalue * (reports[i].vatpercent / 100)),
+          //"Admin Commission": reports[i].commtype == 2 ? (reports[i].carpriceperday * reports[i].totalrentaldays * (reports[i].commvalue / 100)) : (reports[i].totalrentaldays * reports[i].commvalue),
+          //"Admin VAT": reports[i].commtype == 2 ? (reports[i].carpriceperday * reports[i].totalrentaldays * (reports[i].commvalue / 100) * (reports[i].vatpercent / 100)) : (reports[i].totalrentaldays * reports[i].commvalue * (reports[i].vatpercent / 100)),
+          "Admin Commission": reports[i].admincomission,
+          "Admin VAT": reports[i].adminvat,
           "Payment Transaction": (reports[i].paymenttransactionid != 1) ? reports[i].paymenttransactionid : '',
         });
       }

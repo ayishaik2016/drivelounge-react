@@ -112,11 +112,6 @@ const ReportManagement = () => {
       ),
     },
     {
-      title: getLocaleMessages("Payment Transaction"),
-      dataIndex: "paymenttransactionid",
-      key: "paymenttransactionid"
-    },
-    {
       title: getLocaleMessages("Agency Rent Price"),
       dataIndex: "carpriceperday",
       key: "carpriceperday",
@@ -199,6 +194,11 @@ const ReportManagement = () => {
           DEFAULT_CURRENCY
         )}`}</span>
       ),
+    },
+    {
+      title: getLocaleMessages("Payment Transaction"),
+      dataIndex: "paymenttransactionid",
+      key: "paymenttransactionid"
     },
     // {
     //   title: getLocaleMessages("Admin Commission"),
@@ -296,50 +296,39 @@ const ReportManagement = () => {
       var arr = [];
       for (var i = 0; i < reports.length; i++) {
         arr.push({
-          SN: i + 1,
-          "Booking Date": format(
-            new Date(reports[i].bookingdate),
-            "dd/MM/yyyy hh:mm:ss"
-          ),
+          "SN": i + 1,
+          "Booking Date": format( new Date(reports[i].bookingdate), "dd/MM/yyyy hh:mm:ss" ),
           "Booking No": reports[i].bookingcode,
-          "Pickup Date": format(
-            new Date(reports[i].pickupdate),
-            "dd/MM/yyyy hh:mm:ss"
-          ),
-          "Dropoff Date": format(
-            new Date(reports[i].dropoffdate),
-            "dd/MM/yyyy hh:mm:ss"
-          ),
+          "Pickup Date": format( new Date(reports[i].pickupdate), "dd/MM/yyyy hh:mm:ss" ),
+          "Dropoff Date": format( new Date(reports[i].dropoffdate), "dd/MM/yyyy hh:mm:ss" ),
           "Car No": reports[i].carno,
           "Customer Name": reports[i].customername,
           "Agent Name": reports[i].agentname,
           "Total Rental Days": reports[i].totalrentaldays,
-          Depoist: reports[i].deposit,
-          "Payment Transaction": (reports[i].paymenttransactionid != 1) ? reports[i].paymenttransactionid : '',
-          "Agency Rent Price":
-            reports[i].carpriceperday * reports[i].totalrentaldays,
-          "Agency VAT":
-            reports[i].carpriceperday *
-            reports[i].totalrentaldays *
-            (reports[i].vatpercent / 100),
-          "Admin Commission": reports[i].admincomission,
-            // reports[i].commtype == 2
-            //   ? reports[i].carpriceperday *
-            //     reports[i].totalrentaldays *
-            //     (reports[i].commvalue / 100)
-            //   : reports[i].totalrentaldays * reports[i].commvalue,
-          "Admin VAT": reports[i].adminvat,
-            // reports[i].commtype == 2
-            //   ? reports[i].carpriceperday *
-            //     reports[i].totalrentaldays *
-            //     (reports[i].commvalue / 100) *
-            //     (reports[i].vatpercent / 100)
-            //   : reports[i].totalrentaldays *
-            //     reports[i].commvalue *
-            //     (reports[i].vatpercent / 100),
+          "Deposit": reports[i].deposit,
+          "Agency Rent Price": reports[i].carpriceperday * reports[i].totalrentaldays,
+          "Agency VAT": reports[i].carpriceperday * reports[i].totalrentaldays * (reports[i].vatpercent / 100),
+          //"Admin Commission": reports[i].admincomission,
+          //reports[i].commtype == 2
+          //  ? reports[i].carpriceperday *
+          //    reports[i].totalrentaldays *
+          //    (reports[i].commvalue / 100)
+          //  : reports[i].totalrentaldays * reports[i].commvalue,
+          //"Admin VAT": reports[i].adminvat,
+          //reports[i].commtype == 2
+          //  ? reports[i].carpriceperday *
+          //    reports[i].totalrentaldays *
+          //    (reports[i].commvalue / 100) *
+          //    (reports[i].vatpercent / 100)
+          //  : reports[i].totalrentaldays *
+          //    reports[i].commvalue *
+          //    (reports[i].vatpercent / 100),
           "Rental Total Price": reports[i].subtotal,
           "Total VAT": reports[i].vatamount,
           "Total Amount": reports[i].totalcost,
+          "Admin Commission": reports[i].admincomission,
+          "Admin VAT": reports[i].adminvat,
+          "Payment Transaction": (reports[i].paymenttransactionid != 1) ? reports[i].paymenttransactionid : '',
         });
       }
       setExportData(arr);

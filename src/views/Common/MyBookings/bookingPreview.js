@@ -159,8 +159,8 @@ const BookingPreview = React.forwardRef((props, ref) => {
     });
   }, []);
   
-  console.log("UsedForm", usedForm.getFieldsValue(), SelectedBookingInfo);
   let age = 0;
+  let nationalityid = SelectedBookingInfo.nationalityid;
   if(SelectedBookingInfo.dateofbirth !== undefined) {
     const today = new Date();
     const birthDate = new Date(SelectedBookingInfo.dateofbirth);  // create a date object directly from `dob1` argument
@@ -675,10 +675,11 @@ const BookingPreview = React.forwardRef((props, ref) => {
                   <Col span={12}>
                     <Form.Item
                       label={getLocaleMessages("Nationality")}
-                      name={"nationalityid"}
+                      // name={"nationalityid"}
                     >
                       <Select
                       disabled
+                      value={nationalityid} 
                         dropdownStyle={{ minWidth: '200px' }}
                       >
                         {countryList.map((country) => (
