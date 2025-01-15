@@ -118,32 +118,32 @@ const ReportManagement = () => {
         <span>{`${Formatcurrency(subtotal)} ${getLocaleMessages(DEFAULT_CURRENCY)}`}</span>
       ),
     },
-    // {
-    //   title: getLocaleMessages("Total VAT"),
-    //   dataIndex: "vatamount",
-    //   key: "vatamount",
-    //   render: (vatamount) => (
-    //     <span>{`${Formatcurrency(vatamount)} ${getLocaleMessages(
-    //       DEFAULT_CURRENCY
-    //     )}`}</span>
-    //   ),
-    // },
     {
-      title: getLocaleMessages("Agency VAT"),
-      dataIndex: "deposit",
-      key: "deposit",
-      render: (carpriceperday, record) => (
-        <span>
-          {`${Formatcurrency(
-            (
-              record.carpriceperday *
-              record.totalrentaldays *
-              (record.vatpercent / 100)
-            ).toFixed(2)
-          )} ${getLocaleMessages(DEFAULT_CURRENCY)}`}
-        </span>
+      title: getLocaleMessages("Total VAT"),
+      dataIndex: "vatamount",
+      key: "vatamount",
+      render: (vatamount) => (
+        <span>{`${Formatcurrency(vatamount)} ${getLocaleMessages(
+          DEFAULT_CURRENCY
+        )}`}</span>
       ),
     },
+    // {
+    //   title: getLocaleMessages("Agency VAT"),
+    //   dataIndex: "deposit",
+    //   key: "deposit",
+    //   render: (carpriceperday, record) => (
+    //     <span>
+    //       {`${Formatcurrency(
+    //         (
+    //           record.carpriceperday *
+    //           record.totalrentaldays *
+    //           (record.vatpercent / 100)
+    //         ).toFixed(2)
+    //       )} ${getLocaleMessages(DEFAULT_CURRENCY)}`}
+    //     </span>
+    //   ),
+    // },
     {
       title: getLocaleMessages("Coupon Code"),
       dataIndex: "couponcode",
@@ -355,41 +355,23 @@ const ReportManagement = () => {
       var arr = [];
       for (var i = 0; i < reports.length; i++) {
         arr.push({
-          SN: i + 1,
-          "Booking Date": reports[i].bookingdate,
+          "SN": i + 1,
+          "Booking Date": format(new Date(reports[i].bookingdate), "dd/MM/yyyy hh:mm:ss"),
           "Booking No": reports[i].bookingcode,
-          "Pickup Date": format(
-            new Date(reports[i].pickupdate),
-            "dd/MM/yyyy hh:mm:ss"
-          ),
-          "Dropoff Date": format(
-            new Date(reports[i].dropoffdate),
-            "dd/MM/yyyy hh:mm:ss"
-          ),
+          "Pickup Date": format(new Date(reports[i].pickupdate), "dd/MM/yyyy hh:mm:ss"),
+          "Dropoff Date": format(new Date(reports[i].dropoffdate), "dd/MM/yyyy hh:mm:ss"),
           "Car No": reports[i].carno,
           "Customer Name": reports[i].customername,
           "Total Rental Days": reports[i].totalrentaldays,
-          Deposit: reports[i].deposit,
-          "Payment Transaction": reports[i].paymenttransactionid,
-          VAT: reports[i].vatamount,
-          "Admin Commission":
-            reports[i].commtype == 2
-              ? reports[i].carpriceperday *
-                reports[i].totalrentaldays *
-                (reports[i].commvalue / 100)
-              : reports[i].totalrentaldays * reports[i].commvalue,
-          "Admin VAT":
-            reports[i].commtype == 2
-              ? reports[i].carpriceperday *
-                reports[i].totalrentaldays *
-                (reports[i].commvalue / 100) *
-                (reports[i].vatpercent / 100)
-              : reports[i].totalrentaldays *
-                reports[i].commvalue *
-                (reports[i].vatpercent / 100),
+          "Deposit": reports[i].deposit,
           "Rental Total Price": reports[i].subtotal,
-          // "Total VAT": reports[i].vatamount,
+          "VAT": reports[i].vatamount,
+          "Coupon Code": reports[i].couponcode,
+          "Coupon Value": reports[i].couponvalue,
           "Total Amount": reports[i].totalcost,
+          "Admin Commission": reports[i].commtype == 2 ? (reports[i].carpriceperday * reports[i].totalrentaldays * (reports[i].commvalue / 100)) : (reports[i].totalrentaldays * reports[i].commvalue),
+          "Admin VAT": reports[i].commtype == 2 ? (reports[i].carpriceperday * reports[i].totalrentaldays * (reports[i].commvalue / 100) * (reports[i].vatpercent / 100)) : (reports[i].totalrentaldays * reports[i].commvalue * (reports[i].vatpercent / 100)),
+          "Payment Transaction": (reports[i].paymenttransactionid != 1) ? reports[i].paymenttransactionid : '',
         });
       }
       setExportData(arr);
@@ -405,7 +387,7 @@ const ReportManagement = () => {
       <div className="page-container">
         <Row className="head-filter" justify="space-between" align="middle">
           <Col span={12}>
-            <Title level={2}>{getLocaleMessages("Active")}</Title>
+            <Title level={2}>{getLocaleMessages("Agency Report")}</Title>
           </Col>
 
           <Col span={12}>
