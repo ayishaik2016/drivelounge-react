@@ -575,9 +575,9 @@ const BookingDetails = (props) => {
         ? SelectedBookingInfo.drivercharge
         : 0) * BookingDays;
     setDriverCharge(drivercharge);
-    let vat = (subtotal + drivercharge) * (VatPercent / 100);
+    let vat = (subtotal) * (VatPercent / 100);
     setVatAmount(vat);
-    let total = subtotal + drivercharge + vat - CouponValue;
+    let total = subtotal + vat - CouponValue;
     setTotalPrice(total);
     usedForm.setFieldsValue({ totalcost: Formatcurrency(total) });
   };
