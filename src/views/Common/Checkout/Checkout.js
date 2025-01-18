@@ -84,6 +84,7 @@ const Home = () => {
   );
   const { filterCarElements } = useSelector((state) => state.Listing);
   const [SubTotal, setSubTotal] = useState(0);
+  const [ServiceFee, setServiceFee] = useState(0);
   const [TotalPrice, setTotalPrice] = useState(0);
   const [VatAmount, setVatAmount] = useState(0);
   const [VatPercent, setVatPercent] = useState(0);
@@ -211,42 +212,36 @@ const Home = () => {
 
   const handleCalculation = () => {
     if (SelectedCar !== undefined) {
-      let subtotal =
-        (SelectedCar !== undefined ? SelectedCar[0].carpriceperday : 0) *
-        BookingDays;
+      let subtotal = (SelectedCar !== undefined ? SelectedCar[0].carpriceperday : 0) * BookingDays; 
       setSubTotal(subtotal);
-      let hasdrivercharge =
-        (SelectedCar !== undefined &&
-        (SelectedCar[0].cardriver == 1 || SelectedCar[0].cardriver == 2)
-          ? SelectedCar[0].drivercharge
-          : 0) * BookingDays;
+      let serviceFee = subtotal * (SelectedCar[0].admincommission / 100)
+      setServiceFee(serviceFee)
+      let hasdrivercharge = (SelectedCar !== undefined && (SelectedCar[0].cardriver == 1 || SelectedCar[0].cardriver == 2) ? SelectedCar[0].drivercharge : 0) * BookingDays;
       setDriverCharge(hasdrivercharge);
       let drivercharge = filterCarElements.WithDriver ? hasdrivercharge : 0;
-      let couponVal = subtotal * (CouponValue / 100);
+      let couponVal = (subtotal + serviceFee) * (CouponValue / 100);
       setCouponVal(couponVal);
-      let vat = (subtotal - couponVal) * (VatPercent / 100);
+      let vat = ((subtotal + serviceFee) - couponVal) * (VatPercent / 100);
       setVatAmount(vat);
-      let total = subtotal + vat - Decimalval(couponVal);
+      let total = subtotal + serviceFee + vat - Decimalval(couponVal);
       setTotalPrice(total);
     }
   };
 
   useEffect(() => {
     if (SelectedCar !== undefined) {
-      let subtotal =
-        (SelectedCar !== undefined ? SelectedCar[0].carpriceperday : 0) *
-        BookingDays;
+      let subtotal = (SelectedCar !== undefined ? SelectedCar[0].carpriceperday : 0) * BookingDays;
       setSubTotal(subtotal);
-      let hasdrivercharge =
-        (SelectedCar !== undefined ? SelectedCar[0].drivercharge : 0) *
-        BookingDays;
+      let serviceFee = subtotal * (SelectedCar[0].admincommission / 100)
+      setServiceFee(serviceFee)
+      let hasdrivercharge = (SelectedCar !== undefined ? SelectedCar[0].drivercharge : 0) * BookingDays;
       setDriverCharge(hasdrivercharge);
       let drivercharge = filterCarElements.WithDriver ? hasdrivercharge : 0;
-      let couponVal = subtotal * (CouponValue / 100);
+      let couponVal = (subtotal + serviceFee) * (CouponValue / 100);
       setCouponVal(couponVal);
-      let vat = (subtotal - couponVal) * (VatPercent / 100);
+      let vat = ((subtotal + serviceFee) - couponVal) * (VatPercent / 100);
       setVatAmount(vat);
-      let total = subtotal + vat - couponVal;
+      let total = subtotal + serviceFee + vat - couponVal;
       setTotalPrice(total);
     }
   }, [SelectedCar]);
@@ -526,6 +521,7 @@ const Home = () => {
         vatpercent: VatPercent,
         vatamount: Decimalval(VatAmount),
         subtotal: Decimalval(SubTotal),
+        serviceFee: Decimalval(ServiceFee),
         totalcost: Decimalval(TotalPrice),
         otheramount: 0,
         paymentmode: 1, //PaymentOption,
@@ -1049,6 +1045,14 @@ const Home = () => {
                           Curencyval(SubTotal)}
                       </span>
                     </Paragraph>
+                    <Paragraph className="split">
+                      {getLocaleMessages("Service Fee")}
+                      <span>
+                        {/*SelectedCar !== undefined && (SelectedCar[0].symbol ? ( `SAR ${SubTotal.toFixed(SelectedCar[0].decimal)}`):(`${SubTotal.toFixed(SelectedCar[0].decimal)} SAR`))*/}
+                        {SelectedCar !== undefined &&
+                          Curencyval(ServiceFee)}
+                      </span>
+                    </Paragraph>
                     {CouponValue > 0 && (
                       <Paragraph className="split">
                         {`- ${getLocaleMessages(
@@ -1066,7 +1070,7 @@ const Home = () => {
                       <span>
                         {SelectedCar !== undefined &&
                           SubTotal !== undefined &&
-                          Curencyval(SubTotal - CouponVal)}
+                          Curencyval((SubTotal + ServiceFee) - CouponVal)}
                       </span>
                     </Paragraph>
                     <Paragraph className="split">

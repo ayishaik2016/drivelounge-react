@@ -432,6 +432,21 @@ const BookingPreview = React.forwardRef((props, ref) => {
               </Row>
               <Row gutter={20}>
                 <Col span={12}>
+                  <Form.Item name="admincommission" label={getLocaleMessages("Service Fee")+"("+ preferredCurrency +")"}>
+                    <Input disabled />
+                  </Form.Item>
+                </Col>
+                <Col span={12}>
+                  <Form.Item
+                    name="couponvalue"
+                    label={getLocaleMessages("Coupon Value")+"("+ preferredCurrency +")"}
+                  >
+                    <Input disabled />
+                  </Form.Item>
+                </Col>
+              </Row>
+              <Row gutter={20}>
+                <Col span={12}>
                   <Form.Item name="vatamount" label={getLocaleMessages("VAT")+"("+ preferredCurrency +")"}>
                     <Input disabled />
                   </Form.Item>
@@ -452,14 +467,6 @@ const BookingPreview = React.forwardRef((props, ref) => {
                     label={getLocaleMessages(
                       "Deposit [ Not: Deposit amount not included in total amount ]"
                     )+"("+ preferredCurrency +")"}
-                  >
-                    <Input disabled />
-                  </Form.Item>
-                </Col>
-                <Col span={12}>
-                  <Form.Item
-                    name="couponvalue"
-                    label={getLocaleMessages("Coupon Value")+"("+ preferredCurrency +")"}
                   >
                     <Input disabled />
                   </Form.Item>

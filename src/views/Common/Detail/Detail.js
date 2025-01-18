@@ -82,6 +82,7 @@ const Home = (props) => {
   const [CoverImage, setCoverImage] = useState("");
   const [SelectedCar, setSelectedCar] = useState();
   const [SubTotal, setSubTotal] = useState(0);
+  const [ServiceFee, setServiceFee] = useState(0);
   const [TotalPrice, setTotalPrice] = useState(0);
   const [VatAmount, setVatAmount] = useState(0);
   const [VatPercent, setVatPercent] = useState(0);
@@ -115,20 +116,16 @@ const Home = (props) => {
 
   const handleCalculation = () => {
     if (SelectedCar !== undefined) {
-      let subtotal =
-        (SelectedCar !== undefined ? SelectedCar[0].carpriceperday : 0) *
-        BookingDays;
+      let subtotal = (SelectedCar !== undefined ? SelectedCar[0].carpriceperday : 0) * BookingDays;
       setSubTotal(subtotal);
-      let hasdrivercharge =
-        (SelectedCar !== undefined &&
-        (SelectedCar[0].cardriver == 1 || SelectedCar[0].cardriver == 2)
-          ? SelectedCar[0].drivercharge
-          : 0) * BookingDays;
+      let serviceFee = subtotal * (SelectedCar[0].admincommission / 100)
+      setServiceFee(serviceFee);
+      let hasdrivercharge = (SelectedCar !== undefined && (SelectedCar[0].cardriver == 1 || SelectedCar[0].cardriver == 2) ? SelectedCar[0].drivercharge : 0) * BookingDays;
       setDriverCharge(hasdrivercharge);
       let drivercharge = filterCarElements.WithDriver ? hasdrivercharge : 0;
-      let vat = (subtotal - CouponValue) * (VatPercent / 100);
+      let vat = ((subtotal + serviceFee) - CouponValue) * (VatPercent / 100);
       setVatAmount(vat);
-      let total = subtotal + vat - CouponValue;
+      let total = subtotal + serviceFee + vat +  - CouponValue;
       setTotalPrice(total);
     }
   };
@@ -255,6 +252,7 @@ const Home = (props) => {
       message.error("Please enter the valid coupon");
     }
   };
+
   useEffect(() => {
     dispatch({
       type: actions.GET_CAR_FULL_LIST,
@@ -1180,6 +1178,14 @@ const Home = (props) => {
                           {/*SelectedCar !== undefined && (SelectedCar[0].symbol ? ( `SAR ${SubTotal.toFixed(SelectedCar[0].decimal)}`):(`${SubTotal.toFixed(SelectedCar[0].decimal)} SAR`))*/}
                           {SelectedCar !== undefined &&
                             Curencyval(SubTotal)}
+                        </span>
+                      </Paragraph>
+                      <Paragraph className="split">
+                        {getLocaleMessages("Service Fee")}
+                        <span>
+                          {/*SelectedCar !== undefined && (SelectedCar[0].symbol ? ( `SAR ${SubTotal.toFixed(SelectedCar[0].decimal)}`):(`${SubTotal.toFixed(SelectedCar[0].decimal)} SAR`))*/}
+                          {SelectedCar !== undefined &&
+                            Curencyval(ServiceFee)}
                         </span>
                       </Paragraph>
                       <Paragraph className="split">

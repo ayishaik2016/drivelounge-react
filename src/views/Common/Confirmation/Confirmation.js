@@ -428,14 +428,24 @@ const Home = (props) => {
                       </Title>
                       <Paragraph> {bookinginfo.totalrentaldays} </Paragraph>
                     </Col>
+
                     <Col span={12} style={columnStyle}>
                       <Title level={5}>
                         {" "}
-                        {getLocaleMessages("Total Cost")+"("+ preferredCurrency +")"}{" "}
+                        {getLocaleMessages("Service Fee") + "("+ preferredCurrency +")"}{" "}
+                      </Title>
+                      <Paragraph> {bookinginfo.admincommission.toFixed(2)} </Paragraph>
+                    </Col>
+                    <Col span={12} style={columnStyle}>
+                      <Title level={5}>
+                        {" "}
+                        {getLocaleMessages("Coupon Value")+"("+ preferredCurrency +")"}{" "}
                       </Title>
                       <Paragraph>
                         {" "}
-                        {Formatcurrency(bookinginfo.totalcost * parseFloat(currencyConversion).toFixed(2))}{" "}
+                        {bookinginfo?.couponvalue !== undefined
+                          ? Formatcurrency(bookinginfo?.couponvalue * parseFloat(currencyConversion).toFixed(2))
+                          : ""}{" "}
                       </Paragraph>
                     </Col>
                     <Col span={12} style={columnStyle}>
@@ -448,6 +458,16 @@ const Home = (props) => {
                     <Col span={12} style={columnStyle}>
                       <Title level={5}>
                         {" "}
+                        {getLocaleMessages("Total Cost")+"("+ preferredCurrency +")"}{" "}
+                      </Title>
+                      <Paragraph>
+                        {" "}
+                        {Formatcurrency(bookinginfo.totalcost * parseFloat(currencyConversion).toFixed(2))}{" "}
+                      </Paragraph>
+                    </Col>
+                    <Col span={12} style={columnStyle}>
+                      <Title level={5}>
+                        {" "}
                         {getLocaleMessages(
                           "Deposit [ Not: Deposit amount not included in total amount ]"
                         )+"("+ preferredCurrency +")"}{" "}
@@ -455,18 +475,6 @@ const Home = (props) => {
                       <Paragraph>
                         {" "}
                         {Formatcurrency(bookinginfo.cardeposite * parseFloat(currencyConversion).toFixed(2))}{" "}
-                      </Paragraph>
-                    </Col>
-                    <Col span={12} style={columnStyle}>
-                      <Title level={5}>
-                        {" "}
-                        {getLocaleMessages("Coupon Value")+"("+ preferredCurrency +")"}{" "}
-                      </Title>
-                      <Paragraph>
-                        {" "}
-                        {bookinginfo?.couponvalue !== undefined
-                          ? Formatcurrency(bookinginfo?.couponvalue * parseFloat(currencyConversion).toFixed(2))
-                          : ""}{" "}
                       </Paragraph>
                     </Col>
                   </Row>
