@@ -67,6 +67,7 @@ const BookingDetails = (props) => {
   const [DropoffDate, setDropoffDate] = useState();
   const [DropoffTime, setDropoffTime] = useState();
   const [SubTotal, setSubTotal] = useState(0);
+  const [ServiceFee, setServiceFee] = useState(0);
   const [TotalPrice, setTotalPrice] = useState(0);
   const [VatAmount, setVatAmount] = useState(0);
   const [VatPercent, setVatPercent] = useState(0);
@@ -565,21 +566,17 @@ const BookingDetails = (props) => {
     );
 
   const handleCalculation = async () => {
-    let subtotal =
-      (SelectedBookingInfo !== undefined
-        ? SelectedBookingInfo.priceperday
-        : 0) * BookingDays;
+    let subtotal = (SelectedBookingInfo !== undefined ? SelectedBookingInfo.priceperday : 0) * BookingDays;
     setSubTotal(subtotal);
-    let drivercharge =
-      (SelectedBookingInfo !== undefined && SelectedBookingInfo.withdriver !== 0
-        ? SelectedBookingInfo.drivercharge
-        : 0) * BookingDays;
+    let serviceFee = subtotal * (SelectedBookingInfo.admincommission / 100)
+    setServiceFee(serviceFee);
+    let drivercharge = (SelectedBookingInfo !== undefined && SelectedBookingInfo.withdriver !== 0 ? SelectedBookingInfo.drivercharge : 0) * BookingDays;
     setDriverCharge(drivercharge);
-    let vat = (subtotal) * (VatPercent / 100);
+    let vat = (subtotal + serviceFee) * (VatPercent / 100);
     setVatAmount(vat);
-    let total = subtotal + vat - CouponValue;
+    let total = subtotal + serviceFee + vat - CouponValue;
     setTotalPrice(total);
-    usedForm.setFieldsValue({ totalcost: Formatcurrency(total) });
+    // usedForm.setFieldsValue({ totalcost: Formatcurrency(total) });
   };
 
   const [showTripStatus, setshowTripStatus] = useState(false);

@@ -215,11 +215,12 @@ const Home = () => {
       let subtotal = (SelectedCar !== undefined ? SelectedCar[0].carpriceperday : 0) * BookingDays; 
       setSubTotal(subtotal);
       let serviceFee = subtotal * (SelectedCar[0].admincommission / 100)
-      setServiceFee(serviceFee)
+      setServiceFee(serviceFee);
       let hasdrivercharge = (SelectedCar !== undefined && (SelectedCar[0].cardriver == 1 || SelectedCar[0].cardriver == 2) ? SelectedCar[0].drivercharge : 0) * BookingDays;
       setDriverCharge(hasdrivercharge);
       let drivercharge = filterCarElements.WithDriver ? hasdrivercharge : 0;
-      let couponVal = (subtotal + serviceFee) * (CouponValue / 100);
+      // let couponVal = (subtotal + serviceFee) * (CouponValue / 100);
+      let couponVal = serviceFee * (CouponValue / 100);
       setCouponVal(couponVal);
       let vat = ((subtotal + serviceFee) - couponVal) * (VatPercent / 100);
       setVatAmount(vat);
@@ -237,7 +238,8 @@ const Home = () => {
       let hasdrivercharge = (SelectedCar !== undefined ? SelectedCar[0].drivercharge : 0) * BookingDays;
       setDriverCharge(hasdrivercharge);
       let drivercharge = filterCarElements.WithDriver ? hasdrivercharge : 0;
-      let couponVal = (subtotal + serviceFee) * (CouponValue / 100);
+      // let couponVal = (subtotal + serviceFee) * (CouponValue / 100);
+      let couponVal = serviceFee * (CouponValue / 100);
       setCouponVal(couponVal);
       let vat = ((subtotal + serviceFee) - couponVal) * (VatPercent / 100);
       setVatAmount(vat);

@@ -434,7 +434,7 @@ const Home = (props) => {
                         {" "}
                         {getLocaleMessages("Service Fee") + "("+ preferredCurrency +")"}{" "}
                       </Title>
-                      <Paragraph> {bookinginfo.admincommission.toFixed(2)} </Paragraph>
+                      <Paragraph> {parseFloat(bookinginfo.admincommission).toFixed(2)} </Paragraph>
                     </Col>
                     <Col span={12} style={columnStyle}>
                       <Title level={5}>
