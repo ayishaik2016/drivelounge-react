@@ -147,14 +147,14 @@ const ReportManagement = () => {
       ),
     },
 
-    {
+    /*{
       title: getLocaleMessages("Rental Total Price"),
       dataIndex: "subtotal",
       key: "subtotal",
       render: (subtotal) => (
         <span>{`${Formatcurrency(subtotal)} ${getLocaleMessages(DEFAULT_CURRENCY)}`}</span>
       ),
-    },
+    },*/
     {
       title: getLocaleMessages("Total VAT"),
       dataIndex: "vatamount",
@@ -323,7 +323,7 @@ const ReportManagement = () => {
           //  : reports[i].totalrentaldays *
           //    reports[i].commvalue *
           //    (reports[i].vatpercent / 100),
-          "Rental Total Price": reports[i].subtotal,
+          //"Rental Total Price": reports[i].subtotal,
           "Total VAT": reports[i].vatamount,
           "Total Amount": reports[i].totalcost,
           "Admin Commission": reports[i].admincomission,

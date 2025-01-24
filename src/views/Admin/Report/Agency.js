@@ -110,14 +110,14 @@ const ReportManagement = () => {
         <span>{`${Formatcurrency(deposit)} ${getLocaleMessages(DEFAULT_CURRENCY)}`}</span>
       ),
     },
-    {
+    /*{
       title: getLocaleMessages("Rental Total Price"),
       dataIndex: "subtotal",
       key: "subtotal",
       render: (subtotal) => (
         <span>{`${Formatcurrency(subtotal)} ${getLocaleMessages(DEFAULT_CURRENCY)}`}</span>
       ),
-    },
+    },*/
     {
       title: getLocaleMessages("Total VAT"),
       dataIndex: "vatamount",
@@ -384,7 +384,7 @@ const ReportManagement = () => {
           "Customer Name": reports[i].customername,
           "Total Rental Days": reports[i].totalrentaldays,
           "Deposit": reports[i].deposit,
-          "Rental Total Price": reports[i].subtotal,
+          //"Rental Total Price": reports[i].subtotal,
           "Total VAT": reports[i].vatamount,
           "Coupon Code": reports[i].couponcode,
           "Coupon Value": reports[i].couponvalue,
