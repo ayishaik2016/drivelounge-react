@@ -178,9 +178,9 @@ const ReportManagement = () => {
     {
       title: getLocaleMessages("Admin Commission"),
       dataIndex: "admincomission",
-      key: "admincomission  ",
-      render: (totalcost) => (
-        <span>{`${Formatcurrency(totalcost)} ${getLocaleMessages(
+      key: "admincomission",
+      render: (admincomission) => (
+        <span>{`${Formatcurrency(admincomission)} ${getLocaleMessages(
           DEFAULT_CURRENCY
         )}`}</span>
       ),
@@ -189,8 +189,8 @@ const ReportManagement = () => {
       title: getLocaleMessages("Admin VAT"),
       dataIndex: "adminvat",
       key: "adminvat",
-      render: (totalcost) => (
-        <span>{`${Formatcurrency(totalcost)} ${getLocaleMessages(
+      render: (adminvat) => (
+        <span>{`${Formatcurrency(adminvat)} ${getLocaleMessages(
           DEFAULT_CURRENCY
         )}`}</span>
       ),
@@ -323,7 +323,7 @@ const ReportManagement = () => {
           //  : reports[i].totalrentaldays *
           //    reports[i].commvalue *
           //    (reports[i].vatpercent / 100),
-          //"Rental Total Price": reports[i].subtotal,
+          "Coupon Value": reports[i].couponvalue,
           "Total VAT": reports[i].vatamount,
           "Total Amount": reports[i].totalcost,
           "Admin Commission": reports[i].admincomission,

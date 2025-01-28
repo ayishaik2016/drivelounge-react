@@ -144,11 +144,11 @@ const ReportManagement = () => {
     //     </span>
     //   ),
     // },
-    {
-      title: getLocaleMessages("Coupon Code"),
-      dataIndex: "couponcode",
-      key: "couponcode",
-    },
+    // {
+    //   title: getLocaleMessages("Coupon Code"),
+    //   dataIndex: "couponcode",
+    //   key: "couponcode",
+    // },
     {
       title: getLocaleMessages("Coupon Value"),
       dataIndex: "couponvalue",
@@ -165,26 +165,26 @@ const ReportManagement = () => {
         )}`}</span>
       ),
     },
-    {
-      title: getLocaleMessages("Admin Commission"),
-      dataIndex: "admincomission",
-      key: "admincomission  ",
-      render: (totalcost) => (
-        <span>{`${Formatcurrency(totalcost)} ${getLocaleMessages(
-          DEFAULT_CURRENCY
-        )}`}</span>
-      ),
-    },
-    {
-      title: getLocaleMessages("Admin VAT"),
-      dataIndex: "adminvat",
-      key: "adminvat",
-      render: (totalcost) => (
-        <span>{`${Formatcurrency(totalcost)} ${getLocaleMessages(
-          DEFAULT_CURRENCY
-        )}`}</span>
-      ),
-    },
+    // {
+    //   title: getLocaleMessages("Admin Commission"),
+    //   dataIndex: "admincomission",
+    //   key: "admincomission  ",
+    //   render: (totalcost) => (
+    //     <span>{`${Formatcurrency(totalcost)} ${getLocaleMessages(
+    //       DEFAULT_CURRENCY
+    //     )}`}</span>
+    //   ),
+    // },
+    // {
+    //   title: getLocaleMessages("Admin VAT"),
+    //   dataIndex: "adminvat",
+    //   key: "adminvat",
+    //   render: (totalcost) => (
+    //     <span>{`${Formatcurrency(totalcost)} ${getLocaleMessages(
+    //       DEFAULT_CURRENCY
+    //     )}`}</span>
+    //   ),
+    // },
     {
       title: getLocaleMessages("Payment Transaction"),
       dataIndex: "paymenttransactionid",
@@ -381,18 +381,18 @@ const ReportManagement = () => {
           "Pickup Date": format(new Date(reports[i].pickupdate), "dd/MM/yyyy hh:mm:ss"),
           "Dropoff Date": format(new Date(reports[i].dropoffdate), "dd/MM/yyyy hh:mm:ss"),
           "Car No": reports[i].carno,
-          "Customer Name": reports[i].customername,
+          // "Customer Name": reports[i].customername,
           "Total Rental Days": reports[i].totalrentaldays,
           "Deposit": reports[i].deposit,
           //"Rental Total Price": reports[i].subtotal,
           "Total VAT": reports[i].vatamount,
-          "Coupon Code": reports[i].couponcode,
+          // "Coupon Code": reports[i].couponcode,
           "Coupon Value": reports[i].couponvalue,
           "Total Amount": reports[i].totalcost,
           //"Admin Commission": reports[i].commtype == 2 ? (reports[i].carpriceperday * reports[i].totalrentaldays * (reports[i].commvalue / 100)) : (reports[i].totalrentaldays * reports[i].commvalue),
           //"Admin VAT": reports[i].commtype == 2 ? (reports[i].carpriceperday * reports[i].totalrentaldays * (reports[i].commvalue / 100) * (reports[i].vatpercent / 100)) : (reports[i].totalrentaldays * reports[i].commvalue * (reports[i].vatpercent / 100)),
-          "Admin Commission": reports[i].admincomission,
-          "Admin VAT": reports[i].adminvat,
+          // "Admin Commission": reports[i].admincomission,
+          // "Admin VAT": reports[i].adminvat,
           "Payment Transaction": (reports[i].paymenttransactionid != 1) ? reports[i].paymenttransactionid : '',
         });
       }
