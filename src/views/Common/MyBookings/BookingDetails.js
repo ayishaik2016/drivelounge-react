@@ -93,6 +93,7 @@ const BookingDetails = (props) => {
   const [SelectedBooking, setSelectedBooking] = useState({});
   const [IsEnabled, setIsEnabled] = useState(true);
   const [DateEditable, setDateEditable] = useState(true);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   const checkCancel = ({ bookingdate, bookingstatus }) => {
     let addedDate = addDays(parseISO(bookingdate), 2);
@@ -103,7 +104,8 @@ const BookingDetails = (props) => {
 
   const handleBookingPayment = (bookingid) => {
     const id = SelectedBookingInfo.bookingcode || props.location.state;
-   
+    setIsButtonDisabled(true);
+
     dispatch({
       type: settingsAction.CHANGE_BOOKING_PAYMENT,
       payload: { id: id },
@@ -718,6 +720,8 @@ const BookingDetails = (props) => {
         reactToPrintContent={reactToPrintContent}
         DateEditable={DateEditable}
         setDateEditable={setDateEditable}
+        isButtonDisabled={isButtonDisabled}
+        setIsButtonDisabled={setIsButtonDisabled}
       />
     );
   };

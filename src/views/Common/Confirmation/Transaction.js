@@ -58,7 +58,10 @@ const TransactionComponet = (props) => {
 
   return (
     <>
-      
+      <div className="payment-div">
+        <h1>Payment Processing...</h1>
+        <p>Please don't refresh or close the page</p>
+      </div>
     </>
   );
 };

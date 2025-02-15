@@ -645,6 +645,7 @@ border-radius: 35px; box-shadow: none; height: inherit; background: #656565; bor
 .modal-customize-12 .ant-modal-header { background: #656565; color: #fff; }
 .modal-customize-12 .ant-modal-title { font-size: 18px; color: #fff }
 .modal-customize-12 .ant-modal-close { color: #fff }
+.payment-div { min-height: 700px; text-align: center; margin-top: 156px; }
 
 /*******************RESPONSIVE END**************************/
 @media only screen and (max-width:993px) {

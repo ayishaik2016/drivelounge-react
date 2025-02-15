@@ -57,6 +57,7 @@ const MyBookingInformation = () => {
   const [visible, setvisible] = useState(false);
   const [SelectForRate, setSelectForRate] = useState({});
   const [currentDate, setCurrentDate] = useState(new Date());
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   const getTimerCount = (paymentTransactionDate) => {
     const paymentValidityDate = new Date(new Date(paymentTransactionDate).getTime() + 60 * 60 * 24 * 1000);
@@ -157,7 +158,8 @@ const MyBookingInformation = () => {
 
   const handleBookingPayment = (bookingid) => {
     const id = bookingid;
-   
+    setIsButtonDisabled(true);
+    
     dispatch({
       type: settingsAction.CHANGE_BOOKING_PAYMENT,
       payload: { id: id },
@@ -415,6 +417,7 @@ const MyBookingInformation = () => {
                                   <Button
                                     onClick={() => handleBookingPayment(mybook.bookingno)}
                                     type="primary"
+                                    disabled={isButtonDisabled} 
                                   >
                                     {getLocaleMessages("Pay Now")}
                                   </Button>

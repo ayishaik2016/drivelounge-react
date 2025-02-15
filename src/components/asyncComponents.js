@@ -1,55 +1,49 @@
-/*import React, { Component } from "react";
+import React, { Component, Suspense, lazy } from "react";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
+import { Redirect } from "react-router-dom";
 
 NProgress.configure({ showSpinner: false });
-
-export default function asyncComponent(importComponent) {
-  class AsyncComponent extends Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        component: null,
-      };
-      this._isMounted = false;
-    }
-
-    async componentDidMount() {
-      this._isMounted = true;
-      NProgress.start();
-      const { default: component } = await importComponent();
-      NProgress.done();
-      if (this._isMounted) {
-        this.setState({
-          component: component,
-        });
-      }
-    }
-
-    componentWillUnmount() {
-      this._isMounted = false;
-    }
-
-    render() {
-      const Component = this.state.component;
-      return Component ? <Component {...this.props} /> : null;
-    }
-  }
-
-  return AsyncComponent;
-}*/
-
-import React, { Component, Suspense, lazy } from "react";
 
 // A higher-order component to wrap dynamic imports
 const asyncComponent = (importFunc) => {
   const LazyComponent = lazy(importFunc);
 
   return (props) => (
-    <Suspense fallback={<div>Loading...</div>}>
-      <LazyComponent {...props} />
+    <Suspense
+      fallback={<div></div>} // Optional: You can display a spinner or loading text
+    >
+      <ErrorBoundary>
+        <LazyComponent {...props} />
+      </ErrorBoundary>
     </Suspense>
   );
 };
+
+// Error Boundary to handle loading failures and redirect if necessary
+class ErrorBoundary extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error) {
+    // Update state so the next render will show the fallback UI
+    return { hasError: true };
+  }
+
+  componentDidCatch(error, info) {
+    // You can log the error to an error reporting service here if needed
+    NProgress.done();
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return <Redirect to="/" />;
+    }
+
+    return this.props.children;
+  }
+}
 
 export default asyncComponent;

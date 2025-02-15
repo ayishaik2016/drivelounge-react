@@ -96,6 +96,8 @@ const BookingPreview = React.forwardRef((props, ref) => {
     reactToPrintContent,
     DateEditable,
     setDateEditable,
+    isButtonDisabled,
+    setIsButtonDisabled
   } = props;
 
   const { preferredCurrency } = useSelector(state => state.Currency)
@@ -1024,6 +1026,7 @@ const BookingPreview = React.forwardRef((props, ref) => {
                         type="primary"
                         className="save-btn"
                         onClick={() => handleBookingPayment(SelectedBookingInfo.bookingcode)}
+                        disabled={isButtonDisabled} 
                       >
                         {getLocaleMessages("Pay Now")}
                       </Button>
