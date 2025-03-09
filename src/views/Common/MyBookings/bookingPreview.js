@@ -181,27 +181,9 @@ const BookingPreview = React.forwardRef((props, ref) => {
     targetUrl = paymenttransaction.targetUrl + '?paymentid=' + payId;
   }
 
-  const [imageExists, setImageExists] = useState(null);
-  const checkImage = async (invoiceUrl) => {
-    try {
-      const response = await fetch(invoiceUrl, {
-        method: 'HEAD',
-      }); 
-      if (response.ok) {
-        setImageExists(true);
-      } else {
-        setImageExists(false);
-      }
-    } catch (error) {
-      setImageExists(false); 
-    }
-  };
-  
   let invoiceUrl = ''
   if(SelectedBookingInfo.bookingstatus == 3) {
-    invoiceUrl = 'https://api.drivelounge.com/invoice/' + SelectedBookingInfo. bookingcode + '.pdf';
-
-    checkImage(invoiceUrl);
+    invoiceUrl = SelectedBookingInfo.invoiceUrl;
   }
 
   return (
@@ -231,22 +213,22 @@ const BookingPreview = React.forwardRef((props, ref) => {
                   )}
                   content={reactToPrintContent}
                 />
-                {(getLocalDataType() == "user" && imageExists) && (
-                  <Button>
-                    <Link
-                      to={{
-                        pathname: invoiceUrl
-                      }}
-                      target="_blank"
-                      download
-                      className="backtoBook"
-                    >
-                      <FileOutlined />{" "}
-                      {getLocaleMessages("Invoice")}
-                    </Link>
-                  </Button>
-                )}
               <div className="flex_content_booking_flex">
+                {(getLocalDataType() == "user" && invoiceUrl != '') && (
+                    <Button>
+                      <Link
+                        to={{
+                          pathname: invoiceUrl
+                        }}
+                        target="_blank"
+                        download
+                        className="backtoBook"
+                      >
+                        <FileOutlined />{" "}
+                        {getLocaleMessages("Invoice")}
+                      </Link>
+                    </Button>
+                  )}
                 {getLocalDataType() == "admin" && (
                   <Button>
                     <Link
